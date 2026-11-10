@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#0e2829" />
   <title>CroquiPro — Croqui de Redes Elétricas</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+  <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
   <style>
     :root{--bg:#f4f6f4;--white:#fff;--dark:#122c2d;--dark2:#1e3e3e;--green:#177f61;--green2:#e4f5ee;--line:#e1e6e3;--muted:#657679;--text:#213437;--red:#d94844;--blue:#2879d2;--shadow:0 10px 28px rgba(12,38,35,.12);--radius:15px}
     *{box-sizing:border-box}html,body{height:100%;margin:0}body{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text);overflow:hidden}button,input,textarea,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}.hidden{display:none!important}
@@ -135,7 +137,7 @@
     .marker-textnote{display:inline!important;width:max-content;max-width:230px!important;min-width:0!important;padding:1px 2px!important;line-height:1.17!important;background:rgba(255,255,255,.45)!important;border-radius:2px!important}
     .vlabel{padding:1px 3px!important;background:rgba(255,255,255,.50)!important;border-radius:2px!important;display:inline-block;white-space:nowrap}
     .gf-note-anchor{width:max-content;max-width:230px;display:inline-block}
-    .marker-tree-technical{display:block;filter:none;opacity:1;transform-origin:center}
+    .gf-vector-map{position:absolute;inset:0;z-index:0;pointer-events:none!important}.gf-vector-map *{pointer-events:none!important}.gf-vector-map .maplibregl-control-container{display:none!important}.marker-tree-technical{display:block;filter:none;opacity:1;transform-origin:center}
     .marker-handle{width:15px;height:15px;border:2px solid #176e85;background:#fff;border-radius:3px;box-shadow:none;touch-action:none}
     .gf-drawing-hit{stroke:transparent!important;stroke-opacity:0!important;pointer-events:stroke!important;cursor:pointer}
     .gf-drawing-selected{stroke-opacity:.96}
@@ -205,7 +207,7 @@
         <p class="palette-caption">Toque no traçado para editar. Alças ajustam extremidades, forma e tamanho. Selecione vários desenhos e exclua de uma vez.</p>
       </div>
       <div class="mapoverlay map-top-left">
-        <div class="floating satellite-chip"><span id="layersIcon"></span><span>Imagem de satélite</span></div>
+        <div class="floating satellite-chip" style="display:flex;align-items:center;gap:7px"><span id="layersIcon"></span><label for="mapBaseSelect" style="font-size:12px">Mapa:</label><select id="mapBaseSelect" aria-label="Tipo de mapa" style="font:inherit;font-size:12px;background:transparent;border:0;color:inherit;max-width:135px;cursor:pointer"><option value="satellite">Satélite</option><option value="osm">Ruas e estradas (OSM)</option></select></div>
         <div class="floating map-search" role="search"><input id="placeSearch" type="search" placeholder="Endereço ou UTM X Y 22S" aria-label="Buscar endereço ou coordenadas"><button id="searchGo" type="button" aria-label="Buscar localização" title="Buscar local">Buscar</button></div>
         <div class="floating hide-mobile"><span id="coordinateIcon"></span><span id="cursorCoords">Passe o cursor sobre o mapa</span></div>
       </div>
@@ -243,7 +245,7 @@
   <script>
 /* CroquiPro map engine (single-file edition): interactive slippy map without a CDN dependency.
    Raster backgrounds load from the chosen provider only when the viewport is viewed.
-   OpenStreetMap data © OpenStreetMap contributors, ODbL. */
+   Dados de ruas © OpenStreetMap contributors; mapa vetorial © OpenMapTiles / OpenFreeMap. */
 (function () {
   'use strict';
   const TILE=256, RAD=Math.PI/180, EARTH=6378137;
@@ -258,7 +260,7 @@
     fire(type,obj={}){(this.handlers[type]||[]).forEach(f=>f({...obj,target:this}));return this}
   }
   class MiniMap extends Evented{
-    constructor(id){super();this.el=document.getElementById(id);this.el.classList.add('gf-map');this.center={lat:-23.3045,lng:-51.1696};this.zoom=14;this.layers=new Set();this.currentTileLayer=null;this.tileElements=new Map();this.tiles=elt('div','gf-tiles',this.el);this.svg=document.createElementNS('http://www.w3.org/2000/svg','svg');this.svg.classList.add('gf-svg');this.svg.setAttribute('aria-hidden','true');this.el.appendChild(this.svg);this.markers=elt('div','gf-markers',this.el);this.attribution=elt('div','gf-attribution',this.el);this.attribution.innerHTML='© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors';this._bind();this._render()}
+    constructor(id){super();this.el=document.getElementById(id);this.el.classList.add('gf-map');this.center={lat:-23.3045,lng:-51.1696};this.zoom=14;this.layers=new Set();this.currentTileLayer=null;this.tileElements=new Map();this.vectorHost=elt('div','gf-vector-map',this.el);this.vectorHost.style.display='none';this.vectorMap=null;this.vectorError=false;this.tiles=elt('div','gf-tiles',this.el);this.svg=document.createElementNS('http://www.w3.org/2000/svg','svg');this.svg.classList.add('gf-svg');this.svg.setAttribute('aria-hidden','true');this.el.appendChild(this.svg);this.markers=elt('div','gf-markers',this.el);this.attribution=elt('div','gf-attribution',this.el);this.attribution.innerHTML='© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors';this._bind();this._render()}
     getContainer(){return this.el}
     getCenter(){return {...this.center}}
     getZoom(){return this.zoom}
@@ -323,7 +325,24 @@
     _render(){this._drawTiles();for(const layer of this.layers)this._drawLayer(layer)}
     _drawTiles(){
       const base=this.currentTileLayer;
-      if(!base){this.tiles.replaceChildren();this.tileElements.clear();return}
+      if(!base){this.tiles.replaceChildren();this.tileElements.clear();this.vectorHost.style.display='none';return}
+      if(base.options.vector){
+        this.tiles.style.display='none';this.vectorHost.style.display='block';
+        // O motor customizado continua responsável por cliques, pontos, GPS e zoom.
+        // MapLibre apenas desenha o fundo vetorial de ruas e estradas.
+        if(!this.vectorMap && window.maplibregl){
+          try{
+            this.vectorMap=new maplibregl.Map({container:this.vectorHost,style:'https://tiles.openfreemap.org/styles/liberty',center:[this.center.lng,this.center.lat],zoom:this.zoom-1,interactive:false,attributionControl:false,preserveDrawingBuffer:true,fadeDuration:0});
+            this.vectorMap.on('error',err=>{this.vectorError=true;base.fire('tileerror',{message:err?.error?.message||'Erro no mapa de ruas'});});
+            this.vectorMap.on('load',()=>{this.vectorError=false;base.fire('tileload');});
+          }catch(err){this.vectorError=true;base.fire('tileerror',{message:err.message});}
+        }
+        if(this.vectorMap){this.vectorMap.resize();this.vectorMap.jumpTo({center:[this.center.lng,this.center.lat],zoom:this.zoom-1,animate:false});}
+        if(!this.vectorMap&&!window.maplibregl)base.fire('tileerror',{message:'Biblioteca de mapa vetorial indisponível'});
+        this.attribution.innerHTML='© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> · © <a href="https://openmaptiles.org" target="_blank" rel="noopener">OpenMapTiles</a> · <a href="https://openfreemap.org" target="_blank" rel="noopener">OpenFreeMap</a>';
+        return;
+      }
+      this.vectorHost.style.display='none';this.tiles.style.display='block';
       const z=this.zoom, nativeZ=Math.min(z,base.options.maxNativeZoom??19);
       const scale=2**(z-nativeZ), tileSize=TILE*scale, c=this._centerWorld();
       const firstX=Math.floor((c.x-this._w()/2)/tileSize),lastX=Math.floor((c.x+this._w()/2)/tileSize);
@@ -432,7 +451,7 @@
   <script>
   'use strict';
   const $ = id => document.getElementById(id);
-  const APP=Object.freeze({name:'CroquiPro',subtitle:'Croqui de Redes Elétricas',version:'2.13',author:'Alex S. Costa'});
+  const APP=Object.freeze({name:'CroquiPro',subtitle:'Croqui de Redes Elétricas',version:'2.16',author:'Alex S. Costa'});
   const APP_CREDIT=()=>`Gerado por ${APP.name} v${APP.version} · ${APP.author}`;
   $('appVersion').textContent=`v${APP.version} · ${APP.author}`;
   const glyphs={
@@ -1494,8 +1513,11 @@
     return `<svg class="gf-print-overlay" xmlns="http://www.w3.org/2000/svg" width="${PRINT_W}" height="${PRINT_H}" viewBox="0 0 ${PRINT_W} ${PRINT_H}" preserveAspectRatio="none">${markup}</svg>`;
   }
   function printTilesHtml(page){
-    const layer=map?.currentTileLayer;
-    if(!layer)return '';
+    const activeLayer=map?.currentTileLayer;
+    if(!activeLayer)return '';
+    // Impressão multipágina exige tiles raster. Com base vetorial, usar satélite na
+    // impressão para não exibir o erro 403 nem gerar folhas sem fundo cartográfico.
+    const layer=activeLayer.options.vector?{url:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',options:{maxNativeZoom:19}}:activeLayer;
     const native=Math.min(page.zoom,layer.options.maxNativeZoom??19),scale=2**(page.zoom-native),tile=256*scale,n=2**native;
     const minX=Math.floor(page.view.x/tile),maxX=Math.floor((page.view.x+PRINT_W)/tile),minY=Math.max(0,Math.floor(page.view.y/tile)),maxY=Math.min(n-1,Math.floor((page.view.y+PRINT_H)/tile));
     let out='';for(let x=minX;x<=maxX;x++)for(let y=minY;y<=maxY;y++){
@@ -1536,7 +1558,7 @@
   function printDocument(){
     const pages=makePrintPlan(),n=pages.length,c=counts(),date=new Date().toLocaleDateString('pt-BR');
     const title=`${project.code?'Nº '+esc(project.code)+' · ':''}${esc(project.name||'Croqui de campo')} · ${esc(project.city||'Município não informado')}${project.uf?' / '+esc(project.uf):''}`;
-    let content=pages.map(p=>`<section class="gf-print-page"><div class="gf-print-head"><strong>${APP.name.toUpperCase()} · ${title}</strong><span>Folha ${p.number} de ${n} · ${date}</span></div><div class="gf-print-frame"><div class="gf-print-tiles">${printTilesHtml(p)}</div>${printOverlaySvg(p)}</div><div class="gf-print-foot"><span>Postes ${c.all} · Transformadores ${project.transformers.length} · UCs ${project.consumers.length} · Vãos ${c.physical} · MT ${fmt(c.lengths.MT,1)} m · BT ${fmt(c.lengths.BT,1)} m</span><span>UTM X/Y · WGS84 · Coordenadas preliminares</span></div></section>`).join('');
+    let content=pages.map(p=>`<section class="gf-print-page"><div class="gf-print-head"><strong>${APP.name.toUpperCase()} · ${title}</strong><span>Folha ${p.number} de ${n} · ${date}</span></div><div class="gf-print-frame"><div class="gf-print-tiles">${printTilesHtml(p)}</div>${printOverlaySvg(p)}</div><div class="gf-print-foot"><span>Postes ${c.all} · Transformadores ${project.transformers.length} · UCs ${project.consumers.length} · Vãos ${c.physical} · MT ${fmt(c.lengths.MT,1)} m · BT ${fmt(c.lengths.BT,1)} m</span><span>UTM X/Y · WGS84 · Coordenadas preliminares · Fundo impresso: satélite</span></div></section>`).join('');
     const rows=elementRowsForPrint();
     // Dividir a tabela para preservar tamanho legível em folha A4 horizontal.
     const chunks=[];for(let i=0;i<rows.length;i+=17)chunks.push(rows.slice(i,i+17));if(!chunks.length)chunks.push([]);
@@ -1569,7 +1591,7 @@
     toast(`Croqui vetorial: ${pages.length} folha(s) com coordenadas UTM X/Y. Permita múltiplos downloads se solicitado.`,5500);
   }
   function exportMenu(){openModal('Exportar projeto',`<div class="helpinfo" style="margin-bottom:15px">A impressão enquadra automaticamente os elementos e divide levantamentos grandes em folhas. Cada PS, TR e UC mostra UTM X/Y e fuso no croqui impresso. O PNG gera folhas vetoriais sem satélite.</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:9px"><button class="btn" id="exPNG">Croqui PNG</button><button class="btn" id="exPDF">Imprimir / PDF</button><button class="btn" id="exPosts">CSV elementos</button><button class="btn" id="exSegs">CSV trechos</button><button class="btn" id="exGeo">GeoJSON</button><button class="btn" id="exKML">KML</button><button class="btn primary" id="exJSON" style="grid-column:1 / -1">Backup JSON + fotos</button></div><p class="smallhint">Para salvar PDF, escolha “Salvar como PDF” na janela de impressão do dispositivo.</p>`,[{text:'Fechar',fn:closeModal}]);const bind=(id,fn)=>{$(id).onclick=()=>{closeModal();fn()}};bind('exPNG',exportPNG);bind('exPDF',exportPrint);bind('exPosts',()=>exportCSV('poles'));bind('exSegs',()=>exportCSV('segments'));bind('exGeo',()=>{blobDownload(JSON.stringify(geoJson(),null,2),`${safeSlug(project.name)}.geojson`,'application/geo+json');toast('GeoJSON exportado')});bind('exKML',exportKML);bind('exJSON',exportJSON)}
-  function help(){openModal(`Como utilizar o ${APP.name}`,`<div class="helpinfo"><b>Primeiro levantamento</b><br>1. Informe os dados do projeto no topo.<br>2. Use o botão de GPS para localizar-se (requer permissão e acesso seguro).<br>3. Selecione <b>Poste</b> e toque no mapa, ou utilize <b>Poste no GPS</b>.<br> 4. Selecione <b>Rede</b>, escolha MT/BT/Ramal no painel e toque em dois postes, transformadores ou UCs.<br>5. No menu Desenho, clique na origem de uma linha ou seta, mova o cursor para visualizar e clique no destino; retângulo, círculo e árvore são criados com um toque. Após criar um desenho, o mapa volta ao modo Selecionar.<br>6. Em Selecionar (modo padrão), clique e arraste para movimentar o mapa. A roda controla o zoom. Durante o desenho, a ferramenta tem prioridade e o mapa volta ao modo padrão automaticamente ao terminar. PAN permanece opcional.<br>7. Toque nos elementos para editar, mover, fotografar ou excluir e utilize Anexos para documentos gerais.<br>8. Confira os quantitativos e exporte o croqui.</div><p class="m-title" style="margin-top:18px">Importante</p><p class="smallhint">O zoom adicional acima do nível 19 amplia a imagem disponível e pode ficar pixelizado; não cria novos detalhes. O mapa de satélite usa serviços externos e exige internet; se estiver indisponível, as marcações continuam editáveis. Projetos e coordenadas ficam no armazenamento local, fotos e anexos no IndexedDB; faça backup JSON com mídias para evitar perdas. A pré-visualização da câmera exige permissão e navegador compatível, preferencialmente via HTTPS; a câmera do dispositivo é a alternativa. O GPS do tablet pode ter precisão limitada, e a posição marcada manualmente na imagem é estimada. O exportador de PNG produz um croqui vetorial independente, sem copiar a imagem de satélite.</p><p class="smallhint">Para GPS no celular/tablet, abra por HTTPS (por exemplo, após publicar em GitHub Pages) e permita acesso à localização. Abrir o HTML diretamente como arquivo pode não habilitar o GPS em todos os navegadores.</p>`,[{text:'Entendi',class:'primary',fn:closeModal}])}
+  function help(){openModal(`Como utilizar o ${APP.name}`,`<div class="helpinfo"><b>Primeiro levantamento</b><br>1. Informe os dados do projeto no topo.<br>2. Use o botão de GPS para localizar-se (requer permissão e acesso seguro).<br>3. Selecione <b>Poste</b> e toque no mapa, ou utilize <b>Poste no GPS</b>.<br> 4. Selecione <b>Rede</b>, escolha MT/BT/Ramal no painel e toque em dois postes, transformadores ou UCs.<br>5. No menu Desenho, clique na origem de uma linha ou seta, mova o cursor para visualizar e clique no destino; retângulo, círculo e árvore são criados com um toque. Após criar um desenho, o mapa volta ao modo Selecionar.<br>6. Em Selecionar (modo padrão), clique e arraste para movimentar o mapa. A roda controla o zoom. Durante o desenho, a ferramenta tem prioridade e o mapa volta ao modo padrão automaticamente ao terminar. PAN permanece opcional.<br>7. Toque nos elementos para editar, mover, fotografar ou excluir e utilize Anexos para documentos gerais.<br>8. Confira os quantitativos e exporte o croqui.</div><p class="m-title" style="margin-top:18px">Importante</p><p class="smallhint">O zoom adicional acima do nível 19 amplia a imagem disponível e pode ficar pixelizado; não cria novos detalhes. Os mapas Satélite e Ruas e estradas (OpenStreetMap) usam serviços externos e exigem internet; se estiverem indisponíveis, as marcações continuam editáveis. Projetos e coordenadas ficam no armazenamento local, fotos e anexos no IndexedDB; faça backup JSON com mídias para evitar perdas. A pré-visualização da câmera exige permissão e navegador compatível, preferencialmente via HTTPS; a câmera do dispositivo é a alternativa. O GPS do tablet pode ter precisão limitada, e a posição marcada manualmente na imagem é estimada. O exportador de PNG produz um croqui vetorial independente, sem copiar a imagem de satélite.</p><p class="smallhint">Para GPS no celular/tablet, abra por HTTPS (por exemplo, após publicar em GitHub Pages) e permita acesso à localização. Abrir o HTML diretamente como arquivo pode não habilitar o GPS em todos os navegadores.</p>`,[{text:'Entendi',class:'primary',fn:closeModal}])}
 
   // Buscas feitas apenas quando o usuário toca em Buscar ou pressiona Enter.
   // Consultas por coordenadas são processadas localmente e não enviadas ao geocodificador.
@@ -1623,19 +1645,37 @@
     map=L.map('map',{zoomControl:false,preferCanvas:true}).setView([project.view.lat,project.view.lng],project.view.zoom);
     L.control.zoom({position:'bottomright'}).addTo(map);
 
-      const sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{
+    const sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{
       attribution:'Imagery © Esri, Maxar, Earthstar Geographics and contributors',maxZoom:22,maxNativeZoom:19
     });
-
-      // Camada exclusiva de satélite: não trocar automaticamente para ruas.
+    const osm=L.tileLayer('openfreemap-vector',{
+      vector:true,attribution:'© OpenStreetMap contributors · © OpenMapTiles · OpenFreeMap',maxZoom:22,maxNativeZoom:19
+    });
     const mapWarning=document.createElement('div');
     mapWarning.setAttribute('role','status');
     mapWarning.style.cssText='display:none;position:absolute;left:50%;top:74px;transform:translateX(-50%);z-index:420;max-width:min(430px,calc(100% - 24px));background:#fff8ec;border:1px solid #e7c993;border-radius:8px;padding:10px 15px;box-shadow:0 5px 15px #0002;font:12px Arial';
     $('mapArea').appendChild(mapWarning);
+    const baseSelect=$('mapBaseSelect');
+    const baseLayers={satellite:sat,osm};
     let tileErrors=0;
-    sat.on('tileerror',()=>{if(++tileErrors>=3){mapWarning.textContent='Imagens de satélite indisponíveis nesta conexão. Os postes e traçados continuam editáveis. Verifique a internet.';mapWarning.style.display='block'}});
-    sat.on('tileload',()=>{tileErrors=0;mapWarning.style.display='none'});
-    base=sat.addTo(map);
+    const updateBase=(kind)=>{
+      const next=baseLayers[kind]||sat;
+      if(base&&base!==next)map.removeLayer(base);
+      base=next;
+      tileErrors=0;
+      mapWarning.style.display='none';
+      base.addTo(map);
+      baseSelect.value=kind in baseLayers?kind:'satellite';
+      try{localStorage.setItem('croquipro-map-base',baseSelect.value)}catch(_e){}
+    };
+    for(const [kind,layer] of Object.entries(baseLayers)){
+      layer.on('tileerror',()=>{if(base!==layer)return;if(++tileErrors>=3){mapWarning.textContent=kind==='osm'?'Mapa de ruas não carregou. Confira internet e acesso ao OpenFreeMap/MapLibre ou selecione Satélite.':'Imagens de satélite indisponíveis nesta conexão. Verifique a internet ou selecione Ruas e estradas.';mapWarning.style.display='block'}});
+      layer.on('tileload',()=>{if(base!==layer)return;tileErrors=0;mapWarning.style.display='none'});
+    }
+    baseSelect.addEventListener('change',()=>updateBase(baseSelect.value));
+    let savedBase='satellite';
+    try{savedBase=localStorage.getItem('croquipro-map-base')||'satellite'}catch(_e){}
+    updateBase(savedBase);
     setTimeout(()=>map.invalidateSize(),40);
       map.on('click',mapClick);
     map.on('mousemove',ev=>{$('cursorCoords').textContent='UTM '+utmText(ev.latlng);if(drawStart)updateDrawingPreview(ev.latlng)});
