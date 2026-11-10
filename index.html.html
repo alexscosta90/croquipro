@@ -1,0 +1,1671 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0e2829" />
+  <title>CroquiPro — Croqui de Redes Elétricas</title>
+  <style>
+    :root{--bg:#f4f6f4;--white:#fff;--dark:#122c2d;--dark2:#1e3e3e;--green:#177f61;--green2:#e4f5ee;--line:#e1e6e3;--muted:#657679;--text:#213437;--red:#d94844;--blue:#2879d2;--shadow:0 10px 28px rgba(12,38,35,.12);--radius:15px}
+    *{box-sizing:border-box}html,body{height:100%;margin:0}body{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text);overflow:hidden}button,input,textarea,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}.hidden{display:none!important}
+    .topbar{height:69px;display:flex;align-items:center;gap:16px;background:#fff;border-bottom:1px solid var(--line);padding:0 18px;position:relative;z-index:700}.brand{display:flex;align-items:center;gap:11px;min-width:212px}.brandmark{display:grid;place-items:center;background:var(--dark);color:white;border-radius:11px;width:42px;height:42px}.brandname{font-size:19px;font-weight:800;letter-spacing:-.6px;color:#122b2b}.brandtext small{display:block;color:#738083;font-size:10px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;margin-top:2px}.projectpill{display:flex;gap:9px;align-items:center;min-width:0;background:#f5f7f6;border:1px solid #e7ece9;border-radius:10px;padding:9px 12px;margin-right:auto}.projectpill .info{min-width:0}.projectpill b{font-size:13px;display:block;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;max-width:360px}.projectpill span{display:block;color:var(--muted);font-size:11px;margin-top:2px}.header-actions{display:flex;align-items:center;gap:9px}.btn{background:#fff;border:1px solid #d8e1dc;border-radius:10px;color:#24403e;padding:10px 13px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap;transition:.16s}.btn:hover{background:#f2f7f4}.btn.primary{color:#fff;background:var(--green);border-color:var(--green)}.btn.primary:hover{background:#12694f}.btn.dark{background:var(--dark);border-color:var(--dark);color:#fff}.btn.small{padding:8px 10px;font-size:11px}.btn.ghost{border:none;background:none}.btn.danger{color:#bc423d;border-color:#eecac8}.btn.block{width:100%}.btn svg{width:15px;height:15px}.badge{background:#eaf6f0;color:#207b5d;border-radius:100px;padding:4px 8px;font-size:10px;font-weight:750}.badge.grey{background:#eef1f0;color:#647572}.app{height:calc(100% - 69px);display:grid;grid-template-columns:79px minmax(0,1fr) 316px;min-height:0}.toolrail{background:#fff;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:17px 8px;gap:7px;z-index:450;overflow-y:auto}.tool{width:61px;min-height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border:1px solid transparent;border-radius:12px;background:transparent;color:#597073;font-size:10px;font-weight:700;text-align:center;line-height:1.08}.tool svg{width:21px;height:21px;stroke-width:1.9}.tool:hover{background:#f2f6f4}.tool.active{color:#fff;background:var(--dark);border-color:var(--dark);box-shadow:0 5px 14px #143a3833}.tool.active .shape{border-color:#fff}.toolgap{height:12px;width:38px;border-bottom:1px solid var(--line);margin-bottom:8px}.tool .shape{width:18px;height:18px;display:block;border:2px solid currentColor}.tool .shape.circle{border-radius:50%}.tool .shape.triangle{width:0;height:0;border-left:11px solid transparent;border-right:11px solid transparent;border-bottom:18px solid currentColor;border-top:0;position:relative}.maparea{position:relative;min-width:0;min-height:0;overflow:hidden;background:#d4dedb}.map{position:absolute;inset:0;z-index:1}.mapoverlay{position:absolute;z-index:400;pointer-events:none}.mapoverlay>*{pointer-events:auto}.map-top-left{top:16px;left:16px;display:flex;gap:7px;flex-wrap:wrap;align-items:center;max-width:calc(100% - 110px)}.map-top-right{top:16px;right:15px;display:flex;flex-direction:column;gap:7px}.map-bottom{bottom:18px;left:16px;display:flex;flex-direction:column;gap:9px;align-items:flex-start;max-width:calc(100% - 32px)}.floating{display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #e1e8e5;border-radius:11px;padding:10px 12px;box-shadow:0 5px 22px #102d2a20;color:#344d4d;font-size:12px;font-weight:700;max-width:100%}.floating select{border:none;outline:none;background:transparent;color:#233e3d;font-size:12px;font-weight:700;max-width:180px}.floating svg{width:16px;height:16px;flex-shrink:0}.mapround{background:#fff;border:1px solid #e3e8e7;border-radius:10px;width:41px;height:41px;display:grid;place-items:center;box-shadow:0 5px 22px #102d2a20;color:#304c4b}.mapround:hover{background:#eef8f4}.mapround svg{width:18px;height:18px}.statusbar{background:#122b2be9;color:#eaf7f3;border-radius:11px;padding:11px 13px;box-shadow:var(--shadow);font-size:11px;display:flex;align-items:center;gap:8px;max-width:600px;line-height:1.4;backdrop-filter:blur(6px)}.statusbar svg{flex-shrink:0;width:16px;height:16px}.mapfoot{background:#fffdf9ed;border-radius:7px;padding:7px 9px;font-size:10px;color:#4e6262;box-shadow:0 1px 7px #1b382a18}.panel{background:#fff;border-left:1px solid var(--line);overflow-y:auto;min-height:0;z-index:450;display:flex;flex-direction:column}.panel-inner{padding:20px 19px 24px}.eyebrow{font-weight:800;color:#7e908d;letter-spacing:1.2px;text-transform:uppercase;font-size:10px}.sect-title{font-size:18px;letter-spacing:-.5px;font-weight:800;margin:6px 0 15px;color:#1f3536}.section-row{display:flex;align-items:center;justify-content:space-between;margin:20px 0 10px}.section-row b{font-size:12px}.metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.metric{padding:14px 12px;border:1px solid var(--line);border-radius:12px;background:#fff}.metric.primarymetric{background:#eff8f4;border-color:#d3ebde}.metric .n{font-size:25px;font-weight:800;letter-spacing:-1px;color:#1d3839}.metric.primarymetric .n{color:#12674e}.metric .desc{font-size:11px;color:#72817e;margin-top:4px}.legend-row{display:flex;justify-content:space-between;gap:6px;align-items:center;padding:8px 0;border-bottom:1px dashed #e8edeb;font-size:12px;color:#4a6261}.legend-row b{color:#233a3b;font-size:12px}.mini-line{width:25px;height:3px;background:var(--red);display:inline-block;margin-right:8px;vertical-align:middle;border-radius:5px}.mini-line.blue{background:var(--blue)}.mini-line.grey{background:#78828b}.mini-line.dash{background:repeating-linear-gradient(90deg,#39a46f 0 6px,transparent 6px 9px)}.divider{height:1px;background:var(--line);margin:21px 0}.fieldlabel{display:block;font-size:11px;font-weight:750;color:#536766;margin:0 0 6px}.field{width:100%;height:38px;background:#fff;border:1px solid #dce5e0;border-radius:9px;padding:8px 10px;color:#243c3c;outline:none;font-size:12px}.field:focus{border-color:#3da887;box-shadow:0 0 0 3px #e4f5ed}.fieldarea{min-height:64px;resize:vertical;height:auto;line-height:1.45}.fieldrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}.formgroup{margin:0 0 11px}.smallhint{font-size:11px;color:#70817e;line-height:1.5}.pill-row{display:flex;gap:6px;flex-wrap:wrap}.pill{border-radius:8px;border:1px solid #dfe5e3;background:#fff;padding:7px 9px;font-size:11px;font-weight:750;color:#526663;cursor:pointer}.pill.selected{background:#e9f6ef;border-color:#61ad8b;color:#146d4e}.device{display:flex;align-items:center;gap:8px;background:#f4f7f5;padding:10px;border-radius:9px;color:#5e716b;font-size:11px}.dot{width:8px;height:8px;background:#b8c1bd;border-radius:50%;flex-shrink:0}.dot.good{background:#2cad77}.context{position:absolute;z-index:550;top:16px;left:50%;transform:translateX(-50%);width:min(388px,calc(100% - 32px));background:#fff;border:1px solid #e3e8e5;box-shadow:0 13px 42px #09272535;border-radius:16px;max-height:calc(100% - 32px);display:none;overflow:hidden}.context.visible{display:flex;flex-direction:column}.contexthead{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}.contexthead b{font-size:14px}.contexthead span{font-size:11px;color:#758580}.contextbody{padding:15px 16px;overflow:auto}.contextfooter{padding:12px 16px;border-top:1px solid var(--line);display:flex;align-items:center;gap:7px;justify-content:space-between}.xbtn{border:none;background:#f2f5f4;color:#5b6c69;width:27px;height:27px;border-radius:8px;font-size:18px;line-height:1}.leaflet-container{font-family:inherit!important}.leaflet-control-attribution{font-size:9px!important}.leaflet-div-icon{background:transparent;border:none}.marker-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;width:70px;white-space:nowrap;user-select:none}.marker-title{font-weight:800;font-size:11px;background:#fff;border:1px solid #e1e8e5;border-radius:5px;padding:2px 5px;color:#203a3c;box-shadow:0 1px 5px #152b2b33}.marker-pole{width:16px;height:16px;background:#fff;border:3px solid #183d3c;box-shadow:0 1px 0 3px #fff9;border-radius:2px}.marker-pole.existing{background:#85939b}.marker-pole.replace{border-color:#e29524}.marker-pole.remove{border-color:#c05754;background:#f7d3d2}.marker-transformer{width:0;height:0;border-left:13px solid transparent;border-right:13px solid transparent;border-bottom:23px solid #f3a92c;filter:drop-shadow(0 1px 1px #253e3e)}.marker-transformer:after{content:'';position:absolute;top:8px;left:-3px;border-left:3px solid transparent;border-right:3px solid transparent;border-bottom:6px solid #fff}.marker-consumer{width:20px;height:20px;border:4px solid #2e986c;border-radius:50%;background:#fff;box-shadow:0 1px 0 3px #fff9}.marker-note{display:grid;place-items:center;border-radius:50%;background:#fff6d7;border:2px solid #ddaa40;width:23px;height:23px;font-size:12px;font-weight:900;color:#ad7c16}.marker-wrap.selected .marker-pole,.marker-wrap.selected .marker-consumer{box-shadow:0 0 0 5px #4babfa55}.vlabel{background:#fff;border:1px solid #e4e9e6;border-radius:5px;padding:3px 6px;color:#2e4646;font-weight:800;font-size:11px;box-shadow:0 2px 5px #10252218;white-space:nowrap}.vlabel.mt{color:#bb3535}.vlabel.bt{color:#1f69b9}.vlabel.existing{color:#58616b}.vlabel.ramal{color:#228057}.corner-toast{position:fixed;z-index:2000;bottom:24px;left:50%;transform:translateX(-50%);background:#1a3434;color:#fff;border-radius:11px;padding:12px 17px;box-shadow:var(--shadow);font-size:12px;font-weight:650;max-width:90%;display:none;text-align:center}.corner-toast.show{display:block}.modal-backdrop{position:fixed;inset:0;z-index:1500;background:#061d1dcc;display:none;align-items:center;justify-content:center;padding:20px}.modal-backdrop.visible{display:flex}.modal{background:#fff;width:min(560px,100%);max-height:90vh;display:flex;flex-direction:column;overflow:hidden;border-radius:16px;box-shadow:0 25px 75px #0003}.modal-header{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.modal-header b{font-size:17px;letter-spacing:-.3px}.modal-content{padding:18px 20px;overflow:auto}.modal-actions{border-top:1px solid var(--line);padding:13px 20px;display:flex;align-items:center;gap:8px;justify-content:flex-end}.projects-list{display:flex;flex-direction:column;gap:8px}.project-line{display:flex;justify-content:space-between;align-items:center;gap:8px;border:1px solid var(--line);padding:12px;border-radius:10px}.project-line b{font-size:12px}.project-line small{display:block;color:var(--muted);margin-top:4px}.m-title{font-size:14px;font-weight:800;color:#263e3d;margin:0 0 9px}.helpinfo{padding:12px 14px;border:1px solid #dce9e0;border-radius:12px;background:#f5faf7;color:#46665e;font-size:12px;line-height:1.6}.top-mobile{display:none}.mobile-bottom{display:none}.northbadge{background:#fff;border-radius:7px;padding:6px 9px;font-size:12px;font-weight:900;box-shadow:0 2px 8px #20302a20}.line-sample{display:flex;align-items:center;gap:6px}.empty{padding:12px;border:1px dashed #d7e3dd;border-radius:10px;color:#768683;font-size:11px;line-height:1.6}.alert{padding:11px 12px;border-radius:10px;background:#fff7e9;border:1px solid #f4e1c5;color:#7d6239;font-size:11px;line-height:1.5}.leaflet-control-zoom{border:0!important;box-shadow:0 3px 15px #142e2c22!important}.leaflet-control-zoom a{border:1px solid #dbe5df!important;color:#264443!important}.leaflet-control-zoom{margin-right:13px!important;margin-bottom:15px!important}
+    @media(max-width:1050px){.app{grid-template-columns:68px minmax(0,1fr) 275px}.toolrail{padding:12px 4px}.tool{width:57px}.panel-inner{padding:16px 14px}.brand{min-width:184px}.projectpill b{max-width:200px}.header-actions .hide-md{display:none}}
+    @media(max-width:760px){.topbar{height:59px;padding:0 11px;gap:10px}.brand{min-width:0}.brandmark{width:36px;height:36px}.brandname{font-size:17px}.brandtext small{font-size:8px}.projectpill{margin-left:auto;padding:6px 8px}.projectpill b{max-width:105px;font-size:11px}.projectpill span{display:none}.header-actions{gap:4px}.header-actions .desktop-label,.header-actions .hide-sm{display:none}.header-actions .btn{padding:9px}.app{height:calc(100% - 59px - 66px);grid-template-columns:minmax(0,1fr)}.toolrail{position:absolute;bottom:0;left:0;right:0;z-index:600;flex-direction:row;justify-content:space-around;gap:0;padding:5px 4px max(6px,env(safe-area-inset-bottom));height:66px;border-right:none;border-top:1px solid var(--line);box-shadow:0 -4px 20px #091e1c1a}.tool{width:calc(100% / 7);min-height:53px;max-width:65px;padding:3px;gap:4px;font-size:9px}.tool svg{width:18px;height:18px}.toolgap,.tool.extra{display:none}.maparea{bottom:auto}.panel{position:absolute;top:59px;right:0;bottom:66px;width:min(345px,90vw);z-index:590;box-shadow:-9px 0 32px #142b2b22;display:none}.panel.visible{display:flex}.map-bottom{bottom:15px}.map-top-right{right:9px;top:10px}.map-top-left{top:10px;left:9px}.floating{padding:9px 10px;font-size:11px}.context{top:auto;bottom:18px;left:9px;transform:none;width:min(370px,calc(100% - 18px));max-height:calc(100% - 85px)}.statusbar{font-size:10px;max-width:85vw}.mapfoot{display:none}.mapoverlay.map-top-left{max-width:calc(100% - 104px)}.map-top-left .floating.hide-mobile{display:none}.mobile-bottom{display:flex;position:absolute;top:172px;left:9px;right:auto;z-index:650}.badge-mobile{display:flex;align-items:center;gap:4px;border:1px solid #dbe7df;border-radius:10px;background:#fff;padding:8px 10px;box-shadow:var(--shadow);font-size:11px;font-weight:800}.badge-mobile svg{width:15px;height:15px}}
+    @media(max-height:580px){.map-bottom{bottom:7px}.panel-inner{padding-top:10px}.statusbar{padding:8px}}
+    @media print{
+      body{overflow:visible!important;background:white!important}
+      body>*:not(#printSheet){display:none!important}
+      #printSheet{display:block!important;font:12px Arial,sans-serif;color:#1f3735}
+      .gf-print-page{page-break-after:always;break-after:page;page-break-inside:avoid;break-inside:avoid;overflow:hidden;width:100%;height:183mm;box-sizing:border-box;position:relative;padding-bottom:5mm}
+      .gf-print-page::after{content:attr(data-credit);position:absolute;right:1mm;bottom:0;color:#71817c;font:9px Arial,sans-serif;letter-spacing:.1px}
+      .gf-print-page:last-child{page-break-after:auto;break-after:auto}
+      .gf-print-head{display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #234c43;padding:0 0 5px;margin:0 0 8px}
+      .gf-print-head strong{font-size:17px;color:#153e36}
+      .gf-print-head span{font-size:11px;color:#4c6762}
+      .gf-print-frame{width:100%;height:149mm;position:relative;overflow:hidden;background:#e8eeeb;border:1px solid #c7d5ce;box-sizing:border-box}
+      .gf-print-tiles{position:absolute;inset:0;overflow:hidden}
+      .gf-print-tiles img{position:absolute;max-width:none!important;display:block!important;object-fit:fill}
+      .gf-print-overlay{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+      .gf-print-foot{font-size:10px;display:flex;justify-content:space-between;margin-top:7px;color:#455f59;line-height:1.35}
+      .gf-print-coords table{border-collapse:collapse;width:100%;font-size:10px}
+      .gf-print-coords th,.gf-print-coords td{border:1px solid #bccfc6;padding:5px 6px;text-align:left}
+      .gf-print-coords th{background:#ebf4ef}
+      .gf-print-coords tr{break-inside:avoid}
+      @page{size:A4 landscape;margin:9mm}
+    }
+
+    /* Mapa autônomo: os controles e marcações funcionam mesmo se as imagens do provedor não carregarem. */
+    .gf-map{background:#dfe8e2;overflow:hidden;position:absolute;inset:0;touch-action:none;user-select:none}
+    .gf-tiles,.gf-markers,.gf-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+    .gf-tiles{background-color:#e1eadf;background-image:linear-gradient(#c8d4c9aa 1px,transparent 1px),linear-gradient(90deg,#c8d4c9aa 1px,transparent 1px);background-size:80px 80px}
+    .gf-tile{position:absolute;width:256px;height:256px;left:0;top:0;background:transparent;border:0;overflow:hidden}
+    .gf-tile img{display:block;width:100%;height:100%;object-fit:fill;border:0;outline:0}
+    .gf-svg{overflow:visible;z-index:2}
+    .gf-svg .gf-hitline{pointer-events:stroke;cursor:pointer;stroke-linecap:round}
+    .gf-svg .gf-circle{pointer-events:none}
+    .gf-markers{z-index:3}
+    .gf-marker{position:absolute;top:0;left:0;pointer-events:auto;cursor:pointer;touch-action:none}
+    .gf-marker .marker-wrap{pointer-events:none}
+    .gf-marker.gf-drag-ready{cursor:move;filter:drop-shadow(0 0 4px #19a779)}
+    .gf-attribution{position:absolute;right:2px;bottom:1px;z-index:5;background:#ffffffd9;padding:2px 5px;border-radius:3px;font:10px Arial,sans-serif;color:#345}
+    .gf-attribution a{color:#2673a5}
+    .gf-zoom{position:absolute;right:15px;bottom:43px;z-index:5;display:grid;gap:5px}
+    .gf-zoom button{width:40px;height:40px;border:1px solid #d8e5dc;border-radius:9px;background:#fff;box-shadow:0 4px 12px #2039362b;font-size:24px;cursor:pointer;color:#203a39}
+    .map-search{padding:5px 5px 5px 10px;min-width:235px;width:min(360px,42vw);gap:5px}
+    .map-search input{border:0;outline:0;min-width:0;flex:1;width:100%;font-size:12px;background:transparent;color:#203a3c}
+    .map-search button{background:#167c61;color:white;border:0;padding:9px 12px;border-radius:8px;font-size:11px;font-weight:800;white-space:nowrap}
+    .map-search button:disabled{opacity:.6}
+    .search-location{display:flex;flex-direction:column;gap:7px;text-align:left;white-space:normal;align-items:stretch;width:100%;padding:11px}
+    .search-location small{color:#637773;font-size:10px}
+    .map-search-status{position:absolute;top:65px;left:16px;z-index:420;background:#fff;border-radius:8px;padding:7px 9px;box-shadow:0 4px 14px #0002;font-size:11px;display:none;pointer-events:none}
+    @media(max-width:760px){.map-top-left{top:8px;left:8px;max-width:calc(100% - 64px)!important;gap:6px}.map-search{order:-1;width:min(330px,calc(100vw - 115px));min-width:0}.map-search input{font-size:11px}.map-search button{padding:9px}.map-top-left>.floating:first-child{padding:7px 9px}.map-top-right{top:61px}.map-search-status{top:91px;left:8px}}
+
+    /* Ferramentas sempre acessíveis; no celular mantêm a barra principal e abrem uma paleta compacta. */
+    .drawing-palette{display:none;position:absolute;top:15px;left:12px;z-index:590;width:228px;padding:13px;background:#fff;border:1px solid #d6e3dc;border-radius:14px;box-shadow:0 8px 26px #12312d33}
+    .drawing-palette.visible{display:block}.palette-top{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:12px;margin-bottom:11px}
+    .palette-top button{border:0;background:#edf3ef;border-radius:7px;width:27px;height:27px;font-size:19px;cursor:pointer}
+    .palette-tools{display:grid;grid-template-columns:1fr 1fr;gap:6px}.palette-tools button{display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid #dce7df;background:#f8faf8;border-radius:8px;padding:9px 3px;font-size:17px;color:#365b53;cursor:pointer}
+    .palette-tools button span{font-size:11px;font-weight:700}.palette-tools button.active{background:#dcefe7;border-color:#64ae8b}
+    .palette-caption{font-size:10px;color:#6b7c76;margin:12px 0 7px;line-height:1.4}
+    .palette-colors{display:flex;gap:8px;flex-wrap:wrap}.palette-colors button{width:24px;height:24px;background:var(--swatch);border:2px solid white;border-radius:50%;box-shadow:0 0 0 1px #aabbb1;cursor:pointer}.palette-colors button.active{box-shadow:0 0 0 3px #175c48}
+    .marker-textnote{display:inline-block;max-width:230px;min-width:0;background:rgba(255,255,255,.57);border:none;border-radius:4px;padding:2px 4px;font-size:9px;font-weight:400;line-height:1.22;letter-spacing:0;color:#1d3434;opacity:.79;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;vertical-align:top;text-shadow:0 1px 2px #fff;box-shadow:none}
+    .marker-tree{font-size:26px;line-height:1;filter:drop-shadow(0 2px 2px #143e3759);color:#217b42}
+    .marker-handle{width:17px;height:17px;border-radius:50%;border:3px solid #185a4b;background:#fff;box-shadow:0 2px 5px #0003}
+    /* Rótulos discretos de coordenadas UTM anexados aos elementos do mapa */
+    .gf-inline-coords{display:block;font-size:9px;font-weight:400;line-height:1.22;color:#1d3434;opacity:.79;white-space:nowrap;letter-spacing:0;text-align:center;padding:2px 4px;border-radius:4px;background:rgba(255,255,255,.57);text-shadow:0 1px 2px #fff;pointer-events:none;user-select:none}
+    .marker-wrap{position:relative;overflow:visible}
+    .marker-wrap .gf-inline-coords{position:absolute;top:40px;left:50%;transform:translateX(-50%)}
+    .marker-wrap.is-transformer .gf-inline-coords{top:48px}
+    .gf-note-anchor{position:relative;white-space:normal;display:inline-block;min-width:0;max-width:230px}
+    .gf-note-anchor .gf-inline-coords{display:inline-block;margin-top:3px;text-align:left}
+    .gf-extra-coords{font-size:9px;font-weight:400;line-height:1.25;color:#1d3434;opacity:.78;background:rgba(255,255,255,.56);text-shadow:0 1px 2px white;border-radius:3px;padding:2px 4px;white-space:nowrap;pointer-events:none}
+    .gf-coordinates-switch{font-size:11px;cursor:pointer;user-select:none;display:flex;align-items:center;gap:8px;padding:8px 11px;background:rgba(255,255,255,.92)}
+    .gf-coordinates-switch input{width:17px;height:17px;accent-color:#137e61;cursor:pointer;flex:none}
+    .gf-photo-quick{display:flex;gap:9px;align-items:center;justify-content:space-between;background:#eff8f2;border:1px solid #d5e9de;padding:9px 10px;border-radius:10px;margin-bottom:12px}
+    .gf-photo-quick .smallhint{font-size:10px}
+    .gf-photo-desc{width:100%;font-size:11px;min-height:30px;border-radius:6px;border:1px solid #d8e2db;padding:5px 6px;background:#fff}
+    .gf-camera-preview{width:100%;aspect-ratio:4/3;max-height:54vh;object-fit:contain;background:#0f2525;border-radius:10px}
+    .gf-camera-message{font-size:11px;color:#516764;margin-top:7px}
+    .media-thumbs{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:9px 0}.media-thumb{border:1px solid #dce6df;border-radius:10px;overflow:hidden;background:#f5f8f5;min-height:86px;display:flex;flex-direction:column;align-items:stretch;gap:3px}.media-thumb img{height:90px;width:100%;object-fit:cover;cursor:zoom-in;background:#e0e8e4}.media-thumb-actions{display:flex;gap:4px;padding:5px;align-items:center;justify-content:space-around}.media-thumb-actions button{font-size:10px;padding:4px 6px;border:1px solid #d5e1db;border-radius:6px;background:#fff;cursor:pointer}
+    .attach-card{border:1px solid #dfe9e3;border-radius:12px;padding:9px;margin:8px 0;background:#fdfefe}.attach-card .filetype{font-size:10px;word-break:break-word;color:#6a7c76}.attach-card img{width:100%;max-height:180px;object-fit:contain;background:#edf2ed;border-radius:7px}.attach-actions{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.attach-actions button{padding:6px 9px;font-size:11px}
+    .gf-print-media-page{padding-top:2px}.gf-photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-height:132mm;margin-top:12px;align-items:start}.gf-photo-item{margin:0;border:1px solid #d9e4db;border-radius:9px;padding:8px;background:#fafcfb;break-inside:avoid}.gf-photo-item img{max-width:100%;width:100%;height:117mm;object-fit:contain;background:#edf3ee}.gf-photo-item figcaption{padding:5px 0 0;color:#465e56;font-size:11px}.gf-media-meta{background:#f1f7f4;border-radius:8px;padding:10px 12px;font-size:12px;line-height:1.7}
+    @media(max-width:760px){.drawing-palette{top:auto;bottom:73px;left:8px;width:min(260px,calc(100% - 20px))}.toolrail{justify-content:flex-start;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;gap:5px}.tool{flex:0 0 56px;width:56px}.drawing-palette .palette-caption{margin:8px 0}}
+    .app-version{display:block;margin-top:2px;color:#7c8e88;font-size:10px;font-weight:500;letter-spacing:0}
+    .context{left:auto;right:14px;transform:none}
+    @media(max-width:760px){.context{top:auto;bottom:82px;left:8px;right:8px;width:auto;transform:none;max-height:55vh}}
+    .gf-map.pan-mode{cursor:grab!important}.gf-map.pan-mode:active{cursor:grabbing!important}.gf-map.select-mode{cursor:grab!important}.gf-map.select-mode:active{cursor:grabbing!important}
+    .gf-map.draw-mode{cursor:crosshair!important}
+    .gf-map.draw-mode .gf-hitline,.gf-map.pan-mode .gf-marker,.gf-map.pan-mode .gf-hitline{pointer-events:none!important}.gf-map.draw-mode .gf-marker:has(.vlabel){pointer-events:none!important}
+    .gf-preview-line{stroke-dasharray:7 5;opacity:.72;pointer-events:none!important}
+    @media(max-width:760px){.app-version{font-size:8px}.brandname{font-size:17px}}
+
+
+    /* Croqui técnico: rótulos leves sobre satélite, sem caixas opacas. */
+    .marker-wrap .gf-node-caption{position:absolute;top:27px;left:50%;transform:translateX(-50%);width:max-content;min-width:35px;max-width:160px;display:flex;flex-direction:column;align-items:center;gap:1px;pointer-events:none;user-select:none;z-index:1}
+    .marker-wrap.is-transformer .gf-node-caption{top:32px}
+    .marker-wrap .marker-title{font-size:9px;font-weight:450;line-height:1.15;color:#20352f;border:none;border-radius:3px;padding:1px 3px;background:rgba(255,255,255,.65);box-shadow:none;text-shadow:0 1px 1px rgba(255,255,255,.6);letter-spacing:0}
+    .marker-wrap .gf-inline-coords{position:static;transform:none;font-size:8px;line-height:1.2;font-weight:400;letter-spacing:0;color:#253d38;background:rgba(255,255,255,.57);opacity:.84;border-radius:3px;padding:1px 3px;text-shadow:none;white-space:nowrap}
+    .vlabel{font-size:9px;font-weight:450;line-height:1.1;padding:2px 4px;border:none;border-radius:3px;box-shadow:none;background:rgba(255,255,255,.66)}
+    .marker-textnote{font-size:8px!important;font-weight:400!important;line-height:1.24!important;opacity:.8;background:rgba(255,255,255,.49)!important;box-shadow:none!important;text-shadow:none!important}
+    .marker-tree-technical{width:30px;height:30px;pointer-events:none;display:block;opacity:.9;filter:none}
+
+    /* v2.9: símbolo de poste técnico, preto sólido, sem halo ou seleção decorativa. */
+    .marker-wrap .marker-pole,
+    .marker-wrap .marker-pole.existing,
+    .marker-wrap .marker-pole.replace,
+    .marker-wrap .marker-pole.remove,
+    .marker-wrap.selected .marker-pole {
+      box-sizing:border-box;width:12px;height:12px;flex:0 0 12px;
+      background:#111!important;border:0!important;border-radius:0!important;
+      box-shadow:none!important;filter:none!important;outline:0!important;
+      opacity:1!important;
+    }
+    /* IDs sempre junto ao elemento. A tipografia mantém os tamanhos da versão 2.8. */
+    .marker-wrap .gf-node-caption{top:16px;gap:0}
+    .marker-wrap.is-transformer .gf-node-caption{top:25px}
+    .marker-wrap.is-consumer .gf-node-caption{top:21px}
+    .marker-wrap .gf-inline-coords {position:absolute;top:30px;left:50%;transform:translateX(-50%);min-width:125px;max-width:none;box-sizing:border-box;white-space:nowrap;z-index:1}
+    .marker-wrap.is-transformer .gf-inline-coords{top:39px}
+    .marker-wrap.is-consumer .gf-inline-coords{top:35px}
+
+    /* v2.10: fundos dimensionados ao texto, sem áreas brancas excedentes */
+    .marker-wrap .gf-inline-coords{display:inline-block;position:absolute;width:max-content;max-width:none;min-width:0;padding:1px 2px!important;line-height:1.15;background:rgba(255,255,255,.48)!important;border:0!important;border-radius:2px;box-shadow:none!important;pointer-events:auto;cursor:grab;touch-action:none;user-select:none}
+    .marker-wrap .gf-inline-coords:active{cursor:grabbing}
+    .marker-wrap .marker-title{padding:0 2px!important;line-height:1.1!important;background:rgba(255,255,255,.47)!important;border-radius:2px!important}
+    .marker-textnote{display:inline!important;width:max-content;max-width:230px!important;min-width:0!important;padding:1px 2px!important;line-height:1.17!important;background:rgba(255,255,255,.45)!important;border-radius:2px!important}
+    .vlabel{padding:1px 3px!important;background:rgba(255,255,255,.50)!important;border-radius:2px!important;display:inline-block;white-space:nowrap}
+    .gf-note-anchor{width:max-content;max-width:230px;display:inline-block}
+    .marker-tree-technical{display:block;filter:none;opacity:1;transform-origin:center}
+    .marker-handle{width:15px;height:15px;border:2px solid #176e85;background:#fff;border-radius:3px;box-shadow:none;touch-action:none}
+    .gf-drawing-hit{stroke:transparent!important;stroke-opacity:0!important;pointer-events:stroke!important;cursor:pointer}
+    .gf-drawing-selected{stroke-opacity:.96}
+    .gf-multiselect{display:flex;gap:5px;flex-wrap:wrap;margin-top:11px;padding-top:9px;border-top:1px solid #e2e9e4}
+    .gf-multiselect button{font-size:10px;padding:7px 8px;border:1px solid #d4e2d9;border-radius:7px;background:#fff;color:#254b44}
+    .gf-multiselect button.active{background:#e1f3ea;border-color:#6dab90}
+    .gf-multiselect button.danger{color:#a33131;border-color:#ebcbcb}
+    .gf-multiselect .gf-selection-count{width:100%;font-size:10px;color:#697e76}
+
+    .gf-tree-rotated .marker-tree-technical{width:100%;height:100%;opacity:1;filter:none}
+
+    /* Gerenciador de levantamentos: ações legíveis também em tablets. */
+    .project-line .gf-project-info{min-width:0;flex:1;overflow-wrap:anywhere}
+    .gf-project-actions{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end;align-items:center}
+    .gf-project-actions .btn{padding:7px 9px;font-size:11px}
+    .gf-project-actions .btn.danger{color:#af3131;border-color:#e5b6b4}
+    .gf-project-actions .btn:disabled{opacity:.5;cursor:wait}
+    @media(max-width:650px){.project-line{align-items:stretch;flex-direction:column}.gf-project-actions{justify-content:flex-start}.gf-project-actions .btn{flex:1;min-width:74px}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><div class="brandmark" id="logo"></div><div class="brandtext"><div class="brandname">CroquiPro<span style="color:#279a78">.</span></div><small>Croqui de Redes Elétricas</small><span class="app-version" id="appVersion"></span></div></div>
+    <div class="projectpill" id="projectPill" title="Clique para editar identificação do projeto" role="button" tabindex="0"><span id="projectIcon"></span><div class="info"><b id="projectName">Levantamento sem título</b><span id="projectSubtitle">Não informado · Projeto em edição</span></div></div>
+    <div class="header-actions"><span class="badge" id="saveStatus">Salvo localmente</span><button class="btn hide-md" id="btnProjects"><span id="folderIcon"></span><span>Projetos</span></button><button class="btn" id="btnProjectEdit" title="Dados do projeto"><span id="editIcon"></span><span class="desktop-label">Dados</span></button><button class="btn primary" id="btnExport"><span id="downloadIcon"></span><span class="desktop-label">Exportar</span></button></div>
+  </header>
+  <main class="app">
+    <aside class="toolrail" aria-label="Ferramentas do mapa">
+      <button class="tool active" data-tool="select" title="Selecionar e editar"><span id="toolSelect"></span>Selecionar</button>
+      <button class="tool" data-tool="pan" title="PAN (opcional): arraste o mapa sem selecionar elementos"><span id="toolPan"></span>PAN</button>
+      <button class="tool" data-tool="pole" title="Toque no mapa para adicionar um poste"><span class="shape"></span>Poste</button>
+      <button class="tool" data-tool="transformer" title="Toque no mapa para adicionar transformador"><span class="shape triangle"></span>Trafo</button>
+      <button class="tool" data-tool="consumer" title="Toque no mapa para adicionar consumidor"><span class="shape circle"></span>Cliente</button>
+      <button class="tool" data-tool="connect" title="Conecte postes, transformadores e unidades consumidoras"><span id="toolConnect"></span>Rede</button>
+      <button class="tool" data-tool="note" title="Toque para inserir um texto no mapa"><span id="toolNote"></span>Nota</button>
+       <button class="tool" id="btnDrawing" title="Ferramentas de desenho, formas e símbolos"><span id="drawIcon">✎</span>Desenho</button>
+       <button class="tool" id="btnAttachments" title="Anexos gerais do projeto"><span id="attachmentIcon">▧</span>Anexos</button>
+      <div class="toolgap"></div>
+      <button class="tool extra" id="btnUndo" title="Desfazer"><span id="toolUndo"></span>Desfazer</button>
+      <button class="tool extra" id="btnRedo" title="Refazer"><span id="toolRedo"></span>Refazer</button>
+      <button class="tool extra" id="btnHelp" title="Como usar"><span id="toolHelp"></span>Ajuda</button>
+    </aside>
+    <section class="maparea" id="mapArea">
+      <div id="map" class="map" aria-label="Mapa interativo"></div>
+      <div id="drawingPalette" class="drawing-palette" aria-label="Ferramentas de desenho">
+        <div class="palette-top"><strong>Desenho e símbolos</strong><button id="closeDrawing" aria-label="Fechar ferramentas">×</button></div>
+        <div class="palette-tools">
+          <button data-draw="line">╱ <span>Linha</span></button><button data-draw="arrow">➜ <span>Seta</span></button>
+          <button data-draw="rect">▭ <span>Retângulo</span></button><button data-draw="circle">◯ <span>Círculo</span></button>
+          <button data-draw="tree">♣ <span>Árvore</span></button>
+        </div>
+        <div class="palette-caption">Cor do próximo desenho</div>
+        <div id="drawColorPalette" class="palette-colors">
+          <button data-color="#df3f44" title="Vermelho" style="--swatch:#df3f44" class="active"></button>
+          <button data-color="#2879d2" title="Azul" style="--swatch:#2879d2"></button>
+          <button data-color="#26945d" title="Verde" style="--swatch:#26945d"></button>
+          <button data-color="#e3b72c" title="Amarelo" style="--swatch:#e3b72c"></button>
+          <button data-color="#1f2937" title="Preto" style="--swatch:#1f2937"></button>
+          <button data-color="#ee8429" title="Laranja" style="--swatch:#ee8429"></button>
+        </div>
+        <div class="gf-multiselect" id="gfDrawBulkBar">
+          <button type="button" id="gfDrawMulti" title="Selecionar vários desenhos no mapa">Selecionar vários</button>
+          <button type="button" id="gfDrawAll" title="Selecionar todos os desenhos">Todos</button>
+          <button type="button" id="gfDrawRemove" class="danger" title="Excluir os desenhos selecionados">Excluir seleção</button>
+          <span class="gf-selection-count" id="gfDrawCount">0 desenhos selecionados</span>
+        </div>
+        <p class="palette-caption">Toque no traçado para editar. Alças ajustam extremidades, forma e tamanho. Selecione vários desenhos e exclua de uma vez.</p>
+      </div>
+      <div class="mapoverlay map-top-left">
+        <div class="floating satellite-chip"><span id="layersIcon"></span><span>Imagem de satélite</span></div>
+        <div class="floating map-search" role="search"><input id="placeSearch" type="search" placeholder="Endereço ou UTM X Y 22S" aria-label="Buscar endereço ou coordenadas"><button id="searchGo" type="button" aria-label="Buscar localização" title="Buscar local">Buscar</button></div>
+        <div class="floating hide-mobile"><span id="coordinateIcon"></span><span id="cursorCoords">Passe o cursor sobre o mapa</span></div>
+      </div>
+      <div class="mapoverlay map-top-right">
+        <button class="mapround" id="btnLocate" title="Centralizar na minha localização GPS"></button>
+        <button class="mapround" id="btnGPSPole" title="Adicionar poste na minha localização GPS"></button>
+        <button class="mapround" id="btnCoordinates" title="Adicionar ponto por coordenadas"></button>
+        <button class="mapround" id="btnUndoMap" title="Desfazer"></button>
+        <button class="mapround" id="btnReport" title="Resumo do projeto"></button>
+      </div>
+      <div class="mapoverlay map-bottom">
+        <label class="floating gf-coordinates-switch" title="Mostrar ou ocultar UTM X/Y no mapa"><input id="showMapCoordinates" type="checkbox" checked><span>Exibir UTM X/Y de PS, TR e UC</span></label>
+        <div class="statusbar"><span id="statusIcon"></span><span id="modeStatus">Modo seleção: toque em um elemento para visualizar e editar. Para adicionar um poste, selecione Poste.</span></div>
+        <div class="mapfoot" id="mapFoot">Coordenadas UTM X/Y · WGS84 · Fuso por elemento · Mapa requer internet</div>
+      </div>
+      <div class="context" id="contextPanel" aria-live="polite"><div class="contexthead"><div><b id="contextTitle">Elemento</b><div><span id="contextSub">Propriedades</span></div></div><button class="xbtn" id="contextClose" aria-label="Fechar">×</button></div><div class="contextbody" id="contextBody"></div><div class="contextfooter" id="contextFooter"></div></div>
+    </section>
+    <aside class="panel" id="summaryPanel"><div class="panel-inner">
+      <div style="display:flex;align-items:center;justify-content:space-between"><div class="eyebrow">Levantamento de campo</div><button class="btn small ghost" id="closePanel" title="Fechar painel" style="display:none">✕</button></div>
+      <h2 class="sect-title">Resumo do croqui</h2>
+      <div class="metrics"><div class="metric primarymetric"><div class="n" id="metricPoles">0</div><div class="desc">Postes cadastrados</div></div><div class="metric"><div class="n" id="metricSpans">0</div><div class="desc">Vãos / ligações</div></div><div class="metric"><div class="n" id="metricMT">0 m</div><div class="desc">Rede MT</div></div><div class="metric"><div class="n" id="metricBT">0 m</div><div class="desc">Rede BT</div></div></div>
+      <div class="section-row"><b>Quantitativos</b><span class="badge grey">Atualização automática</span></div>
+      <div class="legend-row"><span>Postes projetados</span><b id="metricProjected">0</b></div><div class="legend-row"><span>Postes existentes</span><b id="metricExisting">0</b></div><div class="legend-row"><span>Transformadores</span><b id="metricTransformers">0</b></div><div class="legend-row"><span>Entradas de serviço</span><b id="metricConsumers">0</b></div><div class="legend-row"><span>Vãos MT</span><b id="metricMTSpans">0</b></div><div class="legend-row"><span>Vãos BT</span><b id="metricBTSpans">0</b></div><div class="legend-row"><span>Rede existente / ramais</span><b id="metricOther">0 m</b></div><div class="legend-row"><span>Ligações com TR / UC</span><b id="metricEquipmentLinks">0</b></div>
+      <div class="section-row"><b>Tipo da próxima conexão</b></div><p class="smallhint">Rede: conecte postes, transformadores e UCs. Com MT selecionada, ligações com UC serão Ramal automaticamente.</p><div class="formgroup"><select id="connectionType" class="field"><option value="MT">Média tensão (MT)</option><option value="BT">Baixa tensão (BT)</option><option value="EX">Rede existente</option><option value="RAMAL">Ramal de ligação</option></select></div>
+      <div class="section-row"><b>Identificação do projeto</b><button class="btn small" id="summaryEdit">Editar</button></div><div class="legend-row"><span>Município / UF</span><b id="metricCity">Não informado</b></div><div class="legend-row"><span>Localidade</span><b id="metricLocality">Não informada</b></div><div class="legend-row"><span>Total projetado MT + BT</span><b id="metricTotal">0 m</b></div>
+      <div class="divider"></div><div class="alert">Croqui preliminar: coordenadas de GPS e marcações sobre o mapa devem ser conferidas. A metragem horizontal não representa automaticamente a quantidade final de cabos.</div>
+      <div style="margin-top:12px;display:grid;gap:8px"><button id="summaryGPSPole" class="btn primary block">+ Poste na localização GPS</button><button id="summaryPrint" class="btn block">Imprimir / PDF do croqui</button></div>
+      <p class="smallhint">Os dados são salvos localmente neste navegador. Faça backup em JSON para preservar seus levantamentos.</p>
+    </div></aside>
+  </main>
+  <div class="mobile-bottom"><button class="badge-mobile" id="mobileSummary"><span id="mobileStats">0 postes · 0 m</span><span id="mobileIcon"></span></button></div>
+  <div class="corner-toast" id="toast" role="status"></div>
+  <div class="modal-backdrop" id="modalBackdrop"><div class="modal"><div class="modal-header"><b id="modalTitle"></b><button class="xbtn" id="modalClose">×</button></div><div class="modal-content" id="modalContent"></div><div class="modal-actions" id="modalActions"></div></div></div>
+  <div id="printSheet" style="display:none"></div>
+  <script>
+/* CroquiPro map engine (single-file edition): interactive slippy map without a CDN dependency.
+   Raster backgrounds load from the chosen provider only when the viewport is viewed.
+   OpenStreetMap data © OpenStreetMap contributors, ODbL. */
+(function () {
+  'use strict';
+  const TILE=256, RAD=Math.PI/180, EARTH=6378137;
+  const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+  const point=ll=>Array.isArray(ll)?{lat:Number(ll[0]),lng:Number(ll[1])}:{lat:Number(ll.lat),lng:Number(ll.lng)};
+  const proj=(ll,z)=>{const p=point(ll),lat=clamp(p.lat,-85.05112878,85.05112878)*RAD,n=2**z*TILE;return {x:(p.lng+180)/360*n,y:(1-Math.log(Math.tan(Math.PI/4+lat/2))/Math.PI)/2*n}};
+  const unproj=(pt,z)=>{const n=2**z*TILE,latitude=Math.atan(Math.sinh(Math.PI*(1-2*pt.y/n)))/RAD;return {lat:latitude,lng:pt.x/n*360-180}};
+  function elt(tag,cls,parent){const e=document.createElement(tag);if(cls)e.className=cls;if(parent)parent.appendChild(e);return e}
+  class Evented{
+    constructor(){this.handlers={}}
+    on(type,fn){(this.handlers[type]||(this.handlers[type]=[])).push(fn);return this}
+    fire(type,obj={}){(this.handlers[type]||[]).forEach(f=>f({...obj,target:this}));return this}
+  }
+  class MiniMap extends Evented{
+    constructor(id){super();this.el=document.getElementById(id);this.el.classList.add('gf-map');this.center={lat:-23.3045,lng:-51.1696};this.zoom=14;this.layers=new Set();this.currentTileLayer=null;this.tileElements=new Map();this.tiles=elt('div','gf-tiles',this.el);this.svg=document.createElementNS('http://www.w3.org/2000/svg','svg');this.svg.classList.add('gf-svg');this.svg.setAttribute('aria-hidden','true');this.el.appendChild(this.svg);this.markers=elt('div','gf-markers',this.el);this.attribution=elt('div','gf-attribution',this.el);this.attribution.innerHTML='© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors';this._bind();this._render()}
+    getContainer(){return this.el}
+    getCenter(){return {...this.center}}
+    getZoom(){return this.zoom}
+    _w(){return this.el.clientWidth||600}
+    _h(){return this.el.clientHeight||400}
+    _centerWorld(){return proj(this.center,this.zoom)}
+    toScreen(ll){const p=proj(ll,this.zoom),c=this._centerWorld(),world=TILE*2**this.zoom;let dx=p.x-c.x; if(dx>world/2)dx-=world;if(dx< -world/2)dx+=world;return {x:dx+this._w()/2,y:p.y-c.y+this._h()/2}}
+    fromScreen(x,y){const c=this._centerWorld();return unproj({x:c.x+x-this._w()/2,y:c.y+y-this._h()/2},this.zoom)}
+    setView(ll,z){this.center=point(ll);if(z!=null)this.zoom=clamp(Math.round(z),3,22);this._render();this.fire('moveend');return this}
+    fitBounds(b,opts={}){const ll=b.map(point),mid={lat:(ll[0].lat+ll[1].lat)/2,lng:(ll[0].lng+ll[1].lng)/2},padding=(opts.padding?.[0]||70)*2;let z=Math.min(opts.maxZoom||22,22);for(;z>3;z--){const a=proj(ll[0],z),c=proj(ll[1],z);if(Math.abs(a.x-c.x)<this._w()-padding&&Math.abs(a.y-c.y)<this._h()-padding)break}return this.setView(mid,z)}
+    invalidateSize(){this._render();return this}
+    addLayer(layer){if(layer.kind==='tile'){this.currentTileLayer=layer;this._render();return this}this.layers.add(layer);layer.map=this;this._drawLayer(layer);return this}
+    removeLayer(layer){if(!layer)return this;if(layer.kind==='tile'){if(this.currentTileLayer===layer){this.currentTileLayer=null;this._render()}return this}this.layers.delete(layer);layer.dom?.remove();layer.dom=null;return this}
+    _bind(){
+      this.el.style.touchAction='none';this.panMode='select';this.el.classList.add('select-mode');
+      let start=null,wasPinch=false,pinch=null,tap=null;const pointers=new Map();
+      this.el.addEventListener('auxclick',e=>{if(e.button===1)e.preventDefault()});
+      this.el.addEventListener('pointerdown',e=>{
+        const middle=e.pointerType==='mouse'&&e.button===1;
+        if(e.pointerType==='mouse'&&e.button!==0&&!middle)return;
+        if(!middle&&e.target.closest('.gf-marker,.gf-attribution'))return;
+        if(middle)e.preventDefault();
+        if(!pointers.size)wasPinch=false;
+        pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+        if(pointers.size===2){const [a,b]=[...pointers.values()];pinch={distance:Math.hypot(a.x-b.x,a.y-b.y)||1,zoom:this.zoom};start=null;wasPinch=true}
+        else if(pointers.size===1){
+          const allowPan=true; // Arraste move o mapa em qualquer ferramenta, sem mudar o modo ativo.
+          start=allowPan?{x:e.clientX,y:e.clientY,c:this._centerWorld(),moved:false}:null;
+          tap=!middle?{x:e.clientX,y:e.clientY,moved:false,lineDom:e.target.closest('.gf-hitline')}:null;
+        }
+        this.el.setPointerCapture(e.pointerId)
+      },{passive:false});
+      this.el.addEventListener('pointermove',e=>{
+        if(pointers.has(e.pointerId))pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+        if(pointers.size>=2&&pinch){const [a,b]=[...pointers.values()];const d=Math.hypot(a.x-b.x,a.y-b.y)||1;const z=clamp(Math.round(pinch.zoom+Math.log2(d/pinch.distance)*1.8),3,22);if(z!==this.zoom)this.setView([this.center.lat,this.center.lng],z);return}
+        const bounds=this.el.getBoundingClientRect(),x=e.clientX-bounds.left,y=e.clientY-bounds.top;
+        this.fire('mousemove',{latlng:this.fromScreen(x,y),originalEvent:e});
+        if(tap&&Math.abs(e.clientX-tap.x)+Math.abs(e.clientY-tap.y)>6)tap.moved=true;
+        if(!start)return;
+        const dx=e.clientX-start.x,dy=e.clientY-start.y;
+        if(Math.abs(dx)+Math.abs(dy)>4)start.moved=true;
+        if(start.moved){this.center=unproj({x:start.c.x-dx,y:start.c.y-dy},this.zoom);this._render()}
+      });
+      this.el.addEventListener('pointerup',e=>{
+        const middle=e.pointerType==='mouse'&&e.button===1;
+        pointers.delete(e.pointerId);
+        if(this.el.hasPointerCapture(e.pointerId))this.el.releasePointerCapture(e.pointerId);
+        if(wasPinch){start=null;tap=null;if(pointers.size<2)pinch=null;this.fire('moveend');return}
+        if(start){const moved=start.moved;start=null;if(moved){tap=null;this.fire('moveend');return}}
+        if(middle){tap=null;return}
+        if(!tap)return;
+        const moved=tap.moved,lineDom=tap.lineDom;tap=null;
+        if(moved)return;
+        if(lineDom){const line=[...this.layers].find(layer=>layer.dom===lineDom);if(line){line.fire('click',{originalEvent:e});return}}
+        const bounds=this.el.getBoundingClientRect();this.fire('click',{latlng:this.fromScreen(e.clientX-bounds.left,e.clientY-bounds.top),originalEvent:e});
+      });
+      this.el.addEventListener('pointercancel',e=>{pointers.delete(e.pointerId);start=null;tap=null;pinch=null;wasPinch=false});
+      this.el.addEventListener('wheel',e=>{e.preventDefault();if(e.deltaY===0)return;const newZoom=clamp(this.zoom+(e.deltaY<0?1:-1),3,22);if(newZoom===this.zoom)return;const box=this.el.getBoundingClientRect(),x=e.clientX-box.left,y=e.clientY-box.top,anchor=this.fromScreen(x,y);this.zoom=newZoom;const anchorWorld=proj(anchor,this.zoom);this.center=unproj({x:anchorWorld.x-(x-this._w()/2),y:anchorWorld.y-(y-this._h()/2)},this.zoom);this._render();this.fire('moveend')},{passive:false});
+      this.el.addEventListener('dblclick',e=>{e.preventDefault();if(this.panMode==='pan'||this.panMode==='select')this.setView(this.fromScreen(e.offsetX,e.offsetY),this.zoom+1)});
+      if(window.ResizeObserver){this.observer=new ResizeObserver(()=>this._render());this.observer.observe(this.el)}
+    }
+    _render(){this._drawTiles();for(const layer of this.layers)this._drawLayer(layer)}
+    _drawTiles(){
+      const base=this.currentTileLayer;
+      if(!base){this.tiles.replaceChildren();this.tileElements.clear();return}
+      const z=this.zoom, nativeZ=Math.min(z,base.options.maxNativeZoom??19);
+      const scale=2**(z-nativeZ), tileSize=TILE*scale, c=this._centerWorld();
+      const firstX=Math.floor((c.x-this._w()/2)/tileSize),lastX=Math.floor((c.x+this._w()/2)/tileSize);
+      const firstY=Math.max(0,Math.floor((c.y-this._h()/2)/tileSize));
+      const lastY=Math.min(2**nativeZ-1,Math.floor((c.y+this._h()/2)/tileSize));
+      const n=2**nativeZ, used=new Set();
+      this.attribution.innerHTML=base.url.includes('openstreetmap.org')?
+        '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors':
+        base.options.attribution||'Mapas de terceiros';
+      for(let x=firstX;x<=lastX;x++)for(let y=firstY;y<=lastY;y++){
+        const tx=((x%n)+n)%n,ty=y;
+        const left=Math.round(x*tileSize-(c.x-this._w()/2));
+        const top=Math.round(y*tileSize-(c.y-this._h()/2));
+        const key=`${base.url}|${z}|${nativeZ}|${tx}|${ty}`;
+        used.add(key);
+        let box=this.tileElements.get(key);
+        if(!box){
+          box=elt('div','gf-tile',this.tiles);this.tileElements.set(key,box);
+          box.style.width=(tileSize+1)+'px';box.style.height=(tileSize+1)+'px';
+          const im=elt('img','',box);im.loading='eager';im.decoding='async';im.alt='';
+          im.referrerPolicy='strict-origin-when-cross-origin';
+          im.src=base.url.replace(/\{s\}/g,'').replace(/\{z\}/g,nativeZ).replace(/\{x\}/g,tx).replace(/\{y\}/g,ty);
+          im.onload=()=>base.fire('tileload');im.onerror=()=>{im.remove();base.fire('tileerror')};
+        }
+        box.style.transform=`translate(${left}px,${top}px)`;
+      }
+      for(const [key,box] of this.tileElements){if(!used.has(key)){box.remove();this.tileElements.delete(key)}}
+    }
+    _drawLayer(layer){
+      if(layer.kind==='marker'){const p=this.toScreen(layer.ll),anchor=layer.options.icon?.iconAnchor||[12,30];if(!layer.dom){layer.dom=elt('div','gf-marker',this.markers);layer.dom.innerHTML=layer.options.icon?.html||'';layer.dom.style.width=(layer.options.icon?.iconSize?.[0]||24)+'px';layer.dom.style.height=(layer.options.icon?.iconSize?.[1]||32)+'px';this._markerEvents(layer)}layer.dom.style.transform=`translate(${Math.round(p.x-anchor[0])}px,${Math.round(p.y-anchor[1])}px)`;
+      }else if(layer.kind==='line'){const [a,b]=layer.points.map(ll=>this.toScreen(ll));if(!layer.dom){layer.dom=document.createElementNS('http://www.w3.org/2000/svg','line');layer.dom.setAttribute('class','gf-hitline');layer.dom.addEventListener('click',e=>{e.stopPropagation();layer.fire('click',{originalEvent:e})});this.svg.appendChild(layer.dom)}const dom=layer.dom;dom.setAttribute('x1',a.x);dom.setAttribute('y1',a.y);dom.setAttribute('x2',b.x);dom.setAttribute('y2',b.y);dom.setAttribute('stroke',layer.options.color||'#2879d2');dom.setAttribute('stroke-width',layer.options.weight||4);dom.setAttribute('stroke-opacity',layer.options.opacity??1);if(layer.options.dashArray)dom.setAttribute('stroke-dasharray',layer.options.dashArray);else dom.removeAttribute('stroke-dasharray');
+      }else if(layer.kind==='circle'){const p=this.toScreen(layer.ll);if(!layer.dom){layer.dom=document.createElementNS('http://www.w3.org/2000/svg','circle');layer.dom.setAttribute('class','gf-circle');this.svg.appendChild(layer.dom)}const r=layer.options.radius/(Math.cos(layer.ll.lat*RAD)*2*Math.PI*EARTH)*TILE*2**this.zoom;layer.dom.setAttribute('cx',p.x);layer.dom.setAttribute('cy',p.y);layer.dom.setAttribute('r',clamp(r,3,900));layer.dom.setAttribute('stroke',layer.options.color||'#2879d2');layer.dom.setAttribute('stroke-width',layer.options.weight||1);layer.dom.setAttribute('fill',layer.options.fillColor||'#2879d2');layer.dom.setAttribute('fill-opacity',layer.options.fillOpacity??0.1)}
+    }
+    _markerEvents(layer){
+      // Marcadores: toque curto seleciona; arraste rápido no marcador desloca o mapa;
+      // toque prolongado (320ms) + arraste move o elemento. No mouse, arraste move imediatamente.
+      let gesture=null;
+      const clearHold=()=>{if(gesture?.holdTimer){clearTimeout(gesture.holdTimer);gesture.holdTimer=null}layer.dom?.classList.remove('gf-drag-ready')};
+      layer.dom.addEventListener('contextmenu',e=>e.preventDefault());
+      layer.dom.addEventListener('pointerdown',e=>{
+        if(e.button!==0)return;
+        e.stopPropagation();
+        if(gesture)return;
+        const touch=e.pointerType==='touch'||e.pointerType==='pen';
+        const handle=!!layer.dom.querySelector('.marker-handle');
+        gesture={pointerId:e.pointerId,x:e.clientX,y:e.clientY,start:point(layer.ll),center:this._centerWorld(),touch,armed:!touch||handle,moved:false,dragging:false,panning:false,holdTimer:null};
+        if(touch&&!handle&&layer.options.draggable){
+          const g=gesture;
+          g.holdTimer=setTimeout(()=>{
+            if(gesture===g&&!g.panning&&!g.moved){g.armed=true;layer.dom?.classList.add('gf-drag-ready')}
+          },320);
+        }
+        layer.dom.setPointerCapture(e.pointerId);
+      });
+      layer.dom.addEventListener('pointermove',e=>{
+        const g=gesture;
+        if(!g||e.pointerId!==g.pointerId)return;
+        e.stopPropagation();
+        const dx=e.clientX-g.x,dy=e.clientY-g.y;
+        if(Math.hypot(dx,dy)<6&&!g.moved)return;
+        g.moved=true;
+        if(g.touch&&!g.armed&&!g.panning){
+          clearHold();g.panning=true;
+        }
+        if(g.panning){
+          this.center=unproj({x:g.center.x-dx,y:g.center.y-dy},this.zoom);
+          this._render();
+          return;
+        }
+        if(!g.armed||!layer.options.draggable)return;
+        if(!g.dragging){g.dragging=true;layer.fire('dragstart',{target:layer})}
+        const p=this.toScreen(g.start);
+        layer.ll=this.fromScreen(p.x+dx,p.y+dy);
+        this._drawLayer(layer);
+        layer.fire('drag',{target:layer});
+      });
+      layer.dom.addEventListener('pointerup',e=>{
+        const g=gesture;
+        if(!g||e.pointerId!==g.pointerId)return;
+        e.stopPropagation();
+        clearHold();gesture=null;
+        if(layer.dom?.hasPointerCapture(e.pointerId))layer.dom.releasePointerCapture(e.pointerId);
+        if(g.panning){this.fire('moveend');return}
+        if(g.dragging){layer.fire('dragend',{target:layer});return}
+        if(!g.moved)layer.fire('click',{originalEvent:e});
+      });
+      layer.dom.addEventListener('pointercancel',e=>{
+        const g=gesture;
+        if(!g||e.pointerId!==g.pointerId)return;
+        clearHold();gesture=null;
+        if(g.dragging){layer.ll=point(g.start);this._drawLayer(layer)}
+        if(g.panning)this.fire('moveend');
+      });
+      layer.dom.addEventListener('click',e=>e.stopPropagation());
+    }
+  }
+  class Layer extends Evented{constructor(kind,a,b){super();this.kind=kind;if(kind==='tile'){this.url=a;this.options=b||{}}else if(kind==='line'){this.points=a.map(point);this.options=b||{}}else{this.ll=point(a);this.options=b||{}}this.dom=null;this.map=null}
+    addTo(map){map.addLayer(this);return this}
+    remove(){this.map?.removeLayer(this);return this}
+    getLatLng(){return {...this.ll}}
+  }
+  window.L={map:id=>new MiniMap(id),tileLayer:(url,options)=>new Layer('tile',url,options),polyline:(points,options)=>new Layer('line',points,options),marker:(p,o)=>new Layer('marker',p,o),circle:(p,o)=>new Layer('circle',p,o),divIcon:cfg=>cfg,DomEvent:{stopPropagation(ev){ev.originalEvent?.stopPropagation?.();ev.stopPropagation?.()}},control:{zoom:()=>({addTo(map){const bar=elt('div','gf-zoom',map.el);const plus=elt('button','',bar),minus=elt('button','',bar);plus.textContent='+';minus.textContent='−';plus.title='Aproximar';minus.title='Afastar';plus.onclick=()=>map.setView([map.center.lat,map.center.lng],map.zoom+1);minus.onclick=()=>map.setView([map.center.lat,map.center.lng],map.zoom-1);for(const b of [plus,minus])b.onpointerdown=e=>e.stopPropagation();return this}})}};
+})();
+
+  </script>
+  <script>
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const APP=Object.freeze({name:'CroquiPro',subtitle:'Croqui de Redes Elétricas',version:'2.13',author:'Alex S. Costa'});
+  const APP_CREDIT=()=>`Gerado por ${APP.name} v${APP.version} · ${APP.author}`;
+  $('appVersion').textContent=`v${APP.version} · ${APP.author}`;
+  const glyphs={
+    network:'<path d="M7 5h10v6H7zM3 19h7v-5H3zM14 19h7v-5h-7zM12 11v3m-5-3v3m10-3v3"/>',
+    folder:'<path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3z"/>',
+    edit:'<path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-5 1 1-5z"/>',
+    download:'<path d="M12 3v12m-4-4 4 4 4-4M4 17v4h16v-4"/>',
+    select:'<path d="m5 3 11 10-5 1-3 5zM13 14l4 7"/>',
+    hand:'<path d="M8 13V6a2 2 0 0 1 4 0v5-7a2 2 0 0 1 4 0v7-5a2 2 0 0 1 4 0v8c0 5-3 8-8 8h-1c-2 0-4-1-5-3l-3-6a2 2 0 0 1 4-2l1 2"/>',
+    connect:'<circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 8 17 16"/>',
+    note:'<path d="M5 3h14v14l-4 4H5zM8 8h8M8 12h8M8 16h4"/>',
+    undo:'<path d="M9 14 4 9l5-5M4 9h10a6 6 0 1 1 0 12h-2"/>',
+    redo:'<path d="m15 14 5-5-5-5m5 5H10a6 6 0 1 0 0 12h2"/>',
+    help:'<circle cx="12" cy="12" r="10"/><path d="M9.5 9a2.8 2.8 0 1 1 4.8 2c-1.4 1.2-2.3 1.6-2.3 3M12 18h.01"/>',
+    layers:'<path d="m12 3 9 5-9 5-9-5zM3 12l9 5 9-5M3 16l9 5 9-5"/>',
+    coordinate:'<circle cx="12" cy="12" r="7"/><path d="M12 2v5m0 10v5M2 12h5m10 0h5"/>',
+    locate:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/><path d="M12 1v3m0 16v3M1 12h3m16 0h3"/>',
+    pluspin:'<path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z"/><path d="M12 6v8m-4-4h8"/>',
+    pin:'<path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="2.5"/>',
+    report:'<path d="M5 3h14v18H5zM9 8h6M9 12h6M9 16h4"/>',
+    chevron:'<path d="m6 9 6 6 6-6"/>',
+    info:'<circle cx="12" cy="12" r="10"/><path d="M12 10v7m0-11v.5"/>',
+    trash:'<path d="M4 7h16M10 3h4M7 7l1 14h8l1-14M10 11v6m4-6v6"/>',
+    check:'<path d="m4 12 5 5L20 6"/>',
+    clipboard:'<path d="M8 4H5v17h14V4h-3M9 3h6v4H9z"/>',
+    sat:'<path d="M3 21 9 3l4 4 4-4 4 4-4 4 4 4-4 4-4-4z"/>',
+    lock:'<rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>'
+  };
+  function ico(k,size=19){return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${glyphs[k]||glyphs.info}</svg>`}
+  const iconSlots={logo:'network',projectIcon:'edit',folderIcon:'folder',editIcon:'edit',downloadIcon:'download',toolSelect:'select',toolPan:'hand',toolConnect:'connect',toolNote:'note',toolUndo:'undo',toolRedo:'redo',toolHelp:'help',layersIcon:'layers',coordinateIcon:'coordinate',btnLocate:'locate',btnGPSPole:'pluspin',btnCoordinates:'pin',btnUndoMap:'undo',btnReport:'report',statusIcon:'info',mobileIcon:'chevron'};
+  Object.entries(iconSlots).forEach(([id,v])=>$(id).innerHTML=ico(v,id==='logo'?25:19));
+  const COLORS={MT:'#d94844',BT:'#2879d2',EX:'#798790',RAMAL:'#30a36d'};
+  const TYPELABEL={MT:'Média tensão',BT:'Baixa tensão',EX:'Rede existente',RAMAL:'Ramal de ligação'};
+  const STORAGE='gridfield-projetos-v1';const ACTIVE='gridfield-projeto-ativo-v1';
+  const genId=()=> typeof crypto!=='undefined'&&crypto.randomUUID ? crypto.randomUUID() : ('gf_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2));
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const fmt=(n,d=0)=>Number(n||0).toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
+  const dist=(a,b)=>{const r=Math.PI/180,p1=a.lat*r,p2=b.lat*r,dp=(b.lat-a.lat)*r,dl=(b.lng-a.lng)*r,h=Math.sin(dp/2)**2+Math.cos(p1)*Math.cos(p2)*Math.sin(dl/2)**2;return 6371008.8*2*Math.atan2(Math.sqrt(h),Math.sqrt(1-h))};
+
+  // Fotografias e anexos são armazenados em IndexedDB, separados dos metadados leves de localStorage.
+  const MEDIA_DB='gridfield-anexos-v2';
+  const mediaCache=new Map();
+  let mediaDbPromise=null;
+  function mediaDB(){
+    if(!mediaDbPromise)mediaDbPromise=new Promise((resolve,reject)=>{
+      if(!window.indexedDB)return reject(new Error('IndexedDB não disponível neste navegador.'));
+      const req=indexedDB.open(MEDIA_DB,1);
+      req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains('media'))req.result.createObjectStore('media')};
+      req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error||new Error('Falha no banco de imagens'));
+    });
+    return mediaDbPromise;
+  }
+  async function mediaRead(id){
+    if(mediaCache.has(id))return mediaCache.get(id);
+    const db=await mediaDB();const result=await new Promise((resolve,reject)=>{const tx=db.transaction('media','readonly');const r=tx.objectStore('media').get(id);r.onsuccess=()=>resolve(r.result||null);r.onerror=()=>reject(r.error)});
+    if(result)mediaCache.set(id,result);return result;
+  }
+  async function mediaWrite(id,data){
+    const db=await mediaDB();await new Promise((resolve,reject)=>{const tx=db.transaction('media','readwrite');tx.objectStore('media').put(data,id);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error)});
+    mediaCache.set(id,data);
+  }
+  async function mediaDeleteMany(ids){
+    const unique=[...new Set(ids)].filter(Boolean);
+    if(!unique.length)return;
+    const db=await mediaDB();
+    await new Promise((resolve,reject)=>{const tx=db.transaction('media','readwrite');const store=tx.objectStore('media');unique.forEach(id=>store.delete(id));tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error)});
+    unique.forEach(id=>mediaCache.delete(id));
+  }
+  const fileToDataURL=file=>new Promise((resolve,reject)=>{const fr=new FileReader();fr.onload=()=>resolve(fr.result);fr.onerror=()=>reject(fr.error);fr.readAsDataURL(file)});
+  async function optimizedFile(file){
+    if(!file.type.startsWith('image/')){
+      if(file.type!=='application/pdf')throw Error('Apenas imagens e documentos PDF são aceitos.');
+      if(file.size>12*1024*1024)throw Error('O PDF deve ter até 12 MB.');
+      return {data:await fileToDataURL(file),mime:'application/pdf'};
+    }
+    if(file.size>30*1024*1024)throw Error('Imagem excede 30 MB.');
+    const raw=await fileToDataURL(file);
+    const img=new Image();img.src=raw;await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject});
+    const scale=Math.min(1,1600/Math.max(img.naturalWidth,img.naturalHeight));
+    const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.naturalWidth*scale));canvas.height=Math.max(1,Math.round(img.naturalHeight*scale));
+    canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
+    return {data:canvas.toDataURL('image/jpeg',.78),mime:'image/jpeg'};
+  }
+  // Salva a imagem e os metadados da posição no instante exato da captura.
+  async function saveMediaToElement({general=false,kind='',id='',replaceId=null,data,mime='image/jpeg',name='Foto de campo',source='galeria',expectedProjectId=project.id}){
+    if(expectedProjectId!==project.id)throw Error('O projeto mudou durante a captura.');
+    const owner=general?project:find(kind,id);
+    if(!owner)throw Error('O elemento foi removido.');
+    const collection=general?project.attachments:owner.photos;
+    if(!general&&!replaceId&&collection.length>=2)throw Error('Limite de duas fotos por elemento.');
+    const previous=replaceId?collection.find(m=>m.id===replaceId):null;
+    if(replaceId&&!previous)throw Error('Foto original não encontrada.');
+    const mediaId=genId(),now=new Date().toISOString();
+    const meta={id:mediaId,name,mime,description:previous?.description||'',created:now,source,
+      projectId:project.id,projectCode:project.code||project.name||'',
+      elementId:general?null:id,elementKind:general?null:kind,elementCode:general?null:owner.code,
+      latitude:general?null:Number(owner.lat),longitude:general?null:Number(owner.lng),
+      utmX:general?null:Math.round(utmFor(owner).easting*100)/100,utmY:general?null:Math.round(utmFor(owner).northing*100)/100,utmZone:general?null:utmZone(utmFor(owner))};
+    await mediaWrite(mediaId,data);
+    if(expectedProjectId!==project.id||(!general&&!find(kind,id)))throw Error('Projeto ou elemento alterado durante o salvamento.');
+    snapshot();
+    if(replaceId){const i=collection.findIndex(m=>m.id===replaceId);if(i<0)throw Error('A foto foi removida.');collection.splice(i,1,meta)}
+    else collection.push(meta);
+    changed();
+    if(general)openAttachments();else openContext(kind,id);
+    toast(source==='camera'?'Foto capturada e vinculada ao elemento.':'Foto vinculada ao elemento.');
+    return meta;
+  }
+  function pickMedia({camera=false,general=false,kind='',id='',replaceId=null}={}){
+    const input=document.createElement('input');input.type='file';input.accept=camera?'image/*':general?'image/*,application/pdf':'image/*';
+    if(camera)input.setAttribute('capture','environment');
+    input.onchange=async()=>{
+      const file=input.files?.[0];if(!file)return;
+      const expectedProjectId=project.id;
+      try{
+        toast('Preparando anexo…',1800);
+        const saved=await optimizedFile(file);
+        await saveMediaToElement({general,kind,id,replaceId,expectedProjectId,
+          data:saved.data,mime:saved.mime,name:file.name||('Foto '+new Date().toLocaleString('pt-BR')),
+          source:camera?'camera':'galeria'});
+      }catch(e){toast('Não foi possível salvar a mídia: '+e.message,6000)}
+    };
+    input.click();
+  }
+  // Preview com a câmera do navegador (HTTPS/localhost). O input capture é alternativa para mobile.
+  let activeCameraStream=null;
+  function stopCamera(){
+    if(activeCameraStream){activeCameraStream.getTracks().forEach(t=>t.stop());activeCameraStream=null}
+    const video=$('gfCameraVideo');if(video)video.srcObject=null;
+  }
+  async function startCameraCapture(kind,id,{replaceId=null,general=false}={}){
+    const expectedProjectId=project.id;
+    if(!general){const o=find(kind,id);if(!o)return toast('Elemento indisponível.');if(!replaceId&&(o.photos||[]).length>=2)return toast('Limite de duas fotos. Use Trocar para substituir.');}
+    if(!navigator.mediaDevices?.getUserMedia){pickMedia({camera:true,general,kind,id,replaceId});return;}
+    stopCamera();
+    openModal('Câmera — captura em campo',`<video id="gfCameraVideo" class="gf-camera-preview" autoplay muted playsinline aria-label="Pré-visualização da câmera"></video><div class="gf-camera-message" id="gfCameraStatus">Solicitando permissão à câmera...</div><div class="attach-actions"><button class="btn primary" id="gfCameraShoot" disabled>Fotografar e vincular</button><button class="btn small" id="gfCameraFallback">Câmera do dispositivo</button></div><p class="smallhint">A foto será associada automaticamente ao projeto, elemento, coordenadas e data/hora. Se a câmera não abrir, utilize o botão alternativo.</p>`,[{text:'Cancelar',fn:closeModal}]);
+    $('gfCameraFallback').onclick=()=>{closeModal();pickMedia({camera:true,general,kind,id,replaceId})};
+    try{
+      const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});
+      if(currentModal!=='Câmera — captura em campo'||expectedProjectId!==project.id){stream.getTracks().forEach(t=>t.stop());return;}
+      activeCameraStream=stream;
+      const video=$('gfCameraVideo');
+      video.srcObject=stream;await video.play();
+      if(!video.videoWidth||!video.videoHeight){await new Promise(resolve=>{video.addEventListener('loadedmetadata',resolve,{once:true});setTimeout(resolve,1200)})}
+      $('gfCameraStatus').textContent='Câmera pronta. Enquadre o elemento e toque em Fotografar.';
+      $('gfCameraShoot').disabled=false;
+      $('gfCameraShoot').onclick=async()=>{
+        const btn=$('gfCameraShoot');if(!btn||btn.disabled)return;btn.disabled=true;
+        try{
+          if(!video.videoWidth||!video.videoHeight)throw Error('A câmera ainda não enviou imagem.');
+          const scale=Math.min(1,1600/Math.max(video.videoWidth,video.videoHeight));
+          const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(video.videoWidth*scale));canvas.height=Math.max(1,Math.round(video.videoHeight*scale));
+          canvas.getContext('2d').drawImage(video,0,0,canvas.width,canvas.height);
+          const data=canvas.toDataURL('image/jpeg',.8);
+          stopCamera();closeModal();
+          await saveMediaToElement({general,kind,id,replaceId,expectedProjectId,data,mime:'image/jpeg',
+            name:`Foto_${new Date().toISOString().replace(/[:.]/g,'-')}.jpg`,source:'camera'});
+        }catch(e){stopCamera();closeModal();toast('Erro ao capturar foto: '+e.message,6000)}
+      };
+    }catch(e){
+      stopCamera();const status=$('gfCameraStatus');if(status)status.textContent='Câmera não autorizada ou indisponível. Use “Câmera do dispositivo”.'+(location.protocol==='file:'?' Para pré-visualização, prefira HTTPS.':'');
+    }
+  }
+  function openPhotoMenu(kind,id){
+    const o=find(kind,id);if(!o)return;
+    const n=(o.photos||[]).length;
+    openModal(`Fotos — ${o.code}`,`<div class="helpinfo">Fotos vinculadas automaticamente ao projeto, ${esc(o.code)} e à posição cadastrada.<br>${n}/2 fotos adicionadas.</div><div class="attach-actions"><button class="btn primary" id="gfPhotoShoot" ${n>=2?'disabled':''}>Tirar foto agora</button><button class="btn" id="gfPhotoGallery" ${n>=2?'disabled':''}>Selecionar da galeria</button></div>${n>=2?'<p class="smallhint">Limite atingido. Use Trocar na foto existente para substituí-la.</p>':''}`,[{text:'Voltar ao elemento',fn:closeModal}]);
+    $('gfPhotoShoot').onclick=()=>{closeModal();startCameraCapture(kind,id)};
+    $('gfPhotoGallery').onclick=()=>{closeModal();pickMedia({kind,id})};
+  }
+  function viewMedia(id){
+    mediaRead(id).then(data=>{
+      if(!data){toast('Arquivo não encontrado. Importe um backup com mídias.');return}
+      if(data.startsWith('data:application/pdf')){
+        const w=window.open('','_blank');if(w){w.document.write('<title>Documento do projeto</title><iframe style="position:fixed;inset:0;width:100%;height:100%;border:0" src="'+data+'"></iframe>');w.document.close()}else toast('Habilite a abertura de novas abas para visualizar o documento.');
+      }else openModal('Fotografia do levantamento',`<img alt="Fotografia" src="${data}" style="max-width:100%;max-height:68vh;object-fit:contain;display:block;margin:auto">`,[{text:'Fechar',fn:closeModal}]);
+    }).catch(e=>toast('Falha ao abrir o arquivo: '+e.message,5500));
+  }
+  function hydrateImages(root=document){
+    root.querySelectorAll('img[data-media]').forEach(img=>{
+      const id=img.dataset.media;
+      mediaRead(id).then(data=>{if(data&&img.isConnected)img.src=data}).catch(()=>{});
+    });
+  }
+  function photoSection(kind,id){
+    const o=find(kind,id);if(!o)return '';
+    const items=o.photos||[];
+    return `<div class="section-row" id="gfPhotoList"><b>Fotos do elemento (${items.length}/2)</b></div>
+      <div class="media-thumbs">${items.map(m=>`<div class="media-thumb"><img data-media="${esc(m.id)}" alt="Foto de ${esc(o.code)}"><div class="media-thumb-actions"><button data-ph-view="${esc(m.id)}">Ampliar</button><button data-ph-replace="${esc(m.id)}">Trocar</button><button data-ph-remove="${esc(m.id)}">Excluir</button></div><input class="gf-photo-desc" data-ph-desc="${esc(m.id)}" value="${esc(m.description||'')}" placeholder="Observação da foto"><small class="smallhint" style="padding:0 6px 5px">${m.created?esc(new Date(m.created).toLocaleString('pt-BR')):''}</small></div>`).join('')}</div>
+      ${items.length<2?`<div class="attach-actions"><button class="btn small" id="takePhoto">Tirar foto</button><button class="btn small" id="addPhotoGallery">Galeria</button></div>`:''}
+      <p class="smallhint">Fotos associadas a ${esc(o.code)} · UTM ${utmText(o)}. Máximo: 2. A data e as coordenadas da captura ficam registradas.</p>`;
+  }
+  function wirePhotos(kind,id){
+    const root=$('contextBody');hydrateImages(root);
+    root.querySelectorAll('[data-ph-view]').forEach(el=>el.onclick=()=>viewMedia(el.dataset.phView));
+    root.querySelectorAll('[data-ph-replace]').forEach(el=>el.onclick=()=>openPhotoReplacement(kind,id,el.dataset.phReplace));
+    root.querySelectorAll('[data-ph-remove]').forEach(el=>el.onclick=()=>{
+      if(!confirm('Remover esta foto do elemento?'))return;
+      const o=find(kind,id);snapshot();o.photos=o.photos.filter(p=>p.id!==el.dataset.phRemove);changed();openContext(kind,id);
+    });
+    root.querySelectorAll('[data-ph-desc]').forEach(el=>el.onchange=()=>{
+      const o=find(kind,id),m=o?.photos?.find(p=>p.id===el.dataset.phDesc);
+      if(m){snapshot();m.description=el.value.trim();changed();toast('Observação da foto salva')}
+    });
+    if($('photoActionQuick'))$('photoActionQuick').onclick=()=>openPhotoMenu(kind,id);
+    if($('takePhoto'))$('takePhoto').onclick=()=>startCameraCapture(kind,id);
+    if($('addPhotoGallery'))$('addPhotoGallery').onclick=()=>pickMedia({kind,id});
+  }
+  function openPhotoReplacement(kind,id,replaceId){
+    openModal('Substituir foto',`<p class="smallhint">A imagem substituída será removida da lista deste elemento. A observação será preservada.</p><div class="attach-actions"><button class="btn primary" id="replaceCamera">Tirar nova foto</button><button class="btn" id="replaceGallery">Selecionar da galeria</button></div>`,[{text:'Cancelar',fn:closeModal}]);
+    $('replaceCamera').onclick=()=>{closeModal();startCameraCapture(kind,id,{replaceId})};
+    $('replaceGallery').onclick=()=>{closeModal();pickMedia({kind,id,replaceId})};
+  }
+  function openAttachments(){
+    const list=project.attachments||[];
+    const cards=list.map(m=>`<article class="attach-card"><div><b>${esc(m.name)}</b></div><div class="filetype">${esc(m.mime)} · ${new Date(m.created).toLocaleDateString('pt-BR')}</div>
+      ${m.mime.startsWith('image/')?`<img data-media="${esc(m.id)}" alt="Anexo do projeto">`:'<p class="smallhint">Documento PDF armazenado no projeto.</p>'}
+      <input class="field" data-att-desc="${esc(m.id)}" value="${esc(m.description||'')}" placeholder="Descrição / referência">
+      <div class="attach-actions"><button class="btn small" data-att-open="${esc(m.id)}">Visualizar</button><button class="btn small danger" data-att-delete="${esc(m.id)}">Remover</button></div></article>`).join('');
+    openModal('Anexos do Projeto',`<div class="helpinfo">Fotos gerais, documentos e referências não vinculados a um poste. Incluídos no backup JSON com mídias.</div><div class="attach-actions"><button class="btn primary small" id="newAttachment">+ Adicionar imagem / documento</button><button class="btn small" id="newAttachmentCamera">Tirar foto</button></div>${cards||'<p class="smallhint">Nenhum anexo geral cadastrado.</p>'}`,[{text:'Fechar',fn:closeModal}]);
+    $('newAttachment').onclick=()=>pickMedia({general:true});$('newAttachmentCamera').onclick=()=>pickMedia({general:true,camera:true});
+    hydrateImages($('modalContent'));
+    document.querySelectorAll('[data-att-open]').forEach(b=>b.onclick=()=>viewMedia(b.dataset.attOpen));
+    document.querySelectorAll('[data-att-delete]').forEach(b=>b.onclick=()=>{if(!confirm('Remover anexo do projeto?'))return;snapshot();project.attachments=project.attachments.filter(m=>m.id!==b.dataset.attDelete);changed();openAttachments()});
+    document.querySelectorAll('[data-att-desc]').forEach(el=>el.onchange=()=>{const a=project.attachments.find(x=>x.id===el.dataset.attDesc);if(a){snapshot();a.description=el.value.trim();changed();toast('Descrição salva')}});
+  }
+
+  function blank(){return {id:genId(),name:'Novo levantamento',city:'',uf:'',locality:'',geoManual:{city:false,uf:false,locality:false},responsible:'',projectType:'Extensão de rede',area:'Rural',description:'',created:new Date().toISOString(),updated:new Date().toISOString(),seq:{pole:0,transformer:0,consumer:0,note:0},code:'',showMapCoordinates:true,poles:[],transformers:[],consumers:[],notes:[],segments:[],drawings:[],attachments:[],view:{lat:-23.3045,lng:-51.1696,zoom:14}}}
+  let projects=[]; try{projects=JSON.parse(localStorage.getItem(STORAGE)||'[]');if(!Array.isArray(projects))projects=[]}catch{projects=[]}
+  let project=projects.find(p=>p.id===localStorage.getItem(ACTIVE)); if(!project)project=projects[0]||blank();
+  function normalize(){
+    project.seq=project.seq||{pole:0,transformer:0,consumer:0,note:0};
+    for(const k of ['poles','transformers','consumers','notes','segments','drawings','attachments'])if(!Array.isArray(project[k]))project[k]=[];
+    project.view=project.view||{lat:-23.3045,lng:-51.1696,zoom:14};
+    project.view.zoom=Math.min(22,Math.max(3,Number(project.view.zoom)||14));
+    project.code=project.code||'';
+    if(!project.geoManual||typeof project.geoManual!=='object')project.geoManual={city:!!project.city,uf:false,locality:!!project.locality};
+    if(typeof project.showMapCoordinates!=='boolean')project.showMapCoordinates=true;
+    let max=Number(project.seq.pole)||0;
+    for(const pole of project.poles){const m=String(pole.code||'').match(/^(?:P|PS)(\d+)$/i);if(m){pole.code='PS'+m[1].padStart(2,'0');max=Math.max(max,Number(m[1]))}if(!Array.isArray(pole.photos))pole.photos=[]}
+    project.seq.pole=max;
+    for(const type of ['transformers','consumers'])for(const item of project[type])if(!Array.isArray(item.photos))item.photos=[];
+    for(const seg of project.segments){seg.aKind=seg.aKind||'pole';seg.bKind=seg.bKind||'pole'}
+    for(const n of project.notes)if(!n.description)n.description=n.code||'Nota';
+  }
+    normalize();
+  let map=null,base=null,labels=null,drawLayers=[],drawStart=null,drawColor='#df3f44',selectedDrawingIds=new Set(),multiDrawMode=false,tool='select',selected=null,connectStart=null,undo=[],redo=[],userLoc=null,gpsCircle=null,toastTimer=null,persistTimer=null,currentModal=null;
+  const clone=()=>JSON.parse(JSON.stringify(project));
+  function snapshot(){undo.push(clone());if(undo.length>40)undo.shift();redo=[];setUndoState()}
+  function setUndoState(){$('btnUndo').disabled=$('btnUndoMap').disabled=!undo.length;$('btnRedo').disabled=!redo.length}
+  function markSaved(status='Salvo localmente'){$('saveStatus').textContent=status}
+  function persist(){project.updated=new Date().toISOString();try{const i=projects.findIndex(p=>p.id===project.id);if(i<0)projects.push(clone());else projects[i]=clone();localStorage.setItem(STORAGE,JSON.stringify(projects));localStorage.setItem(ACTIVE,project.id);markSaved()}catch(e){markSaved('Erro ao salvar');toast('Não foi possível salvar. Exporte o JSON e verifique o espaço do navegador.',4500)}}
+  function changed(){persist();renderAll()}
+
+  // Identificação municipal pontual pelo primeiro elemento, nunca em cada poste.
+  // Nominatim público é limitado; não usar este recurso para consultas em massa.
+  const UF_BY_STATE={Acre:'AC',Alagoas:'AL',Amapá:'AP',Amazonas:'AM',Bahia:'BA',Ceará:'CE','Distrito Federal':'DF','Espírito Santo':'ES',Goiás:'GO',Maranhão:'MA','Mato Grosso':'MT','Mato Grosso do Sul':'MS','Minas Gerais':'MG',Pará:'PA',Paraíba:'PB',Paraná:'PR',Pernambuco:'PE',Piauí:'PI','Rio de Janeiro':'RJ','Rio Grande do Norte':'RN','Rio Grande do Sul':'RS',Rondônia:'RO',Roraima:'RR','Santa Catarina':'SC','São Paulo':'SP',Sergipe:'SE',Tocantins:'TO'};
+  UF_BY_STATE['Pará']='PA';
+  const geoCache=new Map();
+  let geoTimer=null,geoInFlight=null,geoLastRequestAt=0,geoTriedProject=null;
+  function firstGeoPoint(){return project.poles[0]||project.transformers[0]||project.consumers[0]||null}
+  function needsGeo(){return !project.city||!project.uf}
+  function scheduleReverseGeocoding({force=false,delay=550}={}){
+    if(geoTimer)clearTimeout(geoTimer);
+    const first=firstGeoPoint();if(!first||!Number.isFinite(Number(first.lat))||!Number.isFinite(Number(first.lng)))return;
+    if(!force&&!needsGeo())return;
+    if(!navigator.onLine){markSaved('Sem internet · município editável');return}
+    const id=project.id;
+    if(!force&&geoTriedProject===id)return;
+    geoTimer=setTimeout(()=>{geoTimer=null;reverseGeoProject(id,{force})},delay);
+  }
+  function parseReverseAddress(data){
+    const a=data?.address||{};
+    const city=(a.municipality||a.city||a.town||a.village||a.county||'').trim();
+    const stateCode=String(a['ISO3166-2-lvl4']||'').match(/BR-([A-Z]{2})/i)?.[1]?.toUpperCase()||UF_BY_STATE[a.state]||'';
+    const neighborhood=(a.suburb||a.neighbourhood||a.quarter||a.city_district||a.hamlet||'').trim();
+    return {city,uf:stateCode,locality:neighborhood&&neighborhood!==city?neighborhood:''};
+  }
+  async function reverseGeoProject(expectedId,{force=false}={}){
+    if(project.id!==expectedId||(!force&&!needsGeo())||!navigator.onLine)return;
+    const pt=firstGeoPoint();if(!pt)return;
+    if(geoInFlight===expectedId)return;
+    const lat=Number(pt.lat),lng=Number(pt.lng);
+    const key=`${lat.toFixed(5)},${lng.toFixed(5)}`;
+    if(!force)geoTriedProject=expectedId;
+    geoInFlight=expectedId;
+    try{
+      let result=geoCache.get(key);
+      if(!result){
+        // Compartilha o intervalo mínimo com a busca textual existente.
+        const last=Math.max(geoLastRequestAt,typeof searchLast==='number'?searchLast:0);
+        const wait=Math.max(0,1200-(Date.now()-last));
+        if(wait)await new Promise(resolve=>setTimeout(resolve,wait));
+        if(project.id!==expectedId||!navigator.onLine)return;
+        geoLastRequestAt=Date.now();
+        const url=`https://nominatim.openstreetmap.org/reverse?format=jsonv2&addressdetails=1&zoom=14&accept-language=pt-BR&lat=${lat}&lon=${lng}`;
+        const resp=await fetch(url,{headers:{Accept:'application/json','Accept-Language':'pt-BR,pt;q=0.9'}});
+        if(!resp.ok)throw Error('HTTP '+resp.status);
+        result=parseReverseAddress(await resp.json());
+        geoCache.set(key,result);
+      }
+      if(project.id!==expectedId)return;
+      const manual=project.geoManual||{};
+      const allow=(field)=>!manual[field];
+      let change=false;
+      for(const field of ['city','uf','locality']){
+        if(result[field]&&allow(field)&&(field!=='locality'||!project.locality||!manual.locality)){
+          if(project[field]!==result[field]){project[field]=result[field];change=true}
+        }
+      }
+      if(change){project.geoSource={latitude:lat,longitude:lng,provider:'Nominatim / OpenStreetMap',updated:new Date().toISOString()};changed();}
+      // Se o usuário estiver digitando os dados, não substituir sua edição nem retirar o foco.
+      if(currentModal==='Dados do projeto'){
+        for(const [id,key] of [['pfCity','city'],['pfUf','uf'],['pfLocal','locality']]){
+          const input=$(id);if(input&&input!==document.activeElement&&!input.value.trim()&&project[key])input.value=project[key];
+        }
+        const status=$('gfGeoStatus');if(status)status.textContent=result.city?'Localização identificada por OpenStreetMap. Confira antes de salvar.':'Localidade não identificada. Preencha manualmente.';
+      }
+      if(result.city)toast(`Município identificado: ${result.city}${result.uf?' / '+result.uf:''}`,3800);
+    }catch(err){
+      if(project.id===expectedId){markSaved('Salvo · localização não consultada');const status=$('gfGeoStatus');if(status)status.textContent='Sem identificação automática agora. Município e UF podem ser preenchidos manualmente.';}
+    }finally{if(geoInFlight===expectedId)geoInFlight=null;}
+  }
+  function toast(t,ms=2600){const e=$('toast');e.textContent=t;e.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>e.classList.remove('show'),ms)}
+  function undoAction(){if(!undo.length)return;redo.push(clone());project=undo.pop();selected=null;connectStart=null;persist();renderAll();setUndoState();toast('Ação desfeita')}
+  function redoAction(){if(!redo.length)return;undo.push(clone());project=redo.pop();selected=null;connectStart=null;persist();renderAll();setUndoState();toast('Ação refeita')}
+  function setTool(t){
+    clearDrawingPreview();
+    tool=t;connectStart=null;drawStart=null;selected=null;selectedDrawingIds.clear();closeContext();updateDrawingSelectionControls();
+    document.querySelectorAll('[data-tool]').forEach(e=>e.classList.toggle('active',e.dataset.tool===t));
+    document.querySelectorAll('[data-draw]').forEach(e=>e.classList.toggle('active',e.dataset.draw===t));
+    const hints={pan:'PAN opcional: arraste o mapa sem criar elementos.',select:'Navegação normal: arraste para mover o mapa; toque nos elementos para editar. Roda para zoom.',pole:'Poste: toque curto insere PS; arraste move o mapa. Segure um poste para reposicionar.',transformer:'Transformador: toque curto insere; arraste move o mapa.',consumer:'UC: toque curto insere; arraste move o mapa.',connect:'Rede: toque em dois elementos, incluindo UCs. Arraste o mapa a qualquer momento.',note:'Nota: toque no mapa e digite o texto que aparecerá no local.',line:'Linha: toque nos pontos inicial e final.',arrow:'Seta: toque no início e na ponta da seta.',rect:'Retângulo: marque dois cantos opostos.',circle:'Círculo: toque no centro e depois na borda.',tree:'Árvore: toque no mapa para marcar vegetação.'};
+    $('modeStatus').textContent=hints[t]||'Selecione uma ferramenta';
+    if(map){map.panMode=t;map.getContainer().classList.toggle('pan-mode',t==='pan');map.getContainer().classList.toggle('select-mode',t==='select');map.getContainer().classList.toggle('draw-mode',['line','arrow','rect','circle','tree','note','pole','transformer','consumer'].includes(t));map.getContainer().style.cursor=['pan','select'].includes(t)?'grab':'crosshair'}renderAll();
+  }
+  function getArr(kind){return ({pole:project.poles,transformer:project.transformers,consumer:project.consumers,note:project.notes,segment:project.segments,drawing:project.drawings})[kind]}
+  const find=(kind,id)=>getArr(kind).find(x=>x.id===id);
+  function create(kind,lat,lng,extra={}){if(!Number.isFinite(lat)||!Number.isFinite(lng)||Math.abs(lat)>90||Math.abs(lng)>180)return toast('Coordenadas inválidas');snapshot();const key=kind==='pole'?'pole':kind;project.seq[key]=(project.seq[key]||0)+1;const prefix={pole:'PS',transformer:'TR',consumer:'UC',note:'N'}[kind],code=prefix+String(project.seq[key]).padStart(2,'0');const node={id:genId(),code,lat,lng,description:'',...extra};if(['pole','transformer','consumer'].includes(kind))node.photos=[];if(kind==='pole'){node.status=extra.status||'projetado';node.source=extra.source||'manual';node.accuracy=extra.accuracy??null;node.height='';node.rating=''}if(kind==='transformer'){node.kva='';node.poleId=''}if(kind==='consumer'){node.service='';node.poleId=''}getArr(kind).push(node);selected={kind,id:node.id};changed();if(['pole','transformer','consumer'].includes(kind))scheduleReverseGeocoding();closeContext();toast(`${{pole:'Poste',transformer:'Transformador',consumer:'Consumidor',note:'Nota'}[kind]} ${code} adicionado`);return node}
+  function endpoint(kind,id){return find(kind||'pole',id)}
+  function segmentEnds(s){return [endpoint(s.aKind||'pole',s.a),endpoint(s.bKind||'pole',s.b)]}
+  function endpointLabel(kind,id){const o=endpoint(kind,id);return o?.code||'?'}
+  function createSegment(from,to){
+    if(from.kind===to.kind&&from.id===to.id)return toast('Selecione dois elementos diferentes.');
+    let type=$('connectionType').value;
+    const ucInvolved=from.kind==='consumer'||to.kind==='consumer';
+    if(ucInvolved&&type==='MT')type='RAMAL'; // UC: usar ramal como padrão, sem interromper o fluxo.
+    const same=(s)=>(s.a===from.id&&(s.aKind||'pole')===from.kind&&s.b===to.id&&(s.bKind||'pole')===to.kind)||
+      (s.a===to.id&&(s.aKind||'pole')===to.kind&&s.b===from.id&&(s.bKind||'pole')===from.kind);
+    if(project.segments.some(s=>same(s)&&s.type===type)){
+      toast('Já existe este tipo de conexão entre os dois elementos.');connectStart=null;renderAll();return;
+    }
+    snapshot();const seg={id:genId(),a:from.id,aKind:from.kind,b:to.id,bKind:to.kind,type,description:'',cable:'',conductors:1,extra:0,measured:null};
+    project.segments.push(seg);selected={kind:'segment',id:seg.id};connectStart=null;changed();closeContext();toast(`Trecho ${type}: ${endpointLabel(from.kind,from.id)} ↔ ${endpointLabel(to.kind,to.id)}${ucInvolved&&$('connectionType').value==='MT'?' · Ramal automático para UC':''}`)
+  }
+  function updateDrawingSelectionControls(){
+    const count=selectedDrawingIds.size;
+    const label=$('gfDrawCount');if(label)label.textContent=count+' desenho'+(count===1?'':'s')+' selecionado'+(count===1?'':'s');
+    const toggle=$('gfDrawMulti');if(toggle)toggle.classList.toggle('active',multiDrawMode);
+    const remove=$('gfDrawRemove');if(remove)remove.disabled=!count;
+  }
+  function removeSelectedDrawings(){
+    const ids=new Set([...selectedDrawingIds].filter(id=>project.drawings.some(d=>d.id===id)));
+    if(!ids.size)return toast('Selecione um desenho para excluir.');
+    if(!confirm('Excluir '+ids.size+' desenho(s) selecionado(s)?'))return;
+    snapshot();project.drawings=project.drawings.filter(d=>!ids.has(d.id));selectedDrawingIds.clear();selected=null;
+    closeContext();changed();updateDrawingSelectionControls();toast(ids.size+' desenho(s) excluído(s)');
+  }
+  function openDrawingBatch(){
+    const count=selectedDrawingIds.size;
+    selected={kind:'drawing-batch',id:''};
+    $('contextTitle').textContent='Desenhos selecionados';
+    $('contextSub').textContent=count+' objeto(s)';
+    $('contextBody').innerHTML='<p class="smallhint">'+count+' desenho(s) selecionado(s). Toque nos outros objetos para incluir ou remover da seleção.</p><p class="smallhint">A tecla Delete também remove os selecionados.</p>';
+    $('contextFooter').innerHTML='<button id="gfDeleteBatch" class="btn danger small">Excluir '+count+'</button><button id="gfClearBatch" class="btn small">Limpar seleção</button>';
+    $('contextPanel').classList.add('visible');
+    $('gfDeleteBatch').onclick=removeSelectedDrawings;
+    $('gfClearBatch').onclick=()=>{selectedDrawingIds.clear();closeContext();renderAll();updateDrawingSelectionControls()};
+  }
+  function selectDrawing(id,event){
+    if(!project.drawings.some(d=>d.id===id))return;
+    const multiple=multiDrawMode||event?.shiftKey||event?.ctrlKey||event?.metaKey;
+    if(multiple){if(selectedDrawingIds.has(id))selectedDrawingIds.delete(id);else selectedDrawingIds.add(id)}
+    else {selectedDrawingIds.clear();selectedDrawingIds.add(id)}
+    updateDrawingSelectionControls();
+    if(selectedDrawingIds.size>1||(multiple&&selectedDrawingIds.size===1))openDrawingBatch();
+    else if(selectedDrawingIds.size===1)openContext('drawing',[...selectedDrawingIds][0]);
+    else closeContext();
+    renderAll();
+  }
+  function clickNode(kind,id,originalEvent){
+    if(kind==='drawing'&&!['line','arrow','rect','circle','tree','note'].includes(tool))return selectDrawing(id,originalEvent);
+    // Toque curto em um elemento respeita a ferramenta gráfica ativa.
+    // Arrastar/pressionar longamente continua disponível independentemente do modo.
+    if(['line','arrow','rect','circle','tree','note'].includes(tool)){
+      const obj=find(kind,id);
+      if(obj&&Number.isFinite(obj.lat)&&Number.isFinite(obj.lng)){
+        mapClick({latlng:{lat:obj.lat,lng:obj.lng}});return;
+      }
+    }
+    if(tool==='connect'){
+      if(kind==='note'||kind==='segment'||kind==='drawing')return toast('Selecione poste, transformador ou UC.');
+      if(!connectStart){connectStart={kind,id};$('modeStatus').textContent=`${endpointLabel(kind,id)} selecionado. Toque no segundo elemento para criar a conexão ${$('connectionType').value}.`;renderAll();return}
+      createSegment(connectStart,{kind,id});return;
+    }
+    selected={kind,id};openContext(kind,id);renderAll()
+  }
+  function mapClick(ev){if(tool==='pan')return;if(tool==='select'){closeContext();return}if(tool==='connect'){toast('No modo Rede, toque em PS, TR ou UC para conectar. Arraste para navegar.');return}if(['line','arrow','rect','circle','tree'].includes(tool))return drawMapClick(ev.latlng);if(tool==='note')return newTextNote(ev.latlng);create(tool,ev.latlng.lat,ev.latlng.lng,{source:'manual'})}
+  
+  function newTextNote(pos){
+    openModal('Inserir anotação',`<div class="formgroup"><label class="fieldlabel">Texto exibido no mapa</label><textarea id="noteTextNew" class="field fieldarea" placeholder="Ex.: Necessário poda" rows="3"></textarea></div><p class="smallhint">A anotação aparece como texto discreto, sem ícone.</p>`,[{text:'Cancelar',fn:closeModal},{text:'Inserir nota',class:'primary',fn:()=>{const msg=$('noteTextNew').value.trim();if(!msg)return toast('Escreva uma anotação.');const n=create('note',pos.lat,pos.lng);n.description=msg;changed();closeModal();setTool('select');toast('Nota adicionada')}}]);
+    setTimeout(()=>$('noteTextNew')?.focus(),20);
+  }
+  let previewLayers=[];
+  function clearDrawingPreview(){if(map)for(const l of previewLayers)map.removeLayer(l);previewLayers=[]}
+  function pointFromScreen(pos,dx,dy){const p=map.toScreen(pos);return map.fromScreen(p.x+dx,p.y+dy)}
+  function arrowHeadPoints(a,b){
+    const aa=map.toScreen(a),bb=map.toScreen(b);const theta=Math.atan2(bb.y-aa.y,bb.x-aa.x),len=21;
+    return [map.fromScreen(bb.x-len*Math.cos(theta-.52),bb.y-len*Math.sin(theta-.52)),map.fromScreen(bb.x-len*Math.cos(theta+.52),bb.y-len*Math.sin(theta+.52))];
+  }
+  function updateDrawingPreview(pos){
+    if(!map||!drawStart||!['line','arrow','rect','circle'].includes(tool))return;
+    const segs=tool==='line'?[[drawStart,pos]]:tool==='arrow'?(()=>{const [l,r]=arrowHeadPoints(drawStart,pos);return [[drawStart,pos],[pos,l],[pos,r]]})():tool==='rect'?drawingCoords({kind:'rect',lat:drawStart.lat,lng:drawStart.lng,lat2:pos.lat,lng2:pos.lng}):drawingCoords({kind:'circle',lat:drawStart.lat,lng:drawStart.lng,lat2:pos.lat,lng2:pos.lng});
+    while(previewLayers.length>segs.length)map.removeLayer(previewLayers.pop());
+    segs.forEach((ends,i)=>{
+      let l=previewLayers[i];if(!l){l=L.polyline([[ends[0].lat,ends[0].lng],[ends[1].lat,ends[1].lng]],{color:drawColor,weight:3,opacity:.8,dashArray:'6 5'}).addTo(map);previewLayers.push(l);l.dom?.classList.add('gf-preview-line');if(l.dom)l.dom.style.pointerEvents='none'}
+      l.points=ends.map(p=>({lat:p.lat,lng:p.lng}));l.options.color=drawColor;map._drawLayer(l);
+    });
+  }
+  function drawMapClick(pos){
+    if(tool==='tree'){snapshot();project.drawings.push({id:genId(),kind:'tree',lat:pos.lat,lng:pos.lng,color:'#111111',size:26,rotation:0,description:''});changed();setTool('select');toast('Árvore adicionada');return}
+    if(tool==='rect'||tool==='circle'){
+      const sample=pointFromScreen(pos,tool==='rect'?86:37,tool==='rect'?57:0);
+      snapshot();project.drawings.push({id:genId(),kind:tool,lat:pos.lat,lng:pos.lng,lat2:sample.lat,lng2:sample.lng,color:drawColor,rotation:0,description:''});changed();const shapeName=tool==='rect'?'Retângulo':'Círculo';setTool('select');toast(`${shapeName} inserido. Selecione para mover${shapeName==='Retângulo'?' ou ajustar os cantos':''}.`);return;
+    }
+    if(!drawStart){drawStart={lat:pos.lat,lng:pos.lng};$('modeStatus').textContent='Origem marcada. Mova o cursor para visualizar e toque no destino.';updateDrawingPreview(pos);return}
+    if(dist(drawStart,pos)<.3){toast('Escolha dois pontos diferentes.');return}
+    snapshot();project.drawings.push({id:genId(),kind:tool,lat:drawStart.lat,lng:drawStart.lng,lat2:pos.lat,lng2:pos.lng,color:drawColor,rotation:0,description:''});drawStart=null;clearDrawingPreview();changed();setTool('select');toast('Desenho criado. Toque no traçado para editar as alças.');
+  }
+  const drawNames={line:'Linha',arrow:'Seta',rect:'Retângulo',circle:'Círculo',tree:'Árvore'};
+  function drawingCoords(d){
+    const a={lat:d.lat,lng:d.lng},b={lat:d.lat2??d.lat,lng:d.lng2??d.lng};
+    if(d.kind==='line'||d.kind==='arrow')return [[a,b]];
+    if(d.kind==='rect'){
+      const c={lat:a.lat,lng:b.lng},e={lat:b.lat,lng:a.lng},corners=[a,c,b,e];
+      const theta=(Number(d.rotation)||0)*Math.PI/180;
+      if(theta&&map){const ctr=map.toScreen({lat:(a.lat+b.lat)/2,lng:(a.lng+b.lng)/2});const cs=Math.cos(theta),sn=Math.sin(theta);for(let i=0;i<corners.length;i++){const p=map.toScreen(corners[i]);const dx=p.x-ctr.x,dy=p.y-ctr.y;corners[i]=map.fromScreen(ctr.x+cs*dx-sn*dy,ctr.y+sn*dx+cs*dy)}}
+      return corners.map((p,i)=>[p,corners[(i+1)%4]]);
+    }
+    if(d.kind==='circle'){const pts=[],radius=dist(a,b),kmLat=111132,kmLon=111320*Math.cos(a.lat*Math.PI/180)||1;for(let i=0;i<=48;i++){const rad=2*Math.PI*i/48;pts.push({lat:a.lat+radius*Math.sin(rad)/kmLat,lng:a.lng+radius*Math.cos(rad)/kmLon})}return pts.slice(1).map((p,i)=>[pts[i],p])}
+    return [];
+  }
+  function drawingCenter(d){
+    if(d.kind==='tree')return {lat:d.lat,lng:d.lng};
+    return {lat:(d.lat+d.lat2)/2,lng:(d.lng+d.lng2)/2};
+  }
+  function technicalTreeSvg(){
+    // Símbolo de árvore baseado no modelo fornecido: copa preenchida e tronco simples.
+    return `<svg class="marker-tree-technical" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-label="Árvore (símbolo técnico)"><g fill="#111"><circle cx="32" cy="17" r="15"/><circle cx="20" cy="27" r="14"/><circle cx="44" cy="27" r="14"/><path d="M29 30 L35 30 L35 57 L29 57 Z"/><path d="M29 39 L20 28 L20 36 L29 47 Z"/><path d="M35 38 L42 32 L42 38 L35 46 Z"/></g></svg>`;
+  }
+  function renderDrawings(){
+    project.drawings.forEach(d=>{
+      const active=selectedDrawingIds.has(d.id)||(selected?.kind==='drawing'&&selected.id===d.id);
+      if(d.kind==='tree'){
+        const size=Math.min(90,Math.max(14,Number(d.size)||26));
+        const treeSvg=`<div class="gf-tree-rotated" style="width:${size}px;height:${size}px;transform:rotate(${Number(d.rotation)||0}deg)">${technicalTreeSvg()}</div>`;
+        const mark=L.marker([d.lat,d.lng],{icon:L.divIcon({html:treeSvg,iconSize:[size,size],iconAnchor:[size/2,size/2]}),draggable:true}).addTo(map);
+        mark.on('click',e=>{L.DomEvent.stopPropagation(e);clickNode('drawing',d.id,e.originalEvent)});
+        mark.on('dragstart',()=>snapshot());mark.on('dragend',e=>{const p=e.target.getLatLng();d.lat=p.lat;d.lng=p.lng;changed()});drawLayers.push(mark);
+        if(active&&selectedDrawingIds.size<=1){
+          const center={lat:d.lat,lng:d.lng};
+          const gripPoint=pointFromScreen(center,size/2+13,size/2+13);
+          drawingHandle(d,gripPoint,'tree-size',center);
+          drawingHandle(d,pointFromScreen(center,0,-size/2-19),'rotate',center);
+        }
+        return;
+      }
+      const segments=drawingCoords(d);
+      for(const [a,b] of segments){
+        const opts={color:d.color||'#df3f44',weight:active?4.5:3,opacity:.9};
+        const line=L.polyline([[a.lat,a.lng],[b.lat,b.lng]],opts).addTo(map);
+        const onSelect=e=>{L.DomEvent.stopPropagation(e);const ev=e.originalEvent;
+          if(['line','arrow','rect','circle','tree','note','pole','transformer','consumer'].includes(tool)&&ev){const box=map.getContainer().getBoundingClientRect();mapClick({latlng:map.fromScreen(ev.clientX-box.left,ev.clientY-box.top)});return}
+          clickNode('drawing',d.id,ev);
+        };
+        line.on('click',onSelect);drawLayers.push(line);
+        // Transparent wide hit-zone: easier to select a thin line on tablets without thickening the visible line.
+        const hit=L.polyline([[a.lat,a.lng],[b.lat,b.lng]],{color:'transparent',weight:20,opacity:0}).addTo(map);
+        hit.dom?.classList.add('gf-drawing-hit');hit.on('click',onSelect);drawLayers.push(hit);
+      }
+      if(d.kind==='arrow'){
+        const p={lat:d.lat2,lng:d.lng2},a={lat:d.lat,lng:d.lng};const angle=Math.atan2((p.lat-a.lat)*111132,(p.lng-a.lng)*111320*Math.cos(p.lat*Math.PI/180));const length=Math.max(dist(a,p)*.18,2);const kmLon=111320*Math.cos(p.lat*Math.PI/180),kmLat=111132;
+        for(const theta of [angle+Math.PI*.82,angle-Math.PI*.82]){const q={lat:p.lat+Math.sin(theta)*length/kmLat,lng:p.lng+Math.cos(theta)*length/kmLon};const tip=L.polyline([[p.lat,p.lng],[q.lat,q.lng]],{color:d.color,weight:3}).addTo(map);tip.on('click',onSelectDrawingEvent(d.id));drawLayers.push(tip)}
+      }
+      if(active&&selectedDrawingIds.size<=1){
+        const center=drawingCenter(d);
+        drawingHandle(d,center,'move',center);
+        if(d.kind==='line'||d.kind==='arrow'){
+          drawingHandle(d,{lat:d.lat,lng:d.lng},'start',center);drawingHandle(d,{lat:d.lat2,lng:d.lng2},'end',center);
+        }
+        if(d.kind==='rect'){
+          const pairs=drawingCoords(d);const pts=pairs.map(pair=>pair[0]);
+          ['cornerA','cornerC','cornerB','cornerD'].forEach((w,i)=>drawingHandle(d,pts[i],w,center));
+          drawingHandle(d,pointFromScreen(center,0,-58),'rotate',center);
+        }
+        if(d.kind==='circle')drawingHandle(d,{lat:d.lat2,lng:d.lng2},'radius',center);
+      }
+    });
+  }
+  function onSelectDrawingEvent(id){return e=>{L.DomEvent.stopPropagation(e);clickNode('drawing',id,e.originalEvent)}}
+  function drawingHandle(d,p,which,center){
+    const m=L.marker([p.lat,p.lng],{icon:L.divIcon({html:`<div class="marker-handle" title="${which==='move'?'Mover':which==='rotate'?'Girar':which==='tree-size'?'Ajustar tamanho':'Ajustar ponto'}"></div>`,iconSize:[15,15],iconAnchor:[7,7]}),draggable:true}).addTo(map);
+    m.on('click',e=>{L.DomEvent.stopPropagation(e);if(selectedDrawingIds.size<=1)openContext('drawing',d.id)});
+    m.on('dragstart',()=>snapshot());
+    m.on('dragend',e=>{
+      const q=e.target.getLatLng();
+      if(which==='move'){
+        const dl=q.lng-center.lng,da=q.lat-center.lat;d.lat+=da;d.lng+=dl;
+        if(Number.isFinite(d.lat2)){d.lat2+=da;d.lng2+=dl}
+      }else if(which==='start'){d.lat=q.lat;d.lng=q.lng}
+      else if(which==='end'||which==='radius'){d.lat2=q.lat;d.lng2=q.lng}
+      else if(which==='tree-size'){
+        const a=map.toScreen(center),b=map.toScreen(q);
+        d.size=Math.max(14,Math.min(90,Math.round(Math.max(Math.abs(b.x-a.x),Math.abs(b.y-a.y))*2-18)));
+      }else if(which==='rotate'){
+        const a=map.toScreen(center),b=map.toScreen(q);
+        d.rotation=(Math.round((Math.atan2(b.x-a.x,a.y-b.y)*180/Math.PI+360)%360/5)*5)%360;
+      }else if(which.startsWith('corner')){
+        // Inverse rotation maps the dragged handle back to the base axis-aligned rectangle.
+        const angle=-(Number(d.rotation)||0)*Math.PI/180;
+        const c=map.toScreen(center),v=map.toScreen(q),dx=v.x-c.x,dy=v.y-c.y;
+        const unrot=map.fromScreen(c.x+Math.cos(angle)*dx-Math.sin(angle)*dy,c.y+Math.sin(angle)*dx+Math.cos(angle)*dy);
+        if(which==='cornerA'){d.lat=unrot.lat;d.lng=unrot.lng}
+        else if(which==='cornerB'){d.lat2=unrot.lat;d.lng2=unrot.lng}
+        else if(which==='cornerC'){d.lat=unrot.lat;d.lng2=unrot.lng}
+        else if(which==='cornerD'){d.lat2=unrot.lat;d.lng=unrot.lng}
+      }
+      changed();if(selectedDrawingIds.size===1)openContext('drawing',d.id);
+    });drawLayers.push(m);
+  }
+
+  function coordinateLabelHtml(o,cls='gf-inline-coords'){
+    const u=utmFor(o);
+    return `<span class="${cls}">X: <span data-gf-x>${utmValue(u.easting)}</span><br>Y: <span data-gf-y>${utmValue(u.northing)}</span><span class="gf-coord-zone"> · ${utmZone(u)}</span></span>`;
+  }
+  function liveCoordinateUpdate(mark,lat,lng){
+    const root=mark.dom;if(!root)return;
+    const x=root.querySelector('[data-gf-x]'),y=root.querySelector('[data-gf-y]');
+    if(!x&&!y)return;
+    const u=toUTM(lat,lng);
+    if(x)x.textContent=utmValue(u.easting);
+    if(y)y.textContent=utmValue(u.northing);
+    const zone=root.querySelector('.gf-coord-zone');if(zone)zone.textContent=' · '+utmZone(u);
+  }
+  function makeIcon(kind,obj,active){
+    if(kind==='note'){
+      // Nota possui apenas uma posição interna para aparecer no croqui: nunca exibir coordenadas.
+      const words=String(obj.description||'Nota').split(/\n/);
+      const estimatedLines=words.reduce((n,line)=>n+Math.max(1,Math.ceil(line.length/42)),0);
+      const markerHeight=Math.max(28,Math.min(650,Math.ceil(estimatedLines*12)+12));
+      return L.divIcon({className:'',iconSize:[240,markerHeight],iconAnchor:[5,13],html:`<div class="gf-note-anchor"><span class="marker-textnote">${esc(obj.description||'Nota')}</span></div>`});
+    }
+    const coords=project.showMapCoordinates?coordinateLabelHtml(obj):'';
+    const label=obj.code,status=kind==='pole'?(obj.status==='existente'?'existing':obj.status==='substituir'?'replace':obj.status==='retirar'?'remove':''):'';
+    const shape=kind==='pole'?`<div class="marker-pole ${status}"></div>`:kind==='transformer'?'<div class="marker-transformer"></div>':'<div class="marker-consumer"></div>';
+    return L.divIcon({className:'',iconSize:[70,68],iconAnchor:[35,9],html:`<div class="marker-wrap ${kind==='transformer'?'is-transformer':kind==='consumer'?'is-consumer':''} ${active?'selected':''}">${shape}<div class="gf-node-caption"><div class="marker-title">${esc(label)}</div></div>${coords}</div>`});
+  }
+  function renderMap(){if(!map)return;drawLayers.forEach(o=>map.removeLayer(o));drawLayers=[];
+    project.segments.forEach(s=>{const [a,b]=segmentEnds(s);if(!a||!b)return;const color=COLORS[s.type]||COLORS.MT;const overlap=project.segments.some(t=>t.id!==s.id && ((t.a===s.a&&t.b===s.b)||(t.a===s.b&&t.b===s.a)));let xyA=[a.lat,a.lng],xyB=[b.lat,b.lng];if(overlap){const forward=(s.type==='MT'?1:s.type==='BT'?-1:s.type==='EX'?2:-2)*.000055;const dlat=b.lat-a.lat,dlng=b.lng-a.lng,h=Math.hypot(dlat,dlng)||1;xyA=[a.lat+(-dlng/h)*forward,a.lng+(dlat/h)*forward];xyB=[b.lat+(-dlng/h)*forward,b.lng+(dlat/h)*forward]}
+      const line=L.polyline([xyA,xyB],{color,weight:selected?.kind==='segment'&&selected.id===s.id?7:4,opacity:.92,dashArray:s.type==='EX'?'7 5':s.type==='RAMAL'?'7 6':null}).addTo(map);line.on('click',e=>{L.DomEvent.stopPropagation(e);clickNode('segment',s.id)});drawLayers.push(line);
+      const middle=[(xyA[0]+xyB[0])/2,(xyA[1]+xyB[1])/2],value=spanLen(s),spanText=`${fmt(value,0)} m`,spanW=Math.max(24,Math.min(56,spanText.length*5.8+8)),spanH=15;const lbl=L.marker(middle,{icon:L.divIcon({html:`<div class="vlabel ${s.type.toLowerCase()==='ex'?'existing':s.type.toLowerCase()}">${spanText}</div>`,className:'',iconSize:[spanW,spanH],iconAnchor:[spanW/2,spanH/2]}),interactive:true}).addTo(map);lbl.on('click',e=>{L.DomEvent.stopPropagation(e);clickNode('segment',s.id)});drawLayers.push(lbl)
+    });
+    renderDrawings();
+    for(const [kind,arr] of [['pole',project.poles],['transformer',project.transformers],['consumer',project.consumers],['note',project.notes]]){arr.forEach(o=>{const active=(selected?.id===o.id)|| (connectStart?.kind===kind&&connectStart?.id===o.id);const mark=L.marker([o.lat,o.lng],{icon:makeIcon(kind,o,active),draggable:true,autoPan:true,gfNodeId:kind==='note'?null:o.id}).addTo(map);mark.on('click',e=>{L.DomEvent.stopPropagation(e);clickNode(kind,o.id)});mark.on('dragstart',()=>snapshot());mark.on('drag',e=>{const p=e.target.getLatLng();liveCoordinateUpdate(mark,p.lat,p.lng)});mark.on('dragend',e=>{const p=e.target.getLatLng();o.lat=p.lat;o.lng=p.lng;changed();if(selected?.id===o.id)openContext(kind,o.id)});drawLayers.push(mark)})}
+    layoutMapLabels();
+  }
+  // Reposiciona somente os rótulos na tela; nunca altera as coordenadas técnicas.
+  function installCoordDrag(o,coordinates){
+    if(!coordinates||coordinates.dataset.gfLabelReady==='1')return;
+    coordinates.dataset.gfLabelReady='1';
+    let drag=null;
+    coordinates.addEventListener('pointerdown',e=>{
+      if(e.button!==0)return;
+      e.stopPropagation();e.preventDefault();
+      drag={id:e.pointerId,x:e.clientX,y:e.clientY,left:parseFloat(coordinates.style.left)||0,top:parseFloat(coordinates.style.top)||0,moved:false};
+      coordinates.setPointerCapture(e.pointerId);
+    });
+    coordinates.addEventListener('pointermove',e=>{
+      if(!drag||drag.id!==e.pointerId)return;e.stopPropagation();
+      const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(Math.abs(dx)+Math.abs(dy)>3)drag.moved=true;
+      if(!drag.moved)return;
+      coordinates.style.left=(drag.left+dx)+'px';coordinates.style.top=(drag.top+dy)+'px';
+    });
+    coordinates.addEventListener('pointerup',e=>{
+      if(!drag||drag.id!==e.pointerId)return;e.stopPropagation();
+      const moved=drag.moved;drag=null;
+      if(coordinates.hasPointerCapture(e.pointerId))coordinates.releasePointerCapture(e.pointerId);
+      if(!moved){const type=project.poles.some(p=>p.id===o.id)?'pole':project.transformers.some(p=>p.id===o.id)?'transformer':'consumer';openContext(type,o.id);return}
+      const m=drawLayers.find(l=>l.kind==='marker'&&l.options?.gfNodeId===o.id);
+      if(!m)return;
+      const anchor=m.options.icon?.iconAnchor||[35,9];
+      const x=parseFloat(coordinates.style.left)||0,y=parseFloat(coordinates.style.top)||0;
+      snapshot();o.coordOffset={x:x-anchor[0],y:y-anchor[1]};changed();toast('Etiqueta movida; coordenada do elemento preservada.');
+    });
+    coordinates.addEventListener('pointercancel',()=>{drag=null});
+    coordinates.addEventListener('click',e=>e.stopPropagation());
+  }
+  // Posiciona etiquetas X/Y lateralmente ao elemento; o deslocamento manual é salvo no projeto.
+  function layoutMapLabels(){
+    if(!map || project.showMapCoordinates===false)return;
+    const occupied=[];
+    const mw=map.getContainer().clientWidth,mh=map.getContainer().clientHeight;
+    const nodes=[...project.poles,...project.transformers,...project.consumers];
+    const layerById=new Map(drawLayers.filter(l=>l.kind==='marker'&&l.options?.gfNodeId).map(l=>[l.options.gfNodeId,l]));
+    const overlap=(a,b)=>Math.max(0,Math.min(a.x+a.w,b.x+b.w)-Math.max(a.x,b.x))*Math.max(0,Math.min(a.y+a.h,b.y+b.h)-Math.max(a.y,b.y));
+    const symbols=nodes.map(o=>{const p=map.toScreen(o);return{x:p.x-18,y:p.y-14,w:36,h:37}});
+    project.notes.forEach(n=>{const p=map.toScreen(n);const txt=String(n.description||'Nota');occupied.push({x:p.x+2,y:p.y-10,w:Math.min(230,Math.max(24,txt.length*4.2)),h:Math.max(12,Math.ceil(txt.length/43)*11)})});
+    project.segments.forEach(seg=>{const [a,b]=segmentEnds(seg);if(a&&b){const q=map.toScreen({lat:(a.lat+b.lat)/2,lng:(a.lng+b.lng)/2});occupied.push({x:q.x-24,y:q.y-10,w:48,h:16})}});
+    for(const o of nodes){
+      const marker=layerById.get(o.id),coordinates=marker?.dom?.querySelector('.gf-inline-coords');if(!coordinates)continue;
+      const p=map.toScreen(o),anchor=marker.options.icon?.iconAnchor||[35,9];
+      coordinates.style.width='max-content';coordinates.style.maxWidth='none';
+      const w=Math.ceil(coordinates.getBoundingClientRect().width)||95,h=Math.ceil(coordinates.getBoundingClientRect().height)||23;
+      if(p.x<-150||p.x>mw+150||p.y<-80||p.y>mh+80)continue;
+      const positions=o.coordOffset&&Number.isFinite(o.coordOffset.x)&&Number.isFinite(o.coordOffset.y)?[[o.coordOffset.x,o.coordOffset.y]]:
+        [[22,-5],[-w-22,-5],[25,9],[-w-25,9],[32,-h-8],[-w-32,-h-8],[16,26],[-w-16,26],[44,6],[-w-44,6]];
+      let chosen=null,best=Infinity;
+      positions.forEach(([dx,dy],j)=>{
+        const r={x:o.coordOffset?p.x+dx:Math.max(1,Math.min(mw-w-1,p.x+dx)),y:o.coordOffset?p.y+dy:Math.max(1,Math.min(mh-h-1,p.y+dy)),w,h};
+        const other=occupied.reduce((n,z)=>n+overlap(r,z),0),sym=symbols.reduce((n,z)=>n+overlap(r,z),0);
+        const distance=Math.hypot(r.x+w/2-p.x,r.y+h/2-p.y);
+        const score=other*18+sym*11+distance*.12+j*.7;
+        if(score<best){best=score;chosen=r}
+      });
+      if(!chosen)continue;
+      occupied.push(chosen);
+      coordinates.style.left=(chosen.x-(p.x-anchor[0]))+'px';coordinates.style.top=(chosen.y-(p.y-anchor[1]))+'px';
+      coordinates.style.transform='none';
+      installCoordDrag(o,coordinates);
+    }
+  }
+
+  function spanLen(s){const [a,b]=segmentEnds(s);return a&&b?dist(a,b):0}
+  function counts(){const lengths={MT:0,BT:0,EX:0,RAMAL:0},spans={MT:0,BT:0,EX:0,RAMAL:0};let equipmentLinks=0;const unique=new Set();project.segments.forEach(s=>{const [a,b]=segmentEnds(s);if(!a||!b)return;lengths[s.type]=(lengths[s.type]||0)+spanLen(s);spans[s.type]=(spans[s.type]||0)+1;const aa=(s.aKind||'pole')+':'+s.a,bb=(s.bKind||'pole')+':'+s.b;unique.add([aa,bb].sort().join('|'));if((s.aKind||'pole')!=='pole'||(s.bKind||'pole')!=='pole')equipmentLinks++});return {lengths,spans,physical:unique.size,all:project.poles.length,equipmentLinks}}
+  function renderMetrics(){const c=counts();$('metricPoles').textContent=fmt(c.all);$('metricSpans').textContent=fmt(c.physical);$('metricEquipmentLinks').textContent=fmt(c.equipmentLinks);$('metricMT').textContent=fmt(c.lengths.MT)+' m';$('metricBT').textContent=fmt(c.lengths.BT)+' m';$('metricProjected').textContent=project.poles.filter(p=>p.status==='projetado').length;$('metricExisting').textContent=project.poles.filter(p=>p.status==='existente').length;$('metricTransformers').textContent=project.transformers.length;$('metricConsumers').textContent=project.consumers.length;$('metricMTSpans').textContent=c.spans.MT;$('metricBTSpans').textContent=c.spans.BT;$('metricOther').textContent=fmt(c.lengths.EX+c.lengths.RAMAL)+' m';$('metricTotal').textContent=fmt(c.lengths.MT+c.lengths.BT)+' m';$('metricCity').textContent=project.city?project.city+(project.uf?' / '+project.uf:''):'Não informado';$('metricLocality').textContent=project.locality||'Não informada';$('projectName').textContent=project.name||'Sem título';$('projectSubtitle').textContent=[project.city,project.uf].filter(Boolean).join(' / ')||'Município não informado';$('mobileStats').textContent=c.all+' postes · '+fmt(c.lengths.MT+c.lengths.BT)+' m'}
+  function renderAll(){const toggle=$('showMapCoordinates');if(toggle)toggle.checked=project.showMapCoordinates!==false;renderMap();renderMetrics();setUndoState()}
+  function closeContext(){selected=null;$('contextPanel').classList.remove('visible')}
+  function bindFieldEvents(kind,id){document.querySelectorAll('[data-bind]').forEach(el=>{
+    el.addEventListener('change',()=>{
+      const o=find(kind,id);if(!o)return;
+      if(['utmX','utmY','utmZone','utmHemisphere'].includes(el.dataset.bind)){
+        const x=readUtmInput('gfContextUTMX'),y=readUtmInput('gfContextUTMY');
+        const zone=Number($('gfContextUTMZone')?.value),hemi=$('gfContextUTMHemisphere')?.value;
+        if(!Number.isFinite(x)||!Number.isFinite(y)||zone<1||zone>60||!['S','N'].includes(hemi))return toast('Informe X, Y, fuso e hemisfério válidos.',4300);
+        try{const result=fromUTM(x,y,zone,hemi);snapshot();o.lat=result.lat;o.lng=result.lng;o.source='UTM digitada';changed();openContext(kind,id)}catch(e){toast('Coordenada UTM inválida: '+e.message,5200)}return;
+      }
+      snapshot();let value=el.value;
+      if(['lat','lng','lat2','lng2'].includes(el.dataset.bind)){
+        value=Number(String(value).replace(',','.'));
+        if(!Number.isFinite(value)||Math.abs(value)>(el.dataset.bind.startsWith('lat')?90:180)){toast('Coordenada inválida');openContext(kind,id);return}
+      }
+      if(['conductors','extra'].includes(el.dataset.bind))value=Number(value)||0;
+      if(el.dataset.bind==='size')value=Math.max(14,Math.min(90,Number(value)||26));
+      if(el.dataset.bind==='rotation')value=((Number(value)||0)%360+360)%360;
+      if(el.dataset.bind==='measured')value=value===''?null:Number(value);
+      o[el.dataset.bind]=value;changed();openContext(kind,id);
+    });
+  })}
+  function field(label,key,val,opts=''){return `<div class="formgroup"><label class="fieldlabel">${label}</label><input class="field" data-bind="${key}" value="${esc(val??'')}" ${opts}></div>`}
+  function options(items,current){return items.map(([v,label])=>`<option value="${esc(v)}" ${String(v)===String(current)?'selected':''}>${esc(label)}</option>`).join('')}
+  function dropdown(label,key,items,value){return `<div class="formgroup"><label class="fieldlabel">${label}</label><select class="field" data-bind="${key}">${options(items,value)}</select></div>`}
+  const dateText=iso=>new Date(iso||Date.now()).toLocaleString('pt-BR');
+  function openContext(kind,id){const o=find(kind,id);if(!o)return;selected={kind,id};const title={pole:'Poste',transformer:'Transformador',consumer:'Entrada de serviço',note:'Anotação',segment:'Trecho de rede',drawing:'Desenho'}[kind];$('contextTitle').textContent=title+' '+(o.code||'');$('contextSub').textContent=kind==='segment'?'Editar ligação e condutores':kind==='note'?'Texto e observações':kind==='drawing'?'Edição do desenho':'Coordenadas e informações do elemento';let html='';let foot=`<button class="btn danger small" id="deleteSelected">${ico('trash',14)} Excluir</button><button class="btn small" id="centerSelected">${ico('locate',14)} Centralizar</button><button class="btn primary small" id="doneSelected">Concluído</button>`;
+    if(kind==='pole'){html+=utmFieldGroup(o);html+=dropdown('Situação do poste','status',[['projetado','Projetado'],['existente','Existente'],['substituir','A substituir'],['retirar','A retirar']],o.status);html+=`<div class="fieldrow">${field('Altura (m)','height',o.height,'placeholder="Opcional"')}${field('Esforço nominal','rating',o.rating,'placeholder="Opcional"')}</div>`;html+=`<div class="device" style="margin-bottom:12px"><span class="dot ${o.source==='GPS'?'good':''}"></span>${o.source==='GPS'?'Coletado por GPS':'Marcação manual ou digitada'} ${Number.isFinite(o.accuracy)?'· Precisão informada: ±'+fmt(o.accuracy,0)+' m':''}</div>`}
+    if(kind==='transformer'){html+=utmFieldGroup(o);html+=dropdown('Poste associado','poleId',[['','Não associado'],...project.poles.map(p=>[p.id,p.code])],o.poleId);html+=field('Potência (kVA)','kva',o.kva,'placeholder="Ex.: 75"')}
+    if(kind==='consumer'){html+=utmFieldGroup(o);html+=dropdown('Poste de origem','poleId',[['','Não definido'],...project.poles.map(p=>[p.id,p.code])],o.poleId);html+=dropdown('Tipo de atendimento','service',[['','Não informado'],['Monofásico','Monofásico'],['Bifásico','Bifásico'],['Trifásico','Trifásico']],o.service)}
+    if(kind==='note'){html+=`<p class="smallhint">A nota pode ser arrastada livremente no mapa. Apenas o texto será exibido no croqui.</p>`}
+    if(kind==='drawing'){
+      html+=`<div class="device" style="margin-bottom:10px">${drawNames[o.kind]} · Selecione o traço ou símbolo; arraste a alça central para mover e as laterais para ajustar.</div>`;
+      if(o.kind!=='tree')html+=dropdown('Cor','color',[["#df3f44",'Vermelho'],["#2879d2",'Azul'],["#26945d",'Verde'],["#e3b72c",'Amarelo'],["#1f2937",'Preto'],["#ee8429",'Laranja']],o.color);
+      if(o.kind==='tree')html+=field('Tamanho da árvore (14–90 px)','size',o.size||26,'type="number" min="14" max="90" step="1"');
+      if(o.kind==='tree'||o.kind==='rect')html+=field('Rotação (graus)','rotation',o.rotation||0,'type="number" min="0" max="359" step="5"');
+    }
+    if(kind==='segment'){const [a,b]=segmentEnds(o),v=spanLen(o);html+=`<div class="device" style="margin-bottom:10px">${esc(a?.code||'?')} ↔ ${esc(b?.code||'?')} · Distância horizontal: <b>${fmt(v,1)} m</b></div>`;html+=dropdown('Tipo de rede','type',[['MT','Média tensão (MT)'],['BT','Baixa tensão (BT)'],['EX','Rede existente'],['RAMAL','Ramal de ligação']],o.type);html+=field('Cabo / condutor (descrição)','cable',o.cable,'placeholder="Ex.: cabo multiplexado 3x..."');html+=`<div class="fieldrow">${field('Quantidade / conjuntos','conductors',o.conductors,'type="number" min="1" step="1"')}${field('Adicional estimado (%)','extra',o.extra,'type="number" min="0" step="0.1"')}</div>`;html+=field('Distância medida (m, opcional)','measured',o.measured,'type="number" min="0" step="0.1"');html+=`<div class="device" style="margin-bottom:12px">Estimativa de condutor: <b>${fmt((o.measured??v)*(Number(o.conductors)||1)*(1+(Number(o.extra)||0)/100),1)} m</b>. Ajustar quantidade de acordo com o tipo de cabo.</div>`;foot=foot.replace('Centralizar','Ver trecho')}
+    if(['pole','transformer','consumer'].includes(kind)){
+      const total=(o.photos||[]).length;
+      html=`<div class="gf-photo-quick"><div><b style="font-size:12px">Registro fotográfico</b><div class="smallhint">${total}/2 fotos vinculadas</div></div><button class="btn primary small" id="photoActionQuick">📷 Foto</button></div>`+html;
+      html+=photoSection(kind,id);
+    }
+    html+=`<div class="formgroup"><label class="fieldlabel">Observações técnicas</label><textarea class="field fieldarea" data-bind="description" placeholder="Registre informações do levantamento...">${esc(o.description||'')}</textarea></div>`;
+    $('contextBody').innerHTML=html;$('contextFooter').innerHTML=foot;$('contextPanel').classList.add('visible');bindFieldEvents(kind,id);if(['pole','transformer','consumer'].includes(kind))wirePhotos(kind,id);
+    $('deleteSelected').onclick=()=>{if(!confirm('Excluir este elemento do projeto?'))return;snapshot();const arr=getArr(kind);const i=arr.findIndex(x=>x.id===id);if(i>=0)arr.splice(i,1);project.segments=project.segments.filter(s=>!((s.a===id&&(s.aKind||'pole')===kind)||(s.b===id&&(s.bKind||'pole')===kind)));if(kind==='pole'){for(const t of [...project.transformers,...project.consumers])if(t.poleId===id)t.poleId=''}if(kind==='drawing'){selectedDrawingIds.delete(id);updateDrawingSelectionControls()}closeContext();changed();toast('Elemento excluído')};
+    $('centerSelected').onclick=()=>{if(kind==='segment'){const [a,b]=segmentEnds(o);if(a&&b)map.fitBounds([[a.lat,a.lng],[b.lat,b.lng]],{padding:[80,80],maxZoom:21})}else if(kind==='drawing')map.setView([drawingCenter(o).lat,drawingCenter(o).lng],Math.max(map.getZoom(),18));else map.setView([o.lat,o.lng],Math.max(map.getZoom(),18));};
+    $('doneSelected').onclick=()=>closeContext();
+  }
+  function openModal(title,content,buttons=[]){currentModal=title;$('modalTitle').textContent=title;$('modalContent').innerHTML=content;$('modalActions').innerHTML='';buttons.forEach(b=>{const e=document.createElement('button');e.className='btn '+(b.class||'');e.textContent=b.text;e.addEventListener('click',b.fn);$('modalActions').appendChild(e)});$('modalBackdrop').classList.add('visible')}
+  function closeModal(){stopCamera();currentModal=null;$('modalBackdrop').classList.remove('visible')}
+  function projectForm(){const s=project;openModal('Dados do projeto',`<div class="fieldrow"><div class="formgroup"><label class="fieldlabel">Nome do projeto</label><input id="pfName" class="field" value="${esc(s.name)}"></div><div class="formgroup"><label class="fieldlabel">Projetista</label><input id="pfResp" class="field" value="${esc(s.responsible)}"></div></div><div class="formgroup"><label class="fieldlabel">Número / código do projeto</label><input id="pfCode" class="field" value="${esc(s.code||'')}" placeholder="Ex.: 2026-001"></div><div class="fieldrow"><div class="formgroup"><label class="fieldlabel">Município</label><input id="pfCity" class="field" value="${esc(s.city)}" placeholder="Ex.: Londrina"></div><div class="formgroup"><label class="fieldlabel">UF</label><input id="pfUf" class="field" maxlength="2" value="${esc(s.uf)}"></div></div><div class="formgroup"><label class="fieldlabel">Localidade / estrada / bairro</label><input id="pfLocal" class="field" value="${esc(s.locality)}"></div><div class="fieldrow"><div class="formgroup"><label class="fieldlabel">Tipo de projeto</label><select id="pfType" class="field">${options([['Extensão de rede','Extensão de rede'],['Ampliação de rede','Ampliação de rede'],['Melhoria de rede','Melhoria de rede']],s.projectType)}</select></div><div class="formgroup"><label class="fieldlabel">Área</label><select id="pfArea" class="field">${options([['Rural','Rural'],['Urbana','Urbana']],s.area)}</select></div></div><div class="formgroup"><label class="fieldlabel">Descrição</label><textarea class="field fieldarea" id="pfDesc">${esc(s.description)}</textarea></div><div class="attach-actions"><button type="button" class="btn small" id="gfGeoLookup">Identificar município pelo primeiro elemento</button></div><p id="gfGeoStatus" class="smallhint">Município e UF podem ser editados. Identificação automática quando há internet e um elemento cadastrado.</p>`,[{text:'Meus projetos',fn:projectManager},{text:'Cancelar',fn:closeModal},{text:'Salvar dados',class:'primary',fn:()=>{const fields={city:$('pfCity').value.trim(),uf:$('pfUf').value.trim().toUpperCase(),locality:$('pfLocal').value.trim()};
+      const oldFields={city:project.city,uf:project.uf,locality:project.locality};
+      snapshot();project.geoManual=project.geoManual||{city:false,uf:false,locality:false};
+      for(const key of Object.keys(fields))if(fields[key]!==oldFields[key])project.geoManual[key]=Boolean(fields[key]);
+      Object.assign(project,{name:$('pfName').value.trim()||'Novo levantamento',code:$('pfCode').value.trim(),responsible:$('pfResp').value.trim(),...fields,projectType:$('pfType').value,area:$('pfArea').value,description:$('pfDesc').value.trim()});
+      changed();closeModal();if(!project.city)scheduleReverseGeocoding({force:true,delay:700});toast('Dados do projeto salvos')}}]);
+    const name=$('pfName');name?.focus();name?.select();
+    $('gfGeoLookup').onclick=()=>{
+      if(!firstGeoPoint())return toast('Adicione primeiro um poste, transformador ou UC ao mapa.');
+      const status=$('gfGeoStatus');if(status)status.textContent='Consultando município e UF…';
+      // Consulta explícita deve respeitar entradas manuais; para sobrescrever, deixe o campo vazio.
+      scheduleReverseGeocoding({force:true,delay:50});
+    };
+  }
+  function newProjectDialog(){
+    openModal('Novo levantamento',`<div class="formgroup"><label class="fieldlabel" for="gfNewName">Nome do levantamento</label><input id="gfNewName" class="field" value="Novo levantamento" autocomplete="off" spellcheck="false"></div><p class="smallhint">Digite o nome com calma. O levantamento atual será mantido e salvo separadamente.</p>`,[
+      {text:'Cancelar',fn:closeModal},
+      {text:'Criar levantamento',class:'primary',fn:()=>{
+        const name=$('gfNewName')?.value.trim();
+        if(!name){toast('Digite um nome para o levantamento.');$('gfNewName')?.focus();return}
+        persist();project=blank();project.name=name;normalize();undo=[];redo=[];selected=null;closeContext();closeModal();setTool('select');changed();map.setView([project.view.lat,project.view.lng],project.view.zoom);toast('Levantamento criado: '+name);
+      }}
+    ]);
+    $('gfNewName')?.focus();$('gfNewName')?.select();
+  }
+  // Inventário dos anexos de um levantamento: inclui fotos PS/TR/UC e anexos gerais.
+  function projectMediaIds(p){
+    return [...new Set([...(p.attachments||[]),...(p.poles||[]).flatMap(e=>e.photos||[]),
+      ...(p.transformers||[]).flatMap(e=>e.photos||[]),...(p.consumers||[]).flatMap(e=>e.photos||[])]
+      .map(m=>m.id).filter(Boolean))];
+  }
+  function storeProjectsWithoutChangingCurrent(){
+    localStorage.setItem(STORAGE,JSON.stringify(projects));
+    localStorage.setItem(ACTIVE,project.id);
+  }
+  function openListedProject(id){
+    if(project.id===id){closeModal();return}
+    const p=projects.find(x=>x.id===id);if(!p)return toast('Levantamento não encontrado.');
+    persist();project=JSON.parse(JSON.stringify(p));normalize();geoTriedProject=null;
+    undo=[];redo=[];selected=null;connectStart=null;selectedDrawingIds.clear();
+    setTool('select');closeContext();closeModal();renderAll();
+    map.setView([project.view.lat,project.view.lng],project.view.zoom);
+    localStorage.setItem(ACTIVE,project.id);
+    scheduleReverseGeocoding({delay:900});toast('Levantamento aberto.');
+  }
+  function renameListedProject(id){
+    const p=projects.find(x=>x.id===id);if(!p)return;
+    openModal('Renomear levantamento',`<div class="formgroup"><label class="fieldlabel" for="gfRenameProject">Nome do levantamento</label><input id="gfRenameProject" class="field" autocomplete="off" value="${esc(p.name||'')}"></div>`,[
+      {text:'Cancelar',fn:projectManager},
+      {text:'Salvar nome',class:'primary',fn:()=>{
+        const name=$('gfRenameProject')?.value.trim();if(!name){toast('Informe o nome do levantamento.');$('gfRenameProject')?.focus();return}
+        p.name=name;if(p.id===project.id)project.name=name;
+        p.updated=new Date().toISOString();
+        try{storeProjectsWithoutChangingCurrent();renderMetrics();projectManager();toast('Levantamento renomeado.')}catch(e){toast('Erro ao salvar nome: '+e.message,5000)}
+      }}
+    ]);
+    $('gfRenameProject')?.focus();$('gfRenameProject')?.select();
+  }
+  function deleteListedProject(id){
+    const p=projects.find(x=>x.id===id);if(!p)return;
+    openModal('Excluir levantamento',`<div class="alert"><b>Tem certeza que deseja excluir este levantamento?</b><p>Esta ação não poderá ser desfeita.</p></div><p style="font-size:13px;margin:12px 0"><b>${esc(p.name||'Sem título')}</b></p><p class="smallhint">Serão removidos os postes, trechos, desenhos, notas, fotografias e anexos armazenados neste navegador. Os outros levantamentos permanecerão intactos.</p>`,[
+      {text:'Cancelar',fn:projectManager},
+      {text:'Excluir Projeto',class:'danger',fn:async()=>{
+        const target=projects.find(x=>x.id===id);if(!target)return projectManager();
+        const remain=projects.filter(x=>x.id!==id);
+        const oldProjects=projects,oldProject=project;
+        const deletingActive=project.id===id;
+        const newProject=deletingActive?(remain[0]?JSON.parse(JSON.stringify(remain[0])):blank()):project;
+        if(deletingActive&&!remain.length)remain.push(newProject);
+        const used=new Set(remain.flatMap(projectMediaIds));
+        const orphanMedia=projectMediaIds(target).filter(mid=>!used.has(mid));
+        projects=remain;project=newProject;
+        try{storeProjectsWithoutChangingCurrent()}catch(e){projects=oldProjects;project=oldProject;toast('Não foi possível excluir: '+e.message,5500);return}
+        if(deletingActive){normalize();geoTriedProject=null;undo=[];redo=[];selected=null;connectStart=null;selectedDrawingIds.clear();closeContext();setTool('select');renderAll();map.setView([project.view.lat,project.view.lng],project.view.zoom)}
+        projectManager();
+        try{await mediaDeleteMany(orphanMedia);toast('Levantamento excluído com suas imagens e anexos.')}
+        catch(e){console.warn('Falha ao limpar mídias excluídas:',e);toast('Levantamento excluído; algumas mídias locais não puderam ser removidas.',5500)}
+      }}
+    ]);
+  }
+  function projectManager(){
+    const list=projects.slice().sort((a,b)=>new Date(b.updated||0)-new Date(a.updated||0)).map(p=>
+      `<div class="project-line"><div class="gf-project-info"><b>${esc(p.name||'Sem título')} ${p.id===project.id?'<span class="badge">Aberto</span>':''}</b><small>${esc([p.city,p.uf].filter(Boolean).join(' / ')||'Sem município')} · ${dateText(p.updated)}</small></div><div class="gf-project-actions"><button class="btn small" data-load="${esc(p.id)}">Abrir</button><button class="btn small" data-rename="${esc(p.id)}">Renomear</button><button class="btn danger small" data-delete-project="${esc(p.id)}">Excluir</button></div></div>`).join('');
+    openModal('Meus levantamentos',`<div class="projects-list">${list||'<div class="empty">Nenhum projeto salvo ainda.</div>'}</div><p class="smallhint">Os levantamentos ficam neste navegador. Exporte um backup JSON com mídias periodicamente.</p>`,[
+      {text:'Fechar',fn:closeModal},{text:'+ Novo projeto',class:'primary',fn:newProjectDialog}
+    ]);
+    const root=$('modalContent');
+    root.querySelectorAll('[data-load]').forEach(e=>e.onclick=()=>openListedProject(e.dataset.load));
+    root.querySelectorAll('[data-rename]').forEach(e=>e.onclick=()=>renameListedProject(e.dataset.rename));
+    root.querySelectorAll('[data-delete-project]').forEach(e=>e.onclick=()=>deleteListedProject(e.dataset.deleteProject));
+  }
+  function gpsFetch(addPole){if(!navigator.geolocation){toast('GPS não disponível neste navegador.',4000);return}toast('Consultando localização GPS…',3300);navigator.geolocation.getCurrentPosition(pos=>{const lat=pos.coords.latitude,lng=pos.coords.longitude,accuracy=pos.coords.accuracy;userLoc={lat,lng,accuracy};if(gpsCircle)map.removeLayer(gpsCircle);gpsCircle=L.circle([lat,lng],{radius:accuracy,color:'#2084d6',weight:1.5,fillColor:'#2084d6',fillOpacity:.09,interactive:false}).addTo(map);map.setView([lat,lng],Math.max(map.getZoom(),17));if(addPole){create('pole',lat,lng,{source:'GPS',accuracy,status:'projetado'})}else toast(`GPS localizado · precisão estimada ±${fmt(accuracy,0)} m`);},err=>{const msg=err.code===1?'Permissão de localização negada.':err.code===2?'O dispositivo não conseguiu obter a localização.':'Tempo esgotado ao consultar o GPS.';toast(msg+' Use HTTPS ou localhost e habilite a localização.',5500)},{enableHighAccuracy:true,timeout:20000,maximumAge:0})}
+  // Conversores WGS84 ↔ UTM: dados geográficos internos preservados para mapa e compatibilidade.
+  function toUTM(lat,lon){const a=6378137,e2=.0066943799901413165,k0=.9996,rad=Math.PI/180,zone=Math.floor((lon+180)/6)+1,cm=((zone-1)*6-180+3)*rad,phi=lat*rad,l=lon*rad,ep2=e2/(1-e2),N=a/Math.sqrt(1-e2*Math.sin(phi)**2),T=Math.tan(phi)**2,C=ep2*Math.cos(phi)**2,A=(l-cm)*Math.cos(phi),M=a*((1-e2/4-3*e2**2/64-5*e2**3/256)*phi-(3*e2/8+3*e2**2/32+45*e2**3/1024)*Math.sin(2*phi)+(15*e2**2/256+45*e2**3/1024)*Math.sin(4*phi)-(35*e2**3/3072)*Math.sin(6*phi));const E=k0*N*(A+(1-T+C)*A**3/6+(5-18*T+T*T+72*C-58*ep2)*A**5/120)+500000;let Y=k0*(M+N*Math.tan(phi)*(A*A/2+(5-T+9*C+4*C*C)*A**4/24+(61-58*T+T*T+600*C-330*ep2)*A**6/720));if(lat<0)Y+=10000000;return {easting:E,northing:Y,zone,hemisphere:lat<0?'S':'N'}}
+  function fromUTM(E,N,zone,hemisphere){const a=6378137,e2=.0066943799901413165,k0=.9996,ep2=e2/(1-e2);if(zone<1||zone>60||E<100000||E>900000||N<0||N>10000000)throw Error('Valores UTM fora da faixa válida.');const x=E-500000,y=(hemisphere==='S'?N-10000000:N),M=y/k0,mu=M/(a*(1-e2/4-3*e2*e2/64-5*e2**3/256)),e1=(1-Math.sqrt(1-e2))/(1+Math.sqrt(1-e2)),phi1=mu+(3*e1/2-27*e1**3/32)*Math.sin(2*mu)+(21*e1*e1/16-55*e1**4/32)*Math.sin(4*mu)+(151*e1**3/96)*Math.sin(6*mu)+(1097*e1**4/512)*Math.sin(8*mu),C1=ep2*Math.cos(phi1)**2,T1=Math.tan(phi1)**2,N1=a/Math.sqrt(1-e2*Math.sin(phi1)**2),R1=a*(1-e2)/(1-e2*Math.sin(phi1)**2)**1.5,D=x/(N1*k0),lat=phi1-(N1*Math.tan(phi1)/R1)*(D*D/2-(5+3*T1+10*C1-4*C1*C1-9*ep2)*D**4/24+(61+90*T1+298*C1+45*T1*T1-252*ep2-3*C1*C1)*D**6/720),lon=((zone-1)*6-180+3)*Math.PI/180+(D-(1+2*T1+C1)*D**3/6+(5-2*C1+28*T1-3*C1*C1+8*ep2+24*T1*T1)*D**5/120)/Math.cos(phi1);return {lat:lat*180/Math.PI,lng:lon*180/Math.PI}}
+  // UTM é a representação padrão da interface. O mapa e os arquivos GeoJSON/KML
+  // conservam geometria WGS84 em graus por exigência dos respectivos padrões.
+  function utmFor(o){return toUTM(Number(o.lat),Number(o.lng))}
+  function utmZone(u){return `${u.zone}${u.hemisphere}`}
+  function utmValue(n){return Number(n).toFixed(2)}
+  function utmText(o){const u=utmFor(o);return `X: ${utmValue(u.easting)} · Y: ${utmValue(u.northing)} · ${utmZone(u)}`}
+  function utmCompact(o){const u=utmFor(o);return `X: ${utmValue(u.easting)}<br>Y: ${utmValue(u.northing)}`}
+  function utmFieldGroup(o){const u=utmFor(o);return `<div class="fieldrow">${field('X — Easting (m)','utmX',utmValue(u.easting),'id="gfContextUTMX" inputmode="decimal"')}${field('Y — Northing (m)','utmY',utmValue(u.northing),'id="gfContextUTMY" inputmode="decimal"')}</div><div class="fieldrow">${dropdown('Fuso UTM','utmZone',Array.from({length:60},(_,i)=>[String(i+1),String(i+1)]),String(u.zone)).replace('<select class="field"','<select id="gfContextUTMZone" class="field"')}${dropdown('Hemisfério','utmHemisphere',[['S','Sul'],['N','Norte']],u.hemisphere).replace('<select class="field"','<select id="gfContextUTMHemisphere" class="field"')}</div><p class="smallhint">UTM · WGS84 · Valores em metros. Informe o fuso e hemisfério corretos para locação.</p>`}
+  function readUtmInput(id){const val=$(''+id)?.value.trim().replace(/\s/g,'').replace(/,(?=\d{1,2}$)/,'.');return Number(val)}
+  function addCoordinates(){
+    const center=utmFor(map.getCenter());
+    openModal('Adicionar poste por coordenadas UTM',`<div class="fieldrow"><div class="formgroup"><label class="fieldlabel">X — Easting (m)</label><input id="coX" class="field" value="${utmValue(center.easting)}" inputmode="decimal"></div><div class="formgroup"><label class="fieldlabel">Y — Northing (m)</label><input id="coY" class="field" value="${utmValue(center.northing)}" inputmode="decimal"></div></div><div class="fieldrow"><div class="formgroup"><label class="fieldlabel">Fuso UTM</label><select id="coZone" class="field">${options(Array.from({length:60},(_,i)=>[String(i+1),String(i+1)]),String(center.zone))}</select></div><div class="formgroup"><label class="fieldlabel">Hemisfério</label><select id="coHemi" class="field">${options([['S','Sul'],['N','Norte']],center.hemisphere)}</select></div></div><p class="smallhint">X/Y em metros · WGS84. Confira fuso e hemisfério antes de marcar o poste.</p>`,[{text:'Cancelar',fn:closeModal},{text:'Adicionar poste',class:'primary',fn:()=>{try{
+      const x=readUtmInput('coX'),y=readUtmInput('coY'),zone=Number($('coZone').value),hemi=$('coHemi').value;
+      const pos=fromUTM(x,y,zone,hemi);
+      const p=create('pole',pos.lat,pos.lng,{source:'UTM digitada'});
+      if(p){map.setView([pos.lat,pos.lng],17);closeModal()}
+    }catch(e){toast('Não foi possível inserir UTM: '+e.message,5000)}}}]);
+  }
+  function safeSlug(s){return String(s||'croquipro').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9_-]+/g,'-').replace(/^-+|-+$/g,'').slice(0,55)||'croquipro'}
+  function blobDownload(content,name,mime='application/octet-stream'){const blob=content instanceof Blob?content:new Blob([content],{type:mime});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000)}
+  function csvEncode(rows){return '\ufeff'+rows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(';')).join('\r\n')}
+  function exportCSV(kind){
+    let rows=[];
+    if(kind==='poles'){
+      rows=[['ID','Elemento','Tipo','Situação','X UTM (m)','Y UTM (m)','Fuso / hemisfério','Datum','Origem','Precisão GPS m','Altura m','Esforço','Notas']];
+      for(const [type,arr] of [['Poste',project.poles],['Transformador',project.transformers],['UC',project.consumers]]){
+        for(const o of arr){const u=utmFor(o);rows.push([o.id,o.code,type,o.status||'',utmValue(u.easting),utmValue(u.northing),utmZone(u),'WGS84',o.source||'',o.accuracy??'',o.height||'',o.rating||'',o.description||''])}
+      }
+    }else{
+      rows=[['ID','Elemento inicial','Tipo inicial','X inicial UTM (m)','Y inicial UTM (m)','Fuso inicial','Elemento final','Tipo final','X final UTM (m)','Y final UTM (m)','Fuso final','Rede','Distância horizontal (m)','Distância medida (m)','Condutor','Quantidade / conjuntos','Adicional (%)','Condutor estimado (m)','Notas']];
+      project.segments.forEach(s=>{const [a,b]=segmentEnds(s),d=spanLen(s),u=a?utmFor(a):null,v=b?utmFor(b):null;
+        rows.push([s.id,a?.code||'',s.aKind||'pole',u?utmValue(u.easting):'',u?utmValue(u.northing):'',u?utmZone(u):'',b?.code||'',s.bKind||'pole',v?utmValue(v.easting):'',v?utmValue(v.northing):'',v?utmZone(v):'',TYPELABEL[s.type],d.toFixed(2),s.measured??'',s.cable,s.conductors,s.extra,((s.measured??d)*(Number(s.conductors)||1)*(1+(Number(s.extra)||0)/100)).toFixed(2),s.description]);
+      });
+    }
+    blobDownload(csvEncode(rows),`${safeSlug(project.name)}_${kind}.csv`,'text/csv;charset=utf-8');toast('CSV em UTM exportado');
+  }
+  
+  function geoJson(){
+    const features=[],utmProps=o=>{const u=utmFor(o);return {x:Math.round(u.easting*100)/100,y:Math.round(u.northing*100)/100,fuso:utmZone(u),datum:'WGS84'}};
+    const scrub=o=>{const {lat,lng,lat2,lng2,latitude,longitude,...rest}=o;return rest};
+    for(const [kind,arr] of [['poste',project.poles],['transformador',project.transformers],['consumidor',project.consumers],['nota',project.notes]])for(const o of arr){features.push({type:'Feature',geometry:{type:'Point',coordinates:[o.lng,o.lat]},properties:{featureType:kind,...scrub(o),...utmProps(o)}})}
+    for(const s of project.segments){const [a,b]=segmentEnds(s);if(!a||!b)continue;features.push({type:'Feature',geometry:{type:'LineString',coordinates:[[a.lng,a.lat],[b.lng,b.lat]]},properties:{featureType:'trecho',...s,distanceM:spanLen(s),origemUTM:utmProps(a),destinoUTM:utmProps(b)}})}
+    for(const d of project.drawings){const pts=d.kind==='tree'?null:drawingCoords(d).flat();features.push({type:'Feature',geometry:d.kind==='tree'?{type:'Point',coordinates:[d.lng,d.lat]}:{type:'LineString',coordinates:pts.length?pts.map(p=>[p.lng,p.lat]):[[d.lng,d.lat],[d.lng2,d.lat2]]},properties:{featureType:'desenho',...scrub(d),...utmProps(d)}})}
+    // Geometria GeoJSON tem CRS WGS84 por padrão (longitude, latitude), como exige RFC 7946.
+    return {type:'FeatureCollection',name:project.name,properties:{displayCrs:'UTM WGS84; X/Y em metros; fuso por elemento'},features};
+  }
+  function xmlEscape(s){return String(s??'').replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&apos;'}[c]))}
+  function exportKML(){let body='';for(const f of geoJson().features){const name=f.properties.code||`${f.properties.featureType} ${f.properties.id.slice(0,7)}`,coord=f.geometry.coordinates;body+=`<Placemark><name>${xmlEscape(name)}</name><description>${xmlEscape(f.properties.featureType)} · ${Number.isFinite(f.properties.x)?`UTM X: ${f.properties.x} · Y: ${f.properties.y} · ${f.properties.fuso}`:f.properties.origemUTM?`UTM inicial: ${f.properties.origemUTM.x} / ${f.properties.origemUTM.y}`: ''}</description>${f.geometry.type==='Point'?`<Point><coordinates>${coord[0]},${coord[1]},0</coordinates></Point>`:`<LineString><coordinates>${coord.map(c=>c[0]+','+c[1]+',0').join(' ')}</coordinates></LineString>`}</Placemark>`}blobDownload(`<?xml version="1.0" encoding="UTF-8"?><kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>${xmlEscape(project.name)}</name>${body}</Document></kml>`,`${safeSlug(project.name)}.kml`,'application/vnd.google-earth.kml+xml');toast('KML exportado')}
+  async function exportJSON(){
+    try{
+      const all=[...(project.attachments||[]),...project.poles.flatMap(p=>p.photos||[]),...project.transformers.flatMap(p=>p.photos||[]),...project.consumers.flatMap(p=>p.photos||[])];
+      const media={};const missing=[];
+      for(const m of all){const data=await mediaRead(m.id);if(data)media[m.id]=data;else missing.push(m.name||m.id)}
+      if(missing.length){toast('Backup interrompido: '+missing.length+' foto(s) ou anexo(s) ausentes. Confira o armazenamento.',6500);return}
+      const payload={format:'gridfield-v2',exportedAt:new Date().toISOString(),project:clone(),media};
+      blobDownload(JSON.stringify(payload),`${safeSlug(project.name)}_backup_com_fotos.json`,'application/json;charset=utf-8');toast(`Backup completo com ${all.length} mídia(s) exportado.`);
+    }catch(e){toast('Erro ao gerar backup: '+e.message,6500)}
+  }
+  function importJSONFile(){
+    const input=document.createElement('input');input.type='file';input.accept='.json,application/json';
+    input.onchange=async()=>{
+      try{
+        const raw=JSON.parse(await input.files[0].text()),p=raw.project||raw;
+        if(!p||!Array.isArray(p.poles)||!Array.isArray(p.segments)||!p.id)throw Error('Arquivo não contém projeto CroquiPro válido.');
+        if(!confirm(`Importar "${p.name}" como novo levantamento?`))return;
+        const imported=JSON.parse(JSON.stringify(p));imported.id=genId();
+        const all=[...(imported.attachments||[]),...(imported.poles||[]).flatMap(o=>o.photos||[]),...(imported.transformers||[]).flatMap(o=>o.photos||[]),...(imported.consumers||[]).flatMap(o=>o.photos||[])];
+        const rawMedia=raw.media||{};
+        const missing=all.filter(x=>!rawMedia[x.id]);
+        if(missing.length)throw Error('O arquivo não contém '+missing.length+' foto(s) / anexo(s). Exporte um backup completo com mídias.');
+        for(const m of all){const old=m.id;m.id=genId();await mediaWrite(m.id,rawMedia[old])}
+        persist();project=imported;normalize();undo=[];redo=[];closeModal();closeContext();setTool('select');changed();map.setView([project.view.lat,project.view.lng],project.view.zoom);toast('Projeto e anexos importados com sucesso');
+      }catch(e){toast('Falha ao importar JSON: '+e.message,6500)}
+    };input.click();
+  }
+  
+  // Croqui exportável independente do mapa de fundo: não reproduz tiles de terceiros.
+  function schematicSvg(width=1500,height=920){const nodes=[...project.poles,...project.transformers,...project.consumers,...project.notes],all=nodes.length?nodes:[{lat:project.view.lat,lng:project.view.lng}];const lats=all.map(p=>p.lat),lngs=all.map(p=>p.lng);let north=Math.max(...lats),south=Math.min(...lats),east=Math.max(...lngs),west=Math.min(...lngs);const centerLat=(north+south)/2;const k=Math.cos(centerLat*Math.PI/180)||.5;const kmx=111320*k,kmy=111132;let dx=Math.max((east-west)*kmx,30),dy=Math.max((north-south)*kmy,30);const graph={x:100,y:140,w:width-200,h:height-335};const scale=Math.min(graph.w/dx,graph.h/dy);const midLon=(east+west)/2,midLat=(north+south)/2;const xy=o=>({x:graph.x+graph.w/2+(o.lng-midLon)*kmx*scale,y:graph.y+graph.h/2-(o.lat-midLat)*kmy*scale});const c=counts();let content='';const svgText=(x,y,s,size=17,weight=600,fill='#25413f')=>`<text x="${x}" y="${y}" font-family="Arial,sans-serif" font-size="${size}" font-weight="${weight}" fill="${fill}">${xmlEscape(s)}</text>`;
+    for(let x=graph.x;x<graph.x+graph.w;x+=75)content+=`<path d="M${x} ${graph.y}V${graph.y+graph.h}" stroke="#e8efec"/>`;for(let y=graph.y;y<graph.y+graph.h;y+=75)content+=`<path d="M${graph.x} ${y}H${graph.x+graph.w}" stroke="#e8efec"/>`;
+    const renderSeg=s=>{const [a,b]=segmentEnds(s);if(!a||!b)return;const aa=xy(a),bb=xy(b),color=COLORS[s.type];content+=`<path d="M${aa.x} ${aa.y}L${bb.x} ${bb.y}" fill="none" stroke="${color}" stroke-width="5" ${s.type==='EX'||s.type==='RAMAL'?'stroke-dasharray="9 6"':''}/>`;const mx=(aa.x+bb.x)/2,my=(aa.y+bb.y)/2;content+=`<rect x="${mx-32}" y="${my-23}" width="65" height="22" rx="5" fill="white" stroke="#d8e2dc"/>${svgText(mx-27,my-7,fmt(spanLen(s))+' m',13,700,color)}`};project.segments.forEach(renderSeg);
+    project.poles.forEach(p=>{const q=xy(p);content+=`<rect x="${q.x-8}" y="${q.y-8}" width="16" height="16" fill="#111" stroke="none"/><rect x="${q.x-21}" y="${q.y+12}" width="48" height="23" rx="5" fill="white" stroke="#d9e5df"/>${svgText(q.x-17,q.y+28,p.code,15,800)}`});project.transformers.forEach(t=>{const q=xy(t);content+=`<path d="M${q.x} ${q.y-13}L${q.x+13} ${q.y+12}H${q.x-13}Z" fill="#f1b63c" stroke="#86591a" stroke-width="2"/>${svgText(q.x+14,q.y-13,t.code,14,700)}`});project.consumers.forEach(t=>{const q=xy(t);content+=`<circle cx="${q.x}" cy="${q.y}" r="10" fill="white" stroke="#2b9b69" stroke-width="5"/>${svgText(q.x+15,q.y-10,t.code,14,700)}`});project.notes.forEach(t=>{const q=xy(t);content+=`<circle cx="${q.x}" cy="${q.y}" r="10" fill="#fff5d5" stroke="#d6a138" stroke-width="2"/>${svgText(q.x+15,q.y-10,t.code,14,700)}`});
+    const date=new Date().toLocaleDateString('pt-BR');return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><rect width="${width}" height="${height}" fill="#fff"/><rect width="${width}" height="100" fill="#123432"/>${svgText(42,45,APP.name.toUpperCase()+'  /  CROQUI DE CAMPO',28,800,'#ffffff')}${svgText(43,74,project.name+'  ·  '+[project.city,project.uf].filter(Boolean).join(' / '),17,500,'#d5e9e4')}<rect x="${graph.x}" y="${graph.y}" width="${graph.w}" height="${graph.h}" fill="#fafdfb" stroke="#dce8e2" stroke-width="2"/>${content}${svgText(width-150,155,'N ↑',24,800)}<rect x="35" y="${height-176}" width="${width-70}" height="138" rx="12" fill="#f0f7f3" stroke="#d4e4db"/>${svgText(56,height-141,'RESUMO DO LEVANTAMENTO',17,800)}${svgText(56,height-105,`Postes: ${c.all}    Vãos / ligações: ${c.physical}    Transformadores: ${project.transformers.length}    Consumidores: ${project.consumers.length}`,17,600)}${svgText(56,height-69,`Rede MT: ${fmt(c.lengths.MT)} m    •    Rede BT: ${fmt(c.lengths.BT)} m    •    Total MT + BT: ${fmt(c.lengths.MT+c.lengths.BT)} m`,17,600)}${svgText(width-235,height-69,date,16,500)}${svgText(40,height-11,'Croqui preliminar sem satélite. Validar em campo e no projeto oficial. · '+APP_CREDIT(),12,400,'#73827c')}</svg>`}
+  function elementRowsForPrint(){
+    const rows=[];
+    const add=(label,arr,extraFn)=>arr.forEach(o=>{const u=utmFor(o);rows.push([
+      o.code||label,label,o.status||'',utmValue(u.easting),utmValue(u.northing),utmZone(u),
+      extraFn?extraFn(o):'',o.description||''
+    ])});
+    add('Poste',project.poles,o=>o.source||'');
+    add('Transformador',project.transformers,o=>o.kva?`${o.kva} kVA`:'');
+    add('UC',project.consumers,o=>o.service||'');
+    return rows;
+  }
+  
+  // Impressão georreferenciada: composição separada do mapa vivo.
+  // Coordenadas aparecem no croqui de campo apenas para postes, transformadores e UCs.
+  const PRINT_W=1320, PRINT_H=745;
+  const merc=(p,z)=>{const lat=Math.max(-85.05112878,Math.min(85.05112878,p.lat))*Math.PI/180;const n=256*2**z;return {x:(p.lng+180)/360*n,y:(1-Math.log(Math.tan(Math.PI/4+lat/2))/Math.PI)/2*n}};
+  const pointList=()=>[...project.poles.map(p=>({...p,kind:'pole'})),...project.transformers.map(p=>({...p,kind:'transformer'})),...project.consumers.map(p=>({...p,kind:'consumer'})),...project.notes.map(p=>({...p,kind:'note'})),...project.drawings.map(d=>({...d,kind:'drawing'})),...project.drawings.filter(d=>d.kind!=='tree').map(d=>({lat:d.lat2,lng:d.lng2,kind:'drawing'}))];
+  function makePrintPlan(){
+    const pts=pointList();
+    const all=pts.length?pts:[{lat:project.view.lat,lng:project.view.lng}];
+    const calc=z=>{const geo=all.map(p=>merc(p,z));const minx=Math.min(...geo.map(p=>p.x)),maxx=Math.max(...geo.map(p=>p.x)),miny=Math.min(...geo.map(p=>p.y)),maxy=Math.max(...geo.map(p=>p.y));return {minx,maxx,miny,maxy,w:Math.max(0,maxx-minx),h:Math.max(0,maxy-miny)}};
+    const padX=205,padY=135,innerW=PRINT_W-padX*2,innerH=PRINT_H-padY*2;
+    // Poucos elementos: maior zoom possível, limitado pela resolução disponível.
+    let chosen=3,b=calc(3);
+    for(let z=19;z>=3;z--){const candidate=calc(z);if(candidate.w<=innerW&&candidate.h<=innerH){chosen=z;b=candidate;break}}
+    if(chosen<16){
+      // Croquis extensos: preferir zoom legível e dividir em folhas, limitado a 24 folhas.
+      for(let z=16;z>=3;z--){const r=calc(z),stepW=PRINT_W*.84,stepH=PRINT_H*.82;const cols=Math.max(1,Math.ceil(Math.max(0,r.w+padX*2-PRINT_W)/stepW)+1),rows=Math.max(1,Math.ceil(Math.max(0,r.h+padY*2-PRINT_H)/stepH)+1);if(cols*rows<=24){chosen=z;b=r;break}}
+    }
+    // Lotes densos: priorizar identificação legível, mesmo que requeira folhas adicionais.
+    const dense=pts.filter(p=>p.kind==='pole'||p.kind==='transformer'||p.kind==='consumer');
+    if(dense.length>=6&&chosen>=16){
+      for(let z=chosen;z<=22;z++){
+        const coords=dense.map(p=>merc(p,z));
+        let nearest=Infinity;
+        for(let i=0;i<coords.length;i++)for(let j=i+1;j<coords.length;j++){
+          const d=Math.hypot(coords[i].x-coords[j].x,coords[i].y-coords[j].y);
+          if(d>0.5&&d<nearest)nearest=d;
+        }
+        const bb=calc(z),stepWidth=PRINT_W*.84,stepHeight=PRINT_H*.82;
+        const cc=Math.max(1,Math.ceil(Math.max(0,bb.w+padX*2-PRINT_W)/stepWidth)+1),rr=Math.max(1,Math.ceil(Math.max(0,bb.h+padY*2-PRINT_H)/stepHeight)+1);
+        if(cc*rr>24)break;
+        chosen=z;b=bb;
+        if(nearest>=90)break;
+      }
+    }
+    const stepW=PRINT_W*.84,stepH=PRINT_H*.82;
+    const cols=Math.max(1,Math.ceil(Math.max(0,b.w+padX*2-PRINT_W)/stepW)+1),rows=Math.max(1,Math.ceil(Math.max(0,b.h+padY*2-PRINT_H)/stepH)+1);
+    const left=cols===1?(b.minx+b.maxx)/2-PRINT_W/2:b.minx-padX,top=rows===1?(b.miny+b.maxy)/2-PRINT_H/2:b.miny-padY;
+    const pages=[];
+    for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){
+      const view={x:left+x*stepW,y:top+y*stepH};
+      const screen=o=>{const p=merc(o,chosen);return {x:p.x-view.x,y:p.y-view.y}};
+      const hasPoint=pts.some(p=>{const v=screen(p);return v.x>=-20&&v.x<=PRINT_W+20&&v.y>=-20&&v.y<=PRINT_H+20});
+      if(hasPoint||!pts.length)pages.push({x,y,view,screen,zoom:chosen});
+    }
+    if(!pages.length)pages.push({x:0,y:0,view:{x:left,y:top},screen:o=>{const p=merc(o,chosen);return{x:p.x-left,y:p.y-top}},zoom:chosen});
+    return pages.map((p,i)=>({...p,number:i+1,total:pages.length}));
+  }
+  const printNodeCoord=p=>{const u=utmFor(p);return {x:utmValue(u.easting),y:utmValue(u.northing),zone:utmZone(u)}};
+  function printOverlaySvg(page){
+    const clean=v=>xmlEscape(String(v??''));
+    let markup=`<defs><clipPath id="clip${page.number}"><rect x="0" y="0" width="${PRINT_W}" height="${PRINT_H}"/></clipPath></defs><g clip-path="url(#clip${page.number})">`;
+    const nodes=pointList().filter(p=>p.kind!=='drawing');
+    const occupied=[];
+    const overlap=(a,b)=>Math.max(0,Math.min(a.x+a.w,b.x+b.w)-Math.max(a.x,b.x))*Math.max(0,Math.min(a.y+a.h,b.y+b.h)-Math.max(a.y,b.y));
+    const inside=(r)=>r.x>=6&&r.y>=6&&r.x+r.w<=PRINT_W-6&&r.y+r.h<=PRINT_H-6;
+    const overlaps=r=>occupied.reduce((n,z)=>n+overlap(r,z),0);
+    const symbolReservations=nodes.filter(p=>p.kind!=='note').map(p=>{const v=page.screen(p);return{x:v.x-12,y:v.y-14,w:24,h:28}});
+    const reserve=r=>occupied.push(r);
+    // Segmentos e etiquetas: distâncias pequenas e translúcidas, sem sacrificar leitura da rede.
+    project.segments.forEach(s=>{
+      const [a,b]=segmentEnds(s);if(!a||!b)return;
+      const p=page.screen(a),q=page.screen(b);
+      if(Math.max(p.x,q.x)<0||Math.min(p.x,q.x)>PRINT_W||Math.max(p.y,q.y)<0||Math.min(p.y,q.y)>PRINT_H)return;
+      const color=COLORS[s.type]||'#1b7193';
+      markup+=`<path d="M${p.x.toFixed(2)} ${p.y.toFixed(2)} L${q.x.toFixed(2)} ${q.y.toFixed(2)}" stroke="${color}" stroke-width="3" stroke-opacity=".93" fill="none" ${s.type==='EX'||s.type==='RAMAL'?'stroke-dasharray="7 5"':''}/>`;
+      const mx=(p.x+q.x)/2,my=(p.y+q.y)/2;
+      if(mx>25&&mx<PRINT_W-25&&my>15&&my<PRINT_H-15){
+        const spanText=`${clean(fmt(spanLen(s),1))} m`,w=Math.max(20,Math.min(52,spanText.length*5.2+8)),h=14,opts=[{x:mx-w/2,y:my-17,w,h},{x:mx-w/2,y:my+5,w,h},{x:mx+6,y:my-7,w,h},{x:mx-w-6,y:my-7,w,h}];
+        const r=opts.find(r=>inside(r)&&!symbolReservations.some(t=>overlap(r,t)))||opts[0];
+        reserve(r);
+        markup+=`<rect x="${r.x}" y="${r.y}" width="${w}" height="${h}" rx="2" fill="#fff" fill-opacity=".50"/><text x="${r.x+w/2}" y="${r.y+10.5}" text-anchor="middle" font-size="9.5" font-weight="400" fill="${color}">${spanText}</text>`;
+      }
+    });
+    // Símbolos técnicos para árvores em planta, sem preenchimento ou sombras.
+    project.drawings.forEach(d=>{
+      const c=d.color||'#df3f44';
+      if(d.kind==='tree'){
+        const v=page.screen(d);
+        if(v.x>=0&&v.x<PRINT_W&&v.y>=0&&v.y<PRINT_H){
+          markup+=`<g transform="translate(${v.x.toFixed(1)} ${v.y.toFixed(1)}) rotate(${Number(d.rotation)||0}) scale(${(Math.min(90,Math.max(14,Number(d.size)||26))/44).toFixed(3)})" fill="#111"><circle cx="0" cy="-14" r="15"/><circle cx="-12" cy="-4" r="14"/><circle cx="12" cy="-4" r="14"/><path d="M-3 -1 L3 -1 L3 26 L-3 26 Z"/><path d="M-3 8 L-12 -3 L-12 5 L-3 16 Z"/><path d="M3 7 L10 1 L10 7 L3 15 Z"/></g>`;
+          reserve({x:v.x-20,y:v.y-22,w:40,h:48});
+        }
+        return;
+      }
+      for(const [a,b] of drawingCoords(d)){
+        const p=page.screen(a),q=page.screen(b);
+        markup+=`<path d="M ${p.x.toFixed(1)} ${p.y.toFixed(1)} L ${q.x.toFixed(1)} ${q.y.toFixed(1)}" fill="none" stroke="${c}" stroke-width="2.5"/>`;
+      }
+      if(d.kind==='arrow'){
+        const p=page.screen({lat:d.lat,lng:d.lng}),q=page.screen({lat:d.lat2,lng:d.lng2}),angle=Math.atan2(q.y-p.y,q.x-p.x);
+        for(const a of [angle+2.6,angle-2.6])markup+=`<path d="M${q.x.toFixed(1)} ${q.y.toFixed(1)} l${(14*Math.cos(a)).toFixed(1)} ${(14*Math.sin(a)).toFixed(1)}" stroke="${c}" stroke-width="2.5" fill="none"/>`;
+      }
+    });
+    // Imprimir anotações longas de forma discreta e sem bloquear as coordenadas.
+    nodes.filter(p=>p.kind==='note').forEach(p=>{
+      const v=page.screen(p);if(v.x<-20||v.x>PRINT_W||v.y<-20||v.y>PRINT_H)return;
+      const raw=String(p.description||'Nota').replace(/\r/g,'');
+      const lines=[];for(const paragraph of raw.split('\n')){
+        const words=paragraph.split(/\s+/).filter(Boolean);let line='';
+        for(const word of words){if((line+' '+word).trim().length>43&&line){lines.push(line);line=word}else line=(line+' '+word).trim()}
+        lines.push(line||' ');
+      }
+      const shown=lines.slice(0,7),w=Math.min(265,Math.max(42,...shown.map(t=>t.length*6.5+12))),h=shown.length*13+7;
+      const candidates=[[v.x+8,v.y-h/2],[v.x-w-8,v.y-h/2],[v.x-w/2,v.y+13],[v.x-w/2,v.y-h-13],
+        [v.x+30,v.y+25],[v.x-w-30,v.y+25],[v.x+35,v.y-h-28],[v.x-w-35,v.y-h-28]];
+      let r=null,score=Infinity;
+      candidates.forEach(([cx,cy],i)=>{const pos={x:Math.max(6,Math.min(PRINT_W-w-6,cx)),y:Math.max(6,Math.min(PRINT_H-h-6,cy)),w,h};const penalty=overlaps(pos)*25+symbolReservations.reduce((n,z)=>n+overlap(pos,z),0)*13+i*3;if(penalty<score){r=pos;score=penalty}});
+      if(!r)return;reserve(r);
+      markup+=`<rect x="${r.x}" y="${r.y}" width="${w}" height="${h}" rx="3" fill="white" fill-opacity=".51"/>`;
+      shown.forEach((line,i)=>markup+=`<text x="${r.x+5}" y="${r.y+12+i*13}" font-size="10.5" font-weight="400" fill="#263a34">${clean(line)}</text>`);
+    });
+    // Todas as coordenadas continuam no croqui. Algoritmo testa alternativas sem sobrepor rótulos existentes.
+    const elements=nodes.filter(p=>p.kind==='pole'||p.kind==='transformer'||p.kind==='consumer');
+    elements.forEach(p=>{
+      const v=page.screen(p);if(v.x<-40||v.x>PRINT_W+40||v.y<-40||v.y>PRINT_H+40)return;
+      if(p.kind==='pole')markup+=`<rect x="${v.x-7}" y="${v.y-7}" width="14" height="14" fill="#111" stroke="none"/>`;
+      if(p.kind==='transformer')markup+=`<path d="M${v.x} ${v.y-10} L${v.x+10} ${v.y+9} L${v.x-10} ${v.y+9}Z" fill="#f0c962" fill-opacity=".85" stroke="#514c35" stroke-width="1.5"/>`;
+      if(p.kind==='consumer')markup+=`<circle cx="${v.x}" cy="${v.y}" r="8" fill="#fff" fill-opacity=".9" stroke="#2b805b" stroke-width="2"/>`;
+    });
+    elements.forEach(p=>{
+      const v=page.screen(p);if(v.x<-40||v.x>PRINT_W+40||v.y<-40||v.y>PRINT_H+40)return;
+      const code=String(p.code||''),titleW=Math.max(32,Math.min(60,code.length*7.1+10)),titleH=15;
+      // Pequenas posições ao redor do símbolo, sempre com deslocamento curto.
+      const titleOptions=[
+        [v.x+11,v.y-8], [v.x-titleW-11,v.y-8],
+        [v.x-titleW/2,v.y+12], [v.x-titleW/2,v.y-titleH-12],
+        [v.x+11,v.y+9], [v.x-titleW-11,v.y+9]
+      ];
+      let codeBox=null,codeScore=Infinity;
+      titleOptions.forEach(([cx,cy],i)=>{
+        const r={x:Math.max(5,Math.min(PRINT_W-titleW-5,cx)),y:Math.max(5,Math.min(PRINT_H-titleH-5,cy)),w:titleW,h:titleH};
+        const score=overlaps(r)*18+symbolReservations.reduce((n,z)=>n+overlap(r,z),0)*14+
+          Math.hypot(r.x+titleW/2-v.x,r.y+titleH/2-v.y)*.16+i*.4;
+        if(score<codeScore){codeScore=score;codeBox=r}
+      });
+      if(!codeBox)return;
+      reserve(codeBox);
+      markup+=`<rect x="${codeBox.x}" y="${codeBox.y}" width="${codeBox.w}" height="${codeBox.h}" rx="2" fill="#fff" fill-opacity=".55"/>`;
+      markup+=`<text x="${codeBox.x+4}" y="${codeBox.y+11.5}" font-size="11.3" font-weight="500" fill="#1e302b">${clean(code)}</text>`;
+
+      // Coordenadas em etiqueta separada: cabem próximas sem deslocar o identificador.
+      const coords=printNodeCoord(p),w=148,h=31;
+      const titleX=codeBox.x,titleY=codeBox.y;
+      const candidates=[
+        [titleX,titleY+titleH+2],[titleX,titleY-h-2],
+        [v.x+14,v.y+13],[v.x-w-14,v.y+13],
+        [v.x+14,v.y-h-13],[v.x-w-14,v.y-h-13],
+        [v.x-w/2,v.y+26],[v.x-w/2,v.y-h-26],
+        [v.x+32,v.y-14],[v.x-w-32,v.y-14],
+        [v.x+45,v.y+20],[v.x-w-45,v.y+20],
+        [v.x-w/2,v.y+43],[v.x-w/2,v.y-h-43],
+      ];
+      if(p.coordOffset&&Number.isFinite(p.coordOffset.x)&&Number.isFinite(p.coordOffset.y))candidates.unshift([v.x+p.coordOffset.x,v.y+p.coordOffset.y]);
+      let best=null,score=Infinity;
+      candidates.forEach(([cx,cy],i)=>{
+        if(p.coordOffset&&i===0){best={x:Math.max(5,Math.min(PRINT_W-w-5,cx)),y:Math.max(5,Math.min(PRINT_H-h-5,cy)),w,h};score=-1e10;return}
+        const r={x:Math.max(5,Math.min(PRINT_W-w-5,cx)),y:Math.max(5,Math.min(PRINT_H-h-5,cy)),w,h};
+        const conflicts=overlaps(r);
+        const symbols=symbolReservations.reduce((sum,t)=>sum+overlap(r,t),0);
+        const distance=Math.hypot(r.x+w/2-v.x,r.y+h/2-v.y);
+        const value=conflicts*22+symbols*13+distance*.17+i*.1;
+        if(value<score){score=value;best=r}
+      });
+      if(!best)return;
+      const r=best;reserve(r);
+      const anchorX=Math.max(r.x,Math.min(v.x,r.x+w)),anchorY=Math.max(r.y,Math.min(v.y,r.y+h));
+      if(Math.hypot(anchorX-v.x,anchorY-v.y)>35)
+        markup+=`<path d="M${v.x.toFixed(1)} ${v.y.toFixed(1)}L${anchorX.toFixed(1)} ${anchorY.toFixed(1)}" stroke="#455a51" stroke-opacity=".42" stroke-width=".65" fill="none"/>`;
+      markup+=`<rect x="${r.x}" y="${r.y}" width="${w}" height="${h}" rx="3" fill="#fff" fill-opacity=".58"/>`;
+      markup+=`<text x="${r.x+5}" y="${r.y+12.5}" font-size="10.3" font-weight="400" fill="#293d35">X: ${clean(coords.x)} · ${clean(coords.zone)}</text>`;
+      markup+=`<text x="${r.x+5}" y="${r.y+25.5}" font-size="10.3" font-weight="400" fill="#293d35">Y: ${clean(coords.y)}</text>`;
+    });
+    markup+='</g><g><rect x="10" y="10" width="48" height="25" rx="3" fill="#fff" fill-opacity=".65"/><text x="34" y="28" text-anchor="middle" font-size="16" font-weight="500" fill="#243830">N ↑</text></g>';
+    return `<svg class="gf-print-overlay" xmlns="http://www.w3.org/2000/svg" width="${PRINT_W}" height="${PRINT_H}" viewBox="0 0 ${PRINT_W} ${PRINT_H}" preserveAspectRatio="none">${markup}</svg>`;
+  }
+  function printTilesHtml(page){
+    const layer=map?.currentTileLayer;
+    if(!layer)return '';
+    const native=Math.min(page.zoom,layer.options.maxNativeZoom??19),scale=2**(page.zoom-native),tile=256*scale,n=2**native;
+    const minX=Math.floor(page.view.x/tile),maxX=Math.floor((page.view.x+PRINT_W)/tile),minY=Math.max(0,Math.floor(page.view.y/tile)),maxY=Math.min(n-1,Math.floor((page.view.y+PRINT_H)/tile));
+    let out='';for(let x=minX;x<=maxX;x++)for(let y=minY;y<=maxY;y++){
+      const tx=((x%n)+n)%n,url=layer.url.replace(/\{s\}/g,'').replace(/\{z\}/g,native).replace(/\{x\}/g,tx).replace(/\{y\}/g,y);
+      const left=Math.round(x*tile-page.view.x),top=Math.round(y*tile-page.view.y);
+      out+=`<img src="${esc(url)}" loading="eager" referrerpolicy="strict-origin-when-cross-origin" alt="" style="left:${left/PRINT_W*100}%;top:${top/PRINT_H*100}%;width:${(tile+1)/PRINT_W*100}%;height:${(tile+1)/PRINT_H*100}%">`;
+    }return out;
+  }
+  function printTable(heads,rows){return `<table><thead><tr>${heads.map(h=>`<th>${xmlEscape(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(row=>`<tr>${row.map(v=>`<td>${xmlEscape(v??'')}</td>`).join('')}</tr>`).join('')}</tbody></table>`}
+  
+  function printMediaSections(){
+    const date=new Date().toLocaleDateString('pt-BR');
+    const number=esc(project.code||project.name||'Não informado');
+    let html='';
+    const entries=[...project.poles.map(o=>({o,kind:'Poste'})),...project.transformers.map(o=>({o,kind:'Transformador'})),...project.consumers.map(o=>({o,kind:'UC'}))];
+    const pageHeader=(heading,tag)=>`<div class="gf-print-head"><strong>${APP.name.toUpperCase()} · ${heading}</strong><span>Projeto nº ${number} · ${date}</span></div>`;
+    const figure=(m,idx)=>{const data=mediaCache.get(m.id);return `<figure class="gf-photo-item">${data&&data.startsWith('data:image/')?`<img src="${data}" alt="Foto ${idx+1}" />`:'<div class="empty">Imagem indisponível</div>'}<figcaption>Foto ${idx+1} · ${esc(m.name)}${m.created?` · ${esc(new Date(m.created).toLocaleString('pt-BR'))}`:''}${m.description?`<div>${esc(m.description)}</div>`:''}${Number.isFinite(m.latitude)&&Number.isFinite(m.longitude)?`<div>Coleta UTM: ${utmText({lat:m.latitude,lng:m.longitude})}</div>`:''}</figcaption></figure>`};
+    for(const {o,kind} of entries){
+      if(!(o.photos||[]).length)continue;
+      html+=`<section class="gf-print-page gf-print-media-page">${pageHeader('RELATÓRIO FOTOGRÁFICO')}<div class="gf-media-meta"><b>${kind}: ${esc(o.code)}</b> · UTM: ${utmText(o)}<div>${esc(o.description||'Sem observações adicionais')}</div></div><div class="gf-photo-grid">${o.photos.map(figure).join('')}</div><div class="gf-print-foot">${esc(project.name)} · Foto vinculada ao elemento e à posição cadastrada</div></section>`;
+    }
+    const attachments=project.attachments||[];
+    for(let i=0;i<attachments.length;i+=2){
+      const set=attachments.slice(i,i+2);
+      html+=`<section class="gf-print-page gf-print-media-page">${pageHeader('ANEXOS DO PROJETO')}<div class="gf-photo-grid">${set.map((m,j)=>{
+        const data=mediaCache.get(m.id);
+        if(m.mime?.startsWith('image/')&&data)return `<figure class="gf-photo-item"><img src="${data}" alt="Anexo"><figcaption><b>${esc(m.name)}</b> · ${esc(m.description||'Sem descrição')}</figcaption></figure>`;
+        return `<div class="gf-photo-item" style="padding:20px"><b>Documento anexo: ${esc(m.name)}</b><p>${esc(m.description||'Sem descrição')}</p><p>O PDF original está incluído no backup JSON com mídias. Sua página não é incorporada automaticamente ao relatório impresso.</p></div>`;
+      }).join('')}</div></section>`;
+    }
+    return html;
+  }
+  async function preloadPrintMedia(){
+    const all=[...(project.attachments||[]),...project.poles.flatMap(o=>o.photos||[]),...project.transformers.flatMap(o=>o.photos||[]),...project.consumers.flatMap(o=>o.photos||[])];
+    await Promise.all(all.map(async m=>{try{await mediaRead(m.id)}catch(e){console.warn('Mídia indisponível',m.id,e)}}));
+  }
+
+  function printDocument(){
+    const pages=makePrintPlan(),n=pages.length,c=counts(),date=new Date().toLocaleDateString('pt-BR');
+    const title=`${project.code?'Nº '+esc(project.code)+' · ':''}${esc(project.name||'Croqui de campo')} · ${esc(project.city||'Município não informado')}${project.uf?' / '+esc(project.uf):''}`;
+    let content=pages.map(p=>`<section class="gf-print-page"><div class="gf-print-head"><strong>${APP.name.toUpperCase()} · ${title}</strong><span>Folha ${p.number} de ${n} · ${date}</span></div><div class="gf-print-frame"><div class="gf-print-tiles">${printTilesHtml(p)}</div>${printOverlaySvg(p)}</div><div class="gf-print-foot"><span>Postes ${c.all} · Transformadores ${project.transformers.length} · UCs ${project.consumers.length} · Vãos ${c.physical} · MT ${fmt(c.lengths.MT,1)} m · BT ${fmt(c.lengths.BT,1)} m</span><span>UTM X/Y · WGS84 · Coordenadas preliminares</span></div></section>`).join('');
+    const rows=elementRowsForPrint();
+    // Dividir a tabela para preservar tamanho legível em folha A4 horizontal.
+    const chunks=[];for(let i=0;i<rows.length;i+=17)chunks.push(rows.slice(i,i+17));if(!chunks.length)chunks.push([]);
+    chunks.forEach((chunk,i)=>{content+=`<section class="gf-print-page gf-print-coords"><div class="gf-print-head"><strong>${APP.name.toUpperCase()} · Coordenadas dos elementos</strong><span>Relação ${i+1} de ${chunks.length} · ${date}</span></div><div style="font-size:11px;margin-bottom:12px">Coordenadas UTM X/Y em metros (WGS84), com fuso e hemisfério por elemento. Valores calculados a partir das posições do GPS ou marcação no mapa; conferir em campo.</div>${printTable(['Elemento','Tipo','Situação','X (Easting) m','Y (Northing) m','Fuso','Detalhes','Observações'],chunk)}</section>`});
+    const spans=project.segments.map(s=>[endpointLabel(s.aKind||'pole',s.a)+' – '+endpointLabel(s.bKind||'pole',s.b),TYPELABEL[s.type]||s.type,fmt(spanLen(s),1)+' m',s.description||'']);
+    if(spans.length||project.notes.length){
+      const pieces=[];for(let i=0;i<spans.length;i+=27)pieces.push(spans.slice(i,i+27));if(!pieces.length)pieces.push([]);
+      pieces.forEach((chunk,i)=>{content+=`<section class="gf-print-page gf-print-coords"><div class="gf-print-head"><strong>${APP.name.toUpperCase()} · Vãos e observações</strong><span>Relação ${i+1} de ${pieces.length}</span></div>${printTable(['Trecho','Rede','Distância horizontal','Observações'],chunk)}${i===pieces.length-1?`<h3>Notas de campo</h3><div>${project.notes.map(p=>`<p><b>${esc(p.code)}</b> ${esc(p.description||'Sem descrição')}</p>`).join('')}</div>`:''}</section>`});
+    }
+    return content+printMediaSections();
+  }
+  async function exportPrint(){
+    try{await preloadPrintMedia();$('printSheet').innerHTML=printDocument();$('printSheet').querySelectorAll('.gf-print-page').forEach(page=>page.dataset.credit=APP_CREDIT());
+      // Aguardar carregamento dos mosaicos antes de solicitar a impressão.
+      const imgs=Array.from($('printSheet').querySelectorAll('img'));
+      const settled=Promise.all(imgs.map(im=>im.complete?Promise.resolve():new Promise(ok=>{im.onload=ok;im.onerror=ok})));
+      Promise.race([settled,new Promise(ok=>setTimeout(ok,4500))]).then(()=>window.print());
+      if(imgs.length)toast('Preparando mapas para impressão…',2700);
+    }catch(e){toast('Falha ao preparar impressão: '+e.message,5000);console.error(e)}
+  }
+  function exportPNG(){
+    // PNG em folhas independentes, sempre com todos os elementos do projeto e coordenadas XY.
+    const pages=makePrintPlan();
+    pages.forEach((p,i)=>{
+      const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${PRINT_W}" height="${PRINT_H}" viewBox="0 0 ${PRINT_W} ${PRINT_H}"><rect width="${PRINT_W}" height="${PRINT_H}" fill="#eef3ef"/><path d="M0 0H${PRINT_W}V${PRINT_H}H0Z" fill="none" stroke="#abbfb5" stroke-width="2"/>${printOverlaySvg(p).replace(/^<svg[^>]+>/,'').replace(/<\/svg>$/,'')}<rect x="0" y="${PRINT_H-29}" width="${PRINT_W}" height="29" fill="#1c433b"/><text x="16" y="${PRINT_H-10}" font-family="Arial" font-size="15" font-weight="700" fill="white">${APP.name.toUpperCase()} v${APP.version} · ${APP.author} · ${xmlEscape(project.name)} · Folha ${p.number}/${pages.length} · UTM X/Y</text></svg>`;
+      const url=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml;charset=utf-8'})),img=new Image();
+      img.onload=()=>{const canvas=document.createElement('canvas');canvas.width=PRINT_W*2;canvas.height=PRINT_H*2;const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0,canvas.width,canvas.height);canvas.toBlob(blob=>{if(blob)blobDownload(blob,`${safeSlug(project.name)}_folha_${String(p.number).padStart(2,'0')}.png`);URL.revokeObjectURL(url)},'image/png')};
+      img.onerror=()=>{URL.revokeObjectURL(url);toast('Erro ao gerar PNG da folha '+p.number)};img.src=url;
+    });
+    toast(`Croqui vetorial: ${pages.length} folha(s) com coordenadas UTM X/Y. Permita múltiplos downloads se solicitado.`,5500);
+  }
+  function exportMenu(){openModal('Exportar projeto',`<div class="helpinfo" style="margin-bottom:15px">A impressão enquadra automaticamente os elementos e divide levantamentos grandes em folhas. Cada PS, TR e UC mostra UTM X/Y e fuso no croqui impresso. O PNG gera folhas vetoriais sem satélite.</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:9px"><button class="btn" id="exPNG">Croqui PNG</button><button class="btn" id="exPDF">Imprimir / PDF</button><button class="btn" id="exPosts">CSV elementos</button><button class="btn" id="exSegs">CSV trechos</button><button class="btn" id="exGeo">GeoJSON</button><button class="btn" id="exKML">KML</button><button class="btn primary" id="exJSON" style="grid-column:1 / -1">Backup JSON + fotos</button></div><p class="smallhint">Para salvar PDF, escolha “Salvar como PDF” na janela de impressão do dispositivo.</p>`,[{text:'Fechar',fn:closeModal}]);const bind=(id,fn)=>{$(id).onclick=()=>{closeModal();fn()}};bind('exPNG',exportPNG);bind('exPDF',exportPrint);bind('exPosts',()=>exportCSV('poles'));bind('exSegs',()=>exportCSV('segments'));bind('exGeo',()=>{blobDownload(JSON.stringify(geoJson(),null,2),`${safeSlug(project.name)}.geojson`,'application/geo+json');toast('GeoJSON exportado')});bind('exKML',exportKML);bind('exJSON',exportJSON)}
+  function help(){openModal(`Como utilizar o ${APP.name}`,`<div class="helpinfo"><b>Primeiro levantamento</b><br>1. Informe os dados do projeto no topo.<br>2. Use o botão de GPS para localizar-se (requer permissão e acesso seguro).<br>3. Selecione <b>Poste</b> e toque no mapa, ou utilize <b>Poste no GPS</b>.<br> 4. Selecione <b>Rede</b>, escolha MT/BT/Ramal no painel e toque em dois postes, transformadores ou UCs.<br>5. No menu Desenho, clique na origem de uma linha ou seta, mova o cursor para visualizar e clique no destino; retângulo, círculo e árvore são criados com um toque. Após criar um desenho, o mapa volta ao modo Selecionar.<br>6. Em Selecionar (modo padrão), clique e arraste para movimentar o mapa. A roda controla o zoom. Durante o desenho, a ferramenta tem prioridade e o mapa volta ao modo padrão automaticamente ao terminar. PAN permanece opcional.<br>7. Toque nos elementos para editar, mover, fotografar ou excluir e utilize Anexos para documentos gerais.<br>8. Confira os quantitativos e exporte o croqui.</div><p class="m-title" style="margin-top:18px">Importante</p><p class="smallhint">O zoom adicional acima do nível 19 amplia a imagem disponível e pode ficar pixelizado; não cria novos detalhes. O mapa de satélite usa serviços externos e exige internet; se estiver indisponível, as marcações continuam editáveis. Projetos e coordenadas ficam no armazenamento local, fotos e anexos no IndexedDB; faça backup JSON com mídias para evitar perdas. A pré-visualização da câmera exige permissão e navegador compatível, preferencialmente via HTTPS; a câmera do dispositivo é a alternativa. O GPS do tablet pode ter precisão limitada, e a posição marcada manualmente na imagem é estimada. O exportador de PNG produz um croqui vetorial independente, sem copiar a imagem de satélite.</p><p class="smallhint">Para GPS no celular/tablet, abra por HTTPS (por exemplo, após publicar em GitHub Pages) e permita acesso à localização. Abrir o HTML diretamente como arquivo pode não habilitar o GPS em todos os navegadores.</p>`,[{text:'Entendi',class:'primary',fn:closeModal}])}
+
+  // Buscas feitas apenas quando o usuário toca em Buscar ou pressiona Enter.
+  // Consultas por coordenadas são processadas localmente e não enviadas ao geocodificador.
+  let searchLast=0;
+  const searchCache=new Map();
+  function parseSearchCoordinates(value){
+    // Aceita somente X/Y UTM acompanhados de fuso/hemisfério. Ex.: 22S 483250.45 7421350.20
+    const raw=value.trim().replace(/[()]/g,'').replace(/\bUTM\b/gi,'').replace(/[XYxy]:?/g,' ').trim();
+    const pattern1=raw.match(/^(\d{1,2})\s*([NS])\s+([0-9.,]+)\s*[,;\s]+\s*([0-9.,]+)$/i);
+    const pattern2=raw.match(/^([0-9.,]+)\s*[,;\s]+\s*([0-9.,]+)\s+(\d{1,2})\s*([NS])$/i);
+    if(!pattern1&&!pattern2)return null;
+    const zone=Number(pattern1?pattern1[1]:pattern2[3]),hemi=(pattern1?pattern1[2]:pattern2[4]).toUpperCase();
+    const x=Number((pattern1?pattern1[3]:pattern2[1]).replace(',','.'));
+    const y=Number((pattern1?pattern1[4]:pattern2[2]).replace(',','.'));
+    try{return fromUTM(x,y,zone,hemi)}catch{return null}
+  }
+  function goToSearchLocation(lat,lng,label){
+    map.setView([lat,lng],Math.max(map.getZoom(),18));
+    closeModal();toast(`Local encontrado: ${label} · ${utmText({lat,lng})}`,4500);
+  }
+  async function searchPlace(){
+    const q=$('placeSearch').value.trim();if(!q)return toast('Digite um endereço ou UTM, por exemplo: 22S 483250.45 7421350.20.');
+    const coords=parseSearchCoordinates(q);if(coords){goToSearchLocation(coords.lat,coords.lng,'UTM');return;}
+    if(q.length<3)return toast('Digite um endereço ou nome de cidade mais completo.');
+    const btn=$('searchGo');
+    if(btn.disabled)return;
+    const cached=searchCache.get(q.toLowerCase());
+    if(!cached && Date.now()-Math.max(searchLast,geoLastRequestAt)<1200)return toast('Aguarde um instante antes de fazer outra busca.',3000);
+    btn.disabled=true;btn.textContent='...';
+    try{
+      let results=cached;
+      if(!results){
+        searchLast=Date.now();
+        const url='https://nominatim.openstreetmap.org/search?format=jsonv2&limit=5&addressdetails=1&q='+encodeURIComponent(q);
+        const resp=await fetch(url,{headers:{'Accept':'application/json','Accept-Language':'pt-BR,pt;q=0.9'}});
+        if(!resp.ok)throw new Error('Serviço de busca indisponível ('+resp.status+').');
+        results=await resp.json();searchCache.set(q.toLowerCase(),results);
+      }
+      if(!Array.isArray(results)||!results.length){toast('Endereço não encontrado. Tente nome da cidade, estrada ou coordenadas UTM.',5000);return}
+      openModal('Resultados da busca',`<p class="smallhint">Selecione uma localização no OpenStreetMap. Não inclui cadastro de postes automaticamente.</p><div class="projects-list">${results.map((r,i)=>`<button class="btn search-location" data-search-result="${i}"><b>${esc(r.display_name)}</b><small>${utmText({lat:Number(r.lat),lng:Number(r.lon)})}</small></button>`).join('')}</div><p class="smallhint">Busca de endereços: © OpenStreetMap contributors / Nominatim.</p>`,[{text:'Cancelar',fn:closeModal}]);
+      $('modalContent').querySelectorAll('[data-search-result]').forEach(el=>el.onclick=()=>{const r=results[Number(el.dataset.searchResult)];goToSearchLocation(Number(r.lat),Number(r.lon),r.display_name)});
+    }catch(err){toast('Falha na busca de endereço. Verifique internet/HTTPS ou informe uma coordenada UTM. '+err.message,6500)}
+    finally{btn.disabled=false;btn.textContent='Buscar'}
+  }
+  function initMap(){
+    if(!window.L){
+      $('map').innerHTML='<div style="padding:30px;max-width:480px;margin:20vh auto;background:#fff;border-radius:13px;box-shadow:0 10px 30px #163f3d33"><h2>Não foi possível carregar o mapa</h2><p>A biblioteca de mapas não carregou. Confira a conexão com a internet ou tente abrir o aplicativo em outro navegador.</p></div>';
+      toast('Falha ao carregar a biblioteca Leaflet. Verifique a internet.',5000);
+      return;
+    }
+    map=L.map('map',{zoomControl:false,preferCanvas:true}).setView([project.view.lat,project.view.lng],project.view.zoom);
+    L.control.zoom({position:'bottomright'}).addTo(map);
+
+      const sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{
+      attribution:'Imagery © Esri, Maxar, Earthstar Geographics and contributors',maxZoom:22,maxNativeZoom:19
+    });
+
+      // Camada exclusiva de satélite: não trocar automaticamente para ruas.
+    const mapWarning=document.createElement('div');
+    mapWarning.setAttribute('role','status');
+    mapWarning.style.cssText='display:none;position:absolute;left:50%;top:74px;transform:translateX(-50%);z-index:420;max-width:min(430px,calc(100% - 24px));background:#fff8ec;border:1px solid #e7c993;border-radius:8px;padding:10px 15px;box-shadow:0 5px 15px #0002;font:12px Arial';
+    $('mapArea').appendChild(mapWarning);
+    let tileErrors=0;
+    sat.on('tileerror',()=>{if(++tileErrors>=3){mapWarning.textContent='Imagens de satélite indisponíveis nesta conexão. Os postes e traçados continuam editáveis. Verifique a internet.';mapWarning.style.display='block'}});
+    sat.on('tileload',()=>{tileErrors=0;mapWarning.style.display='none'});
+    base=sat.addTo(map);
+    setTimeout(()=>map.invalidateSize(),40);
+      map.on('click',mapClick);
+    map.on('mousemove',ev=>{$('cursorCoords').textContent='UTM '+utmText(ev.latlng);if(drawStart)updateDrawingPreview(ev.latlng)});
+    map.on('moveend',()=>{
+      if(!project)return;
+      requestAnimationFrame(layoutMapLabels);
+      const v=map.getCenter();
+      project.view={lat:v.lat,lng:v.lng,zoom:map.getZoom()};
+      $('mapFoot').textContent=map.getZoom()>19?'Zoom '+map.getZoom()+' (ampliação digital) · UTM X/Y · WGS84 · Conferir posições em campo':'Coordenadas UTM (X/Y) · WGS84 · Distâncias horizontais aproximadas · Mapa requer internet';
+      clearTimeout(persistTimer);
+      persistTimer=setTimeout(persist,700);
+    });
+
+      renderAll();
+  }
+  $('btnDrawing').onclick=()=>{$('drawingPalette').classList.toggle('visible')};
+  $('closeDrawing').onclick=()=>$('drawingPalette').classList.remove('visible');
+  document.querySelectorAll('[data-draw]').forEach(b=>b.onclick=()=>{setTool(b.dataset.draw);$('drawingPalette').classList.add('visible')});
+  document.querySelectorAll('[data-color]').forEach(b=>b.onclick=()=>{drawColor=b.dataset.color;document.querySelectorAll('[data-color]').forEach(e=>e.classList.toggle('active',e===b));toast('Cor selecionada')});
+  $('btnAttachments').onclick=()=>openAttachments();
+  $('gfDrawMulti').onclick=()=>{multiDrawMode=!multiDrawMode;if(tool!=='select')setTool('select');updateDrawingSelectionControls();toast(multiDrawMode?'Seleção múltipla ativada. Toque nos desenhos.':'Seleção múltipla desativada.');};
+  $('gfDrawAll').onclick=()=>{setTool('select');selectedDrawingIds=new Set(project.drawings.map(d=>d.id));multiDrawMode=true;updateDrawingSelectionControls();if(selectedDrawingIds.size)openDrawingBatch();renderAll();};
+  $('gfDrawRemove').onclick=removeSelectedDrawings;updateDrawingSelectionControls();
+  $('showMapCoordinates').onchange=e=>{project.showMapCoordinates=e.target.checked;changed()};
+  window.addEventListener('online',()=>{geoTriedProject=null;scheduleReverseGeocoding({delay:1200})});
+  $('searchGo').onclick=searchPlace;$('placeSearch').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();searchPlace()}});$('btnLocate').onclick=()=>gpsFetch(false);$('btnGPSPole').onclick=()=>gpsFetch(true);$('summaryGPSPole').onclick=()=>gpsFetch(true);$('btnCoordinates').onclick=addCoordinates;$('btnUndoMap').onclick=undoAction;$('btnUndo').onclick=undoAction;$('btnRedo').onclick=redoAction;$('btnHelp').onclick=help;$('btnReport').onclick=()=>{$('summaryPanel').classList.toggle('visible');setTimeout(()=>map&&map.invalidateSize(),200)};$('mobileSummary').onclick=()=>{$('summaryPanel').classList.toggle('visible')};$('closePanel').onclick=()=>$('summaryPanel').classList.remove('visible');$('projectPill').onclick=projectForm;$('projectPill').onkeydown=e=>{if(e.key==='Enter')projectForm()};$('btnProjectEdit').onclick=projectForm;$('summaryEdit').onclick=projectForm;$('btnProjects').onclick=projectManager;$('btnExport').onclick=exportMenu;$('summaryPrint').onclick=exportPrint;$('contextClose').onclick=closeContext;$('modalClose').onclick=closeModal;$('modalBackdrop').onclick=e=>{if(e.target===e.currentTarget&&!['Novo levantamento','Dados do projeto'].includes(currentModal))closeModal()};document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>setTool(b.dataset.tool));$('connectionType').onchange=()=>{if(tool==='connect'){connectStart=null;$('modeStatus').textContent=`Tipo ${$('connectionType').value} selecionado. Toque em dois elementos (PS, TR ou UC).`;renderAll()}};
+  window.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!['Novo levantamento','Dados do projeto'].includes(currentModal))closeModal();if(!currentModal){closeContext();if(tool!=='select')setTool('select')}}const textInput=['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName);if(!textInput&&!currentModal&&(e.key==='Delete'||e.key==='Backspace')&&selectedDrawingIds.size){e.preventDefault();removeSelectedDrawings();return}if(!textInput&&(e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();if(e.shiftKey)redoAction();else undoAction()}});
+  if(window.innerWidth<=760){$('closePanel').style.display='';}
+  // Sincroniza o projeto inicial sem sobrescrever outro levantamento existente.
+  persist();setUndoState();initMap();setTimeout(()=>scheduleReverseGeocoding({delay:750}),400);try{if(!sessionStorage.getItem('croquipro-help-seen')){sessionStorage.setItem('croquipro-help-seen','1');setTimeout(()=>toast('Selecione Poste à esquerda e toque no mapa para criar PS01.',4000),550)}}catch(e){/* Sessão indisponível em visualização restrita. */}
+  </script>
+</body>
+</html>
